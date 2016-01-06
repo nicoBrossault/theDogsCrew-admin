@@ -1,0 +1,35 @@
+Image:
+  type: entity
+  table: image
+  fields:
+    idimage:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: IDIMAGE
+      generator:
+        strategy: IDENTITY
+    titre:
+      type: text
+      nullable: false
+      column: TITRE
+    description:
+      type: text
+      nullable: false
+      column: DESCRIPTION
+    url:
+      type: text
+      nullable: false
+      column: URL
+  oneToOne:
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUser:
+          referencedColumnName: IDUSER
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

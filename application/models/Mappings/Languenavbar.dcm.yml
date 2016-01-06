@@ -1,0 +1,23 @@
+Languenavbar:
+  type: entity
+  table: languenavbar
+  fields:
+    idlanguenavbar:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idLangueNavBar
+      generator:
+        strategy: IDENTITY
+    idlangue:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idLangue
+    texte:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+  lifecycleCallbacks: {  }

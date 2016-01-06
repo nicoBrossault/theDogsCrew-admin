@@ -1,0 +1,25 @@
+Droit:
+  type: entity
+  table: droit
+  fields:
+    iddroit:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: IDDROIT
+      generator:
+        strategy: IDENTITY
+    libelle:
+      type: text
+      nullable: false
+      column: LIBELLE
+  manyToMany:
+    idtype:
+      targetEntity: Usertype
+      cascade: {  }
+      mappedBy: iddroit
+      inversedBy: null
+      joinTable: null
+      orderBy: null
+  lifecycleCallbacks: {  }

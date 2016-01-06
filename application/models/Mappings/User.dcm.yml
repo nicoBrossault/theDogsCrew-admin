@@ -1,0 +1,39 @@
+User:
+  type: entity
+  table: user
+  fields:
+    iduser:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: IDUSER
+      generator:
+        strategy: IDENTITY
+    nom:
+      type: text
+      nullable: false
+      column: NOM
+    prenom:
+      type: text
+      nullable: false
+      column: PRENOM
+    mail:
+      type: text
+      nullable: false
+      column: MAIL
+    mdp:
+      type: text
+      nullable: false
+      column: MDP
+  oneToOne:
+    idtype:
+      targetEntity: Usertype
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        IDTYPE:
+          referencedColumnName: IDTYPE
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

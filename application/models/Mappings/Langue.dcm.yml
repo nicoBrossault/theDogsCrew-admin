@@ -1,0 +1,17 @@
+Langue:
+  type: entity
+  table: langue
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    langue:
+      type: string
+      length: 60
+      fixed: false
+      nullable: false
+  lifecycleCallbacks: {  }
