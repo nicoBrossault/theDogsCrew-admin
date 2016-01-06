@@ -5,11 +5,10 @@ class Index extends CI_Controller {
 	public function __construct(){
 		 // Obligatoire
 		 parent::__construct();
-	 
+		 $this->load->library('javascript/jquery');
 	}
  
 	public function index(){
-		echo "pouet";
 		$this->load->view('vIndex/index');
 	}
 }

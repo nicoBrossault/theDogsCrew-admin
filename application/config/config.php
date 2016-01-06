@@ -36,7 +36,14 @@ $config['base_url'] = 'http://127.0.0.1/theDogsCrew/theDogsCrew-admin-v2/';
 |
 */
 $config['index_page'] = '';
-
+/*
+ |--------------------------------------------------------------------------
+ | Javascript
+ |--------------------------------------------------------------------------
+ |
+ */
+$config['javascript_location'] = $config['base_url'].'assets/js/jquery/';
+$config['javascript_ajax_img'] = 'assets/images/ajax-loader.gif';
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
