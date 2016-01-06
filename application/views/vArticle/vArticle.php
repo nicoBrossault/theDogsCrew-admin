@@ -1,5 +1,5 @@
 <?php
-foreach ($utilisateurs as $user){
-    echo($user->getTexte()."<br>");
+foreach ($articles as $article){
+    echo($article->getTexte()."<br>");
 }
 ?>

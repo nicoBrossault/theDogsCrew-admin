@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `dogscrew`
 --
-
+CREATE DATABASE dogscrew;
+use dogscrew;
 -- --------------------------------------------------------
 
 --

@@ -1,48 +1,48 @@
 <?php
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 /**
  * Article
  *
- * @ORM\Table(name="article")
- * @ORM\Entity
+ * @Table(name="article")
+ * @Entity
  */
 class Article {
     /**
      * @var integer $idarticle
      *
-     * @ORM\Column(name="IDARTICLE", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="IDARTICLE", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $idarticle;
 
     /**
      * @var date $date
      *
-     * @ORM\Column(name="DATE", type="date", nullable=false)
+     * @Column(name="DATE", type="date", nullable=false)
      */
     private $date;
 
     /**
      * @var text $titre
      *
-     * @ORM\Column(name="Titre", type="text", nullable=false)
+     * @Column(name="Titre", type="text", nullable=false)
      */
     private $titre;
 
     /**
      * @var text $texte
      *
-     * @ORM\Column(name="TEXTE", type="text", nullable=false)
+     * @Column(name="TEXTE", type="text", nullable=false)
      */
     private $texte;
 
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
+     * @OneToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
      * })
      */
     private $iduser;
@@ -50,9 +50,9 @@ class Article {
     /**
      * @var Langue
      *
-     * @ORM\OneToOne(targetEntity="Langue")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
+     * @OneToOne(targetEntity="Langue")
+     * @JoinColumns({
+     *   @JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
      * })
      */
     private $idlangue;

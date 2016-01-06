@@ -2,59 +2,59 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * User
  *
- * @ORM\Table(name="user")
- * @ORM\Entity
+ * @Table(name="user")
+ * @Entity
  */
 class User
 {
     /**
      * @var integer $iduser
      *
-     * @ORM\Column(name="IDUSER", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="IDUSER", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $iduser;
 
     /**
      * @var text $nom
      *
-     * @ORM\Column(name="NOM", type="text", nullable=false)
+     * @Column(name="NOM", type="text", nullable=false)
      */
     private $nom;
 
     /**
      * @var text $prenom
      *
-     * @ORM\Column(name="PRENOM", type="text", nullable=false)
+     * @Column(name="PRENOM", type="text", nullable=false)
      */
     private $prenom;
 
     /**
      * @var text $mail
      *
-     * @ORM\Column(name="MAIL", type="text", nullable=false)
+     * @Column(name="MAIL", type="text", nullable=false)
      */
     private $mail;
 
     /**
      * @var text $mdp
      *
-     * @ORM\Column(name="MDP", type="text", nullable=false)
+     * @Column(name="MDP", type="text", nullable=false)
      */
     private $mdp;
 
     /**
      * @var Usertype
      *
-     * @ORM\OneToOne(targetEntity="Usertype")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDTYPE", referencedColumnName="IDTYPE", unique=true)
+     * @OneToOne(targetEntity="Usertype")
+     * @JoinColumns({
+     *   @JoinColumn(name="IDTYPE", referencedColumnName="IDTYPE", unique=true)
      * })
      */
     private $idtype;
