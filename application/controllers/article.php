@@ -9,7 +9,7 @@ class Article extends CI_Controller {
 	}
 	
 	public function index(){
-		echo "test";
+		echo "test 2";
 	}
 	public function all(){
 		$this->load->model('Article');
