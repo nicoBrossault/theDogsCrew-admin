@@ -9,6 +9,12 @@ class CArticle extends CI_Controller {
 	}
 	
 	public function index(){
-		$this->load->view('vIndex/index');
+		$this->jsutils->getAndBindTo(".article","click","CArticle/ajaxGet","#response");
+		echo $this->jsutils->compile();
+		$this->load->view('article/vIndex');
+	}
+	
+	function ajaxGet(){
+		echo "Exemple de get sur click";
 	}
 }

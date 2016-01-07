@@ -3,15 +3,19 @@
 	<head>
 		<title>Admin</title>
 		<meta charset="UTF-8">
+		<script type="text/javascript" src="assets/js/jquery.js"></script>
+		<script type="text/javascript" src="assets/js/menu.js"></script>
 		<script type="text/javascript" src="assets/js/materialize.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="assets/css/materialize.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	</head>
 	<body>
+		<?php echo $library_src;?>
+		<?php echo $script_foot;?>
 		<nav>
   			<ul class="right hide-on-med-and-down">
 					<li>
-						<a href="#">Articles</a>
+						<a class="article">Articles</a>
 					</li>
 					<li>
 						<a href="#">Pages</a>
@@ -54,10 +58,10 @@
 				</a>
 			</nav>
 		
-		<div class="col s9" style="background-color: green">
+		<div class="col s12 m9" style="background-color: green">
 			<!-- Page Content -->
-			<div class="content">@pouet</div>
+			<div class="content"> </div>
 		</div>
-		<div id="response"></div>
+		<div id="reponse"></div>
 	</body>
 </html>
