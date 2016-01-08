@@ -1,67 +1,126 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Admin</title>
-		<meta charset="UTF-8">
-		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script type="text/javascript" src="assets/js/menu.js"></script>
-		<script type="text/javascript" src="assets/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="assets/css/materialize.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	</head>
-	<body>
-		<?php echo $library_src;?>
-		<?php echo $script_foot;?>
-		<nav>
-  			<ul class="right hide-on-med-and-down">
-					<li>
-						<a class="article">Articles</a>
-					</li>
-					<li>
-						<a href="#">Pages</a>
-					</li>
-					<li>
-						<a href="#">Images Pages</a>
-					</li>
-					<li>
-						<a href="#">Textes du Site</a>
-					</li>
-					<li>
-						<a href="#">Compagnie</a>
-					</li>
-					<li>
-						<a href="#">Galerie</a>
-					</li>
-				</ul>
-				<ul id="slide-out" class="side-nav">
-					<li>
-						<a href="#">Articles</a>
-					</li>
-					<li>
-						<a href="#">Pages</a>
-					</li>
-					<li>
-						<a href="#">Images Pages</a>
-					</li>
-					<li>
-						<a href="#">Textes du Site</a>
-					</li>
-					<li>
-						<a href="#">Compagnie</a>
-					</li>
-					<li>
-						<a href="#">Galerie</a>
-					</li>
-				</ul>
-				<a href="#" data-activates="slide-out" class="button-collapse">	
-					<i class="mdi-navigation-menu"></i>
-				</a>
-			</nav>
-		
-		<div class="col s12 m9" style="background-color: green">
-			<!-- Page Content -->
-			<div class="content"> </div>
+<div class="container">
+<!-- ARTICLE -->
+	<div class="col s8 m5 l4  hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/article.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>ARTICLE</b>
+				</div>
 		</div>
-		<div id="reponse"></div>
-	</body>
-</html>
+		</a>
+	</div>
+	
+<!-- PAGE -->	
+	<div class="col s8 m5 l4 hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/page.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>Page</b>
+				</div>
+			</div>
+		</a>
+	</div>
+
+<!-- GALERIE -->	
+	<div class="col s8 m5 l4 hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/galerie.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>Galerie</b>
+				</div>
+			</div>
+		</a>
+	</div>
+
+<!-- IMAGE PAGE -->	
+	<div class="col s8 m5 l4 hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/galerie.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>Images Pages</b>
+				</div>
+			</div>
+		</a>
+	</div>
+
+<!-- COMPAGNIE -->
+	<div class="col s8 m5 l4 hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/banner-rond-01.png" style="margin-left:-5px;">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>Compagnie</b>
+				</div>
+			</div>
+		</a>
+	</div>
+
+<!-- LANGUE -->
+	<div class="col s8 m5 l4 hoverable">
+		<a href="#" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/langue.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>langue</b>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
