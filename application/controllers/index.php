@@ -12,7 +12,8 @@ class Index extends CI_Controller {
 		$this->jsutils->getAndBindTo(".article","click","Index/ajaxGet","#reponse");
 		echo $this->jsutils->compile();
 		$ajaxReady=true;
-		$this->load->view('theme/vMenu', array('ajaxReady'=>$ajaxReady));
+		$titre = "Index";
+		$this->load->view('theme/vMenu', array('ajaxReady'=>$ajaxReady, 'titre'=>$titre));
 		$this->load->view('index/vIndex');
 		$this->load->view('theme/vFooter');
 		

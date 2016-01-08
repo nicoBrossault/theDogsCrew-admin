@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Admin</title>
+		<title>Admin <?=$titre?></title>
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/menu.js"></script>
+		<script type="text/javascript" src="<?php echo base_url()?>assets/js/general.js"></script>
 		<script type="text/javascript" src="<?php echo base_url()?>assets/js/materialize.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/materialize.min.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/style.css">
@@ -25,7 +25,7 @@
 		  <li><a href="#!">Images des pages</a></li>
 		</ul>
 		<nav class="teal darken-1" style="margin-bottom: 5%;">
-			<span class="brand-logo right" style="margin-right:33%;">TITRE</span>
+			<span class="brand-logo right" style="margin-right:33%;"><?=$titre?></span>
   			<ul id="slide-out" class="side-nav fixed">
   				<div class="card" style="margin-top:-30px;">
 					<div class="card-image">
