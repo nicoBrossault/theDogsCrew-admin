@@ -1,7 +1,7 @@
 <div class="container">
 <!-- ARTICLE -->
 	<div class="col s8 m5 l4  hoverable">
-		<a href="#" class="teal-text text-darken-1">
+		<a href="<?php echo current_url()?>/cArticle" class="teal-text text-darken-1">
 			<div class="card small teal darken-1">
 				<div class="card-image">
 					<div class="container">
@@ -13,7 +13,7 @@
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>ARTICLE</b>
+					<b>ARTICLES</b>
 				</div>
 		</div>
 		</a>
@@ -34,7 +34,7 @@
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>Page</b>
+					<b>PAGES</b>
 				</div>
 			</div>
 		</a>
@@ -55,7 +55,7 @@
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>Galerie</b>
+					<b>GALERIE</b>
 				</div>
 			</div>
 		</a>
@@ -69,14 +69,13 @@
 					<div class="container">
 						<br>
 						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/galerie.png">
+						<div class="col s12 m12">
+				 			<img src="assets/images/imgPage.png">
 			 			</div>
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>Images Pages</b>
+					<b>IMAGES PAGES</b>
 				</div>
 			</div>
 		</a>
@@ -97,7 +96,7 @@
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>Compagnie</b>
+					<b>COMPAGNIE</b>
 				</div>
 			</div>
 		</a>
@@ -113,12 +112,12 @@
 						<br>
 						<br>
 						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/langue.png">
+				 			<img src="assets/images/reglageLang.png">
 			 			</div>
 		 			</div>
 				</div>
 				<div class="card-action white">
-					<b>langue</b>
+					<b>LANGUES</b>
 				</div>
 			</div>
 		</a>

@@ -5,11 +5,11 @@
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script type="text/javascript" src="assets/js/jquery.js"></script>
-		<script type="text/javascript" src="assets/js/menu.js"></script>
-		<script type="text/javascript" src="assets/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="assets/css/materialize.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.js"></script>
+		<script type="text/javascript" src="<?php echo base_url()?>assets/js/menu.js"></script>
+		<script type="text/javascript" src="<?php echo base_url()?>assets/js/materialize.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/style.css">
 	</head>
 	<body>
 	 
@@ -29,7 +29,7 @@
   			<ul id="slide-out" class="side-nav fixed">
   				<div class="card" style="margin-top:-30px;">
 					<div class="card-image">
-						<img src="assets/images/epee.jpg">
+						<img src="<?php echo base_url()?>assets/images/epee.jpg">
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">The Dogs' Crew

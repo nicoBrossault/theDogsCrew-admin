@@ -9,9 +9,16 @@ class CArticle extends CI_Controller {
 	}
 	
 	public function index(){
-		$this->jsutils->getAndBindTo(".article","click","CArticle/ajaxGet","#response");
-		echo $this->jsutils->compile();
+		$ajaxReady=false;
+		$articles = $this->all();
+		$this->load->view('theme/vMenu', array('ajaxReady'=>$ajaxReady, 'articles'=>$articles));
 		$this->load->view('article/vIndex');
+		$this->load->view('theme/vFooter');
+	}
+	
+	public function all(){
+		$query = $this->doctrine->em->createQuery("SELECT a FROM article a");
+		$articles = $query->getResult();
 	}
 	
 	function ajaxGet(){
