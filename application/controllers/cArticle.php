@@ -12,7 +12,8 @@ class CArticle extends CI_Controller {
 		$ajaxReady=true;
 		$titre="Articles";
 
-		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#list');
+		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
+		$this->jsutils->getAndBindTo('.modifier','click','cArticle/add','#content');
 		$this->jsutils->compile();
 		
 		$varPage = $this->pagination();
@@ -39,7 +40,9 @@ class CArticle extends CI_Controller {
 	
 	public function getId($id){
 		$_SESSION['page']=$id;
-		$this->index();
+		$this->index('article/vAdd', array(
+				
+		));
 	}
 	
 	public function pagination(){
@@ -48,7 +51,7 @@ class CArticle extends CI_Controller {
 		}
 		
 		$page=$_SESSION['page'];
-		$nbPerPage = 1;
+		$nbPerPage = 5;
 		$nbArticles = $this->count();
 		
 		$nbPages=ceil($nbArticles/$nbPerPage);
@@ -65,6 +68,11 @@ class CArticle extends CI_Controller {
 	}
 	
 	public function add(){
+		$ajaxReady=false;
+		$titre="Modifier/ Ajouter un article :";
+		$this->layout->view('article/vAdd', array(
+						'titre'=>$titre,
+						'ajaxReady'=>$ajaxReady,));
 	}
 	
 	function ajaxGet(){

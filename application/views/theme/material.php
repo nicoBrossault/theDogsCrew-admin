@@ -70,7 +70,7 @@
 			<div class="col s10 m10 l9 offset-s1 offset-m2 offset-l3">
 				<!-- Page Content -->
 				<div id="content"> 
-					<?php echo $output; ?>
+					<?php echo $output_content; ?>
 				</div>		
 			</div>
 		</div>
