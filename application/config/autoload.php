@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','doctrine','jsUtils','session');
+$autoload['libraries'] = array('database','doctrine','jsUtils','session','layout');
 $autoload['helper'] = array('url','assets');
 
 /*

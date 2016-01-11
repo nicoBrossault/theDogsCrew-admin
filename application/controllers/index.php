@@ -13,9 +13,10 @@ class Index extends CI_Controller {
 		echo $this->jsutils->compile();
 		$ajaxReady=true;
 		$titre = "Index";
-		$this->load->view('theme/vMenu', array('ajaxReady'=>$ajaxReady, 'titre'=>$titre));
-		$this->load->view('index/vIndex');
-		$this->load->view('theme/vFooter');
+
+		$this->layout->view('index/vIndex',array(
+							'titre'=>$titre,
+							'ajaxReady'=>$ajaxReady));
 		
 	}
 	

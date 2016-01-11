@@ -9,35 +9,59 @@ class CArticle extends CI_Controller {
 	}
 	
 	public function index(){
-		$ajaxReady=false;
+		$ajaxReady=true;
 		$titre="Articles";
-						
-		$page = 1;
-		$nbPerPage = 3;
-		$articles = $this->pagination($page,$nbPerPage);
+
+		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#list');
+		$this->jsutils->compile();
 		
-		$this->load->view('theme/vMenu', array('ajaxReady'=>$ajaxReady, 'titre'=>$titre));
-		$this->load->view('article/vIndex', array('articles'=>$articles));
-		$this->load->view('theme/vFooter');
+		$varPage = $this->pagination();
+		
+		$nbPages = $varPage['nbPages'];
+		$articles = $varPage['articles'];
+		
+		$this->layout->view('article/vIndex',array(
+							'titre'=>$titre,
+							'ajaxReady'=>$ajaxReady,
+							'articles'=>$articles,
+							'nbPages'=>$nbPages));
 	}
 	
-	public function all(){
+	public function count(){
 		$query = $this->doctrine->em->createQuery("SELECT a FROM article a");
-		return $query->getResult();
+		$articles = $query->getResult();
+		$nbArticles=0;
+		foreach ($articles as $data){
+			$nbArticles+=1;
+		}
+		return $nbArticles;
 	}
 	
-	public function pagination($page,$nbPerPage){
-		$query = $this->doctrine->em->createQuery("SELECT COUNT(a) FROM article a");
-		$nbArticles=$query->getResult();
+	public function getId($id){
+		$_SESSION['page']=$id;
+		$this->index();
+	}
+	
+	public function pagination(){
+		if(!isset($_SESSION['page'])){
+			$_SESSION['page'] = 1;
+		}
 		
-		echo $min = (($page)*$nbPerPage)-($nbPerPage);
-		echo $num = $nbPerPage;
+		$page=$_SESSION['page'];
+		$nbPerPage = 1;
+		$nbArticles = $this->count();
+		
+		$nbPages=ceil($nbArticles/$nbPerPage);
+		
+		$min = (($page)*$nbPerPage)-($nbPerPage);
+		$num = $min + $nbPerPage;
 		if($min < 0){
 			$min = 0;
 		}
-		$nCondition = " ORDER BY DATE ASC LIMIT ".$min.",". $num;
+		$nCondition = "WHERE a.idarticle >".$min." AND a.idarticle <=".$num." ORDER BY a.date ASC";
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a ".$nCondition);
-		return $list = $queryNb->getResult();
+		return $varPage=array('articles'=>$queryNb->getResult(),'nbPages'=>$nbPages);
+		
 	}
 	
 	public function add(){
