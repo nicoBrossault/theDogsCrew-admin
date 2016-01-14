@@ -43,7 +43,7 @@ $config['index_page'] = 'index.php';
 |--------------------------------------------------------------------------
 |
 */
-$config['javascript_location'] = $config['base_url'].'assets/js/jquery/';
+$config['javascript_location'] = $config['base_url'].'assets/js/jquery.js';
 $config['javascript_ajax_img'] = 'assets/images/ajax-loader.gif';
 
 /*

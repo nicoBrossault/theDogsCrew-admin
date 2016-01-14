@@ -1,60 +1,55 @@
 <?php
-
-
-
-use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Mapping as ORM;
 /**
  * Page
  *
- * @ORM\Table(name="page")
- * @ORM\Entity
+* @Table(name="page")
+ * @Entity
  */
-class Page
-{
+class Page {
     /**
      * @var integer $idpage
      *
-     * @ORM\Column(name="idPage", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="idPage", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $idpage;
 
     /**
      * @var string $titre
      *
-     * @ORM\Column(name="titre", type="string", length=60, nullable=false)
+     * @Column(name="titre", type="string", length=60, nullable=false)
      */
     private $titre;
 
     /**
      * @var text $texte
      *
-     * @ORM\Column(name="texte", type="text", nullable=false)
+     * @Column(name="texte", type="text", nullable=false)
      */
     private $texte;
 
     /**
      * @var text $image
      *
-     * @ORM\Column(name="image", type="text", nullable=true)
+     * @Column(name="image", type="text", nullable=true)
      */
     private $image;
 
     /**
      * @var date $date
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @Column(name="date", type="date", nullable=true)
      */
     private $date;
 
     /**
      * @var Langue
      *
-     * @ORM\OneToOne(targetEntity="Langue")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
+     * @OneToOne(targetEntity="Langue")
+     * @JoinColumns({
+     *   @JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
      * })
      */
     private $idlangue;
@@ -62,9 +57,9 @@ class Page
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
+     * @OneToOne(targetEntity="User")
+     * @JoinColumns({
+     *   @JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
      * })
      */
     private $iduser;

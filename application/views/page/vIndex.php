@@ -5,30 +5,37 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <div class="list">
 	<ul class="collapsible popout" data-collapsible="accordion" style="box-shadow:none">
 		<?php
-			foreach ($articles as $article):
+			foreach ($pages as $page):
 		?>
 		<li>
 			<div class="collapsible-header">
-				<label>Article <?=$article->getIdArticle()?> : </label>
-				<?=character_limiter($article->getTexte(),30)?>
+				<label>page <?=$page->getIdpage()?> : </label>
+				<?=character_limiter($page->getTitre(),30)?>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">
 					<div class="col m10 s10 offset-m1 offset-s1" style="padding-top:3%; padding-bottom:3%">
 						<label style="font-size:20px;">Identifiant : </label>
 						<br>
-						<?=$article->getIdArticle()?>
+						<?=$page->getIdpage()?>
 						<br>
 						<br>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
-						<?=$article->getTexte()?>
+						<?=utf8_encode($page->getTexte())?>
 						<br>
 						<br>
+						<?php if($page->getImage()!="") :?>
+							<label style="font-size:20px;">Image : </label>
+							<br>
+							<img src="../theDogsCrew-site/<?=$page->getImage()?>" style="width:20%">
+							<br>
+							<br>
+						<?php endif ?>
 						<label style="font-size:20px;">Date : </label>
 						<br>
 						<?php
-							$date = $article->getDate();
+							$date = $page->getDate();
 							$result = $date->format('Y-m-d');
 							if ($result) {
 								echo $result;
@@ -55,7 +62,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <br>
 <ul class="pagination">
 	<?php for ($i=0; $i<$nbPages; $i++): ?>
-		<?php if($numA==($i+1)):?>
+		<?php if($numP==($i+1)):?>
 			<li class="page active" id="<?=$i+1 ?>">
 		<?php else : ?>
 			<li class="waves-effect page" id="<?=$i+1 ?>">

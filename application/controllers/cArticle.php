@@ -5,27 +5,16 @@ class CArticle extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
-		$this->load->helper('text');
 	}
 	
 	public function index(){
-		$ajaxReady=true;
 		$titre="Articles";
-
-		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
-		$this->jsutils->getAndBindTo('.modifier','click','cArticle/add','#content');
-		$this->jsutils->compile();
+		$this->layout->set_titre($titre);
+		$this->layout->th_default();
 		
-		$varPage = $this->pagination();
+		$this->load->helper('text');
 		
-		$nbPages = $varPage['nbPages'];
-		$articles = $varPage['articles'];
-		
-		$this->layout->view('article/vIndex',array(
-							'titre'=>$titre,
-							'ajaxReady'=>$ajaxReady,
-							'articles'=>$articles,
-							'nbPages'=>$nbPages));
+		$this->listArticle();
 	}
 	
 	public function count(){
@@ -38,20 +27,29 @@ class CArticle extends CI_Controller {
 		return $nbArticles;
 	}
 	
+	public function listArticle(){
+		$this->load->helper('text');
+		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
+		$this->jsutils->getAndBindTo('.modifier','click','cArticle/add','#content');
+		$this->jsutils->compile();
+		
+		$varPage = $this->pagination();
+		
+		$this->layout->view('article/vIndex', $data=$varPage);
+	}
+	
 	public function getId($id){
-		$_SESSION['page']=$id;
-		$this->index('article/vAdd', array(
-				
-		));
+		$_SESSION['pageA']=$id;
+		$this->listArticle();
 	}
 	
 	public function pagination(){
-		if(!isset($_SESSION['page'])){
-			$_SESSION['page'] = 1;
+		if(!isset($_SESSION['pageA'])){
+			$_SESSION['pageA'] = 1;
 		}
 		
-		$page=$_SESSION['page'];
-		$nbPerPage = 5;
+		$page=$_SESSION['pageA'];
+		$nbPerPage = 2;
 		$nbArticles = $this->count();
 		
 		$nbPages=ceil($nbArticles/$nbPerPage);
@@ -63,7 +61,10 @@ class CArticle extends CI_Controller {
 		}
 		$nCondition = "WHERE a.idarticle >".$min." AND a.idarticle <=".$num." ORDER BY a.date ASC";
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a ".$nCondition);
-		return $varPage=array('articles'=>$queryNb->getResult(),'nbPages'=>$nbPages);
+		return $varPage=array(	'articles'	=>	$queryNb->getResult(),
+								'nbPages'	=>	$nbPages,
+								'numA'		=>	$numP=$_SESSION['pageA']
+								);
 		
 	}
 	

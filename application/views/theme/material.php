@@ -5,21 +5,21 @@
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/general.js"></script>
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/materialize.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/materialize.min.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/style.css">
+		<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
+		<script type="text/javascript" src="<?=base_url()?>assets/js/general.js"></script>
+		<script type="text/javascript" src="<?=base_url()?>assets/js/materialize.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
 	</head>
 	<body>
 		<?php
-			if($ajaxReady==true){
+			if(isset($library_src) && isset($script_foot)){
 				echo $library_src;
 				echo $script_foot;
 			}
 		?>
 		<ul id="dropdownPage" class="dropdown-content">
-		  <li><a href="#!">Les pages</a></li>
+		  <li><a href="<?=base_url()?>cPage">Les Pages</a></li>
 		  <li><a href="#!">Compagnies</a></li>
 		  <li><a href="#!">Images des pages</a></li>
 		</ul>
@@ -28,7 +28,7 @@
   			<ul id="slide-out" class="side-nav fixed">
   				<div class="card" style="margin-top:-30px;">
 					<div class="card-image">
-						<img src="<?php echo base_url()?>assets/images/epee.jpg">
+						<img src="<?=base_url()?>assets/images/epee.jpg">
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">The Dogs' Crew
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<li>
-					<a class="article">Articles</a>
+					<a href="<?=base_url()?>cArticle">Articles</a>
 				</li>
 				<li>
 					<a class="dropdown-button" href="#!" data-activates="dropdownPage">
@@ -65,12 +65,10 @@
 				<i class="mdi-navigation-menu btnAccordeon"></i>
 			</a>
 		</nav>
-		
 		<div class="row">
 			<div class="col s10 m10 l9 offset-s1 offset-m2 offset-l3">
-				<!-- Page Content -->
-				<div id="content"> 
-					<?php echo $output_content; ?>
+				<div id="content">
+					<?=$output_content?>
 				</div>		
 			</div>
 		</div>

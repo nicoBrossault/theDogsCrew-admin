@@ -5,25 +5,10 @@
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/general.js"></script>
-		<script type="text/javascript" src="<?php echo base_url()?>assets/js/materialize.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/materialize.min.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/style.css">
 	</head>
 	<body>
-	 	<div id="global">
-		<?php
-			if($ajaxReady==true){
-				echo $library_src;
-				echo $script_foot;
-			}
-		?>
-		<ul id="dropdownPage" class="dropdown-content">
-		  <li><a href="#!">Les pages</a></li>
-		  <li><a href="#!">Compagnies</a></li>
-		  <li><a href="#!">Images des pages</a></li>
-		</ul>
 		<nav class="teal darken-1" style="margin-bottom: 5%;">
 			<span class="brand-logo right" style="margin-right:33%;"><?=$titre?></span>
   			<ul id="slide-out" class="side-nav fixed">
@@ -40,17 +25,32 @@
 						<span class="card-title grey-text text-darken-4">The Dogs' Crew
 							<i class="material-icons right" style="margin-top:8px;">close</i>
 						</span>
-						user
+						<a href="#">user</a>
+						<a href="<?=base_url()?>">Home</a>
 					</div>
 				</div>
 				<li>
-					<a class="article">Articles</a>
+					<a href="<?=base_url("cArticle")?>">Articles</a>
 				</li>
 				<li>
-					<a class="dropdown-button" href="#!" data-activates="dropdownPage">
-							Pages
-						<i class="material-icons right"></i>
-					</a>
+					<ul class="collapsible" data-collapsible="accordion">
+						<li>
+						<div class="collapsible-header" style="margin-left:-6%">
+							<a>Pages</a>
+						</div>
+						<div class="collapsible-body">
+							<ul>
+								<li><a href="<?=base_url("cPage")?>">Les pages</a></li>
+								<li><a href="#!">Compagnies</a></li>
+								<li><a href="#!">Images des pages</a></li>
+							</ul>
+						</div>
+						<!--<a href="#" class="dropdown-button" data-activates="dropdownPage">
+								Pages
+							<i class="material-icons right"></i>
+						</a>-->
+						</li>
+					</ul>
 				</li>
 				<li>
 					<a href="#">Textes du Site</a>
@@ -66,9 +66,7 @@
 				<i class="mdi-navigation-menu btnAccordeon"></i>
 			</a>
 		</nav>
+		
 		<div class="row">
-			<div class="col s10 m10 l9 offset-s1 offset-m2 offset-l3">
-				<!-- Page Content -->
-				<div class="content"> 
-				
+			<div class="col s10 m10 l9 offset-s1 offset-m2 offset-l3">	
 			

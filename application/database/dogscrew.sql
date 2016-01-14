@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `ip` varchar(16) NOT NULL,
   `pays` varchar(60) DEFAULT NULL,
   `region` varchar(60) DEFAULT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
