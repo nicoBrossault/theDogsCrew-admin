@@ -2,6 +2,16 @@
 use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 ?>
+<script src="<?=base_url()?>assets/js/jquery.js"></script>
+<?php
+	if(isset($library_src) && isset($script_foot)){
+		echo $library_src;
+		echo $script_foot;
+	}
+?>
+<script src="<?=base_url()?>assets/js/general.js"></script>
+<script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+
 <div class="list">
 	<ul class="collapsible popout" data-collapsible="accordion" style="box-shadow:none">
 		<?php
@@ -43,8 +53,18 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<i class="large material-icons">mode_edit</i>
 					</a>
 					<ul>
-						<li><a class="btn-floating red"><i class="material-icons modifier">mode_edit</i></a></li>
-						<li><a class="btn-floating yellow darken-1"><i class="material-icons supprimer">delete</i></a></li>
+						<li>
+							<a class="btn-floating red modifier" id="<?=$article->getIdArticle()?>">
+								<i class="material-icons">mode_edit</i>
+								<?=$idArticle=$article->getIdArticle()?>
+							</a>
+						</li>
+						<li>
+							<a class="btn-floating yellow darken-1 supprimer" id="<?=$article->getIdArticle()?>">
+								<i class="material-icons">delete</i>
+								<?=$article->getIdArticle()?>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

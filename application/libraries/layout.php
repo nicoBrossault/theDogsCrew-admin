@@ -25,6 +25,10 @@ class Layout {
 		$this->titre = $titre;
 		return true;
 	}
+	
+	public function getTitre(){
+		return $this->titre;
+	}
 
 /*
 |===============================================================================
@@ -36,9 +40,8 @@ class Layout {
 */
 	public function th_default(){
 		$this->CI->load->view('theme/content/vMenu', array(
-				'titre' => $this->titre,
-				'output_content' => $this->output_content,
-				
+				'titre' 			=> 	$this->titre,
+				'output_content' 	=> 	$this->output_content,
 		));
 	}
 	
@@ -52,7 +55,9 @@ class Layout {
 	
 	public function view($name, $data = array()){
 		$this->setContent($this->CI->load->view($name, $data, true));
-		$this->CI->load->view('theme/content/vContent', array('content'=>$this->content));
+		$this->CI->load->view('theme/content/vContent', array(
+				'content'	=>	$this->content,
+		));
 	}
 }
 

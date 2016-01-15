@@ -1,3 +1,6 @@
+<?php
+use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,8 +8,8 @@
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/materialize.min.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/materialize.min.css">
+		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
 	</head>
 	<body>
 		<nav class="teal darken-1" style="margin-bottom: 5%;">
@@ -14,7 +17,7 @@
   			<ul id="slide-out" class="side-nav fixed">
   				<div class="card" style="margin-top:-30px;">
 					<div class="card-image">
-						<img src="<?php echo base_url()?>assets/images/epee.jpg">
+						<img src="<?=base_url()?>assets/images/epee.jpg">
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">The Dogs' Crew
@@ -35,20 +38,16 @@
 				<li>
 					<ul class="collapsible" data-collapsible="accordion">
 						<li>
-						<div class="collapsible-header" style="margin-left:-6%">
-							<a>Pages</a>
-						</div>
-						<div class="collapsible-body">
-							<ul>
-								<li><a href="<?=base_url("cPage")?>">Les pages</a></li>
-								<li><a href="#!">Compagnies</a></li>
-								<li><a href="#!">Images des pages</a></li>
-							</ul>
-						</div>
-						<!--<a href="#" class="dropdown-button" data-activates="dropdownPage">
-								Pages
-							<i class="material-icons right"></i>
-						</a>-->
+							<div class="collapsible-header" style="margin-left:-6%">
+								<a>Pages</a>
+							</div>
+							<div class="collapsible-body">
+								<ul>
+									<li><a href="<?=base_url("cPage")?>">Les pages</a></li>
+									<li><a href="#!">Compagnies</a></li>
+									<li><a href="#!">Images des pages</a></li>
+								</ul>
+							</div>
 						</li>
 					</ul>
 				</li>

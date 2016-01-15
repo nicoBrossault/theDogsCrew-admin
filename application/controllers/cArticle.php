@@ -7,7 +7,7 @@ class CArticle extends CI_Controller {
 		parent::__construct();
 	}
 	
-	public function index(){
+	public function index(){		
 		$titre="Articles";
 		$this->layout->set_titre($titre);
 		$this->layout->th_default();
@@ -28,14 +28,12 @@ class CArticle extends CI_Controller {
 	}
 	
 	public function listArticle(){
+		$this->ajaxGet();
 		$this->load->helper('text');
-		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
-		$this->jsutils->getAndBindTo('.modifier','click','cArticle/add','#content');
-		$this->jsutils->compile();
-		
+				
 		$varPage = $this->pagination();
 		
-		$this->layout->view('article/vIndex', $data=$varPage);
+		$this->layout->view('article/vIndex',$data=$varPage);
 	}
 	
 	public function getId($id){
@@ -49,7 +47,7 @@ class CArticle extends CI_Controller {
 		}
 		
 		$page=$_SESSION['pageA'];
-		$nbPerPage = 2;
+		$nbPerPage = 5;
 		$nbArticles = $this->count();
 		
 		$nbPages=ceil($nbArticles/$nbPerPage);
@@ -63,20 +61,30 @@ class CArticle extends CI_Controller {
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a ".$nCondition);
 		return $varPage=array(	'articles'	=>	$queryNb->getResult(),
 								'nbPages'	=>	$nbPages,
-								'numA'		=>	$numP=$_SESSION['pageA']
+								'numA'		=>	$numP=$_SESSION['pageA'],
 								);
 		
 	}
 	
-	public function add(){
-		$ajaxReady=false;
+	public function add($id){
+		$_SESSION['object']="article";
 		$titre="Modifier/ Ajouter un article :";
+		
+		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a WHERE a.idarticle =".$id);
+		$article = $queryNb->getResult();
+		
+		$queryLng = $this->doctrine->em->createQuery("SELECT l FROM langue l");
+		$langues = $queryLng->getResult();
 		$this->layout->view('article/vAdd', array(
-						'titre'=>$titre,
-						'ajaxReady'=>$ajaxReady,));
+						'titre'		=>	$titre,
+						'article'	=>	$article,
+						'langues'	=>	$langues,
+						));
 	}
 	
 	function ajaxGet(){
-		echo "Exemple de get sur click";
+		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
+		$this->jsutils->getAndBindTo('.modifier','click','cArticle/add','#content');
+		$this->jsutils->compile();
 	}
 }
