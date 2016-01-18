@@ -22,22 +22,22 @@ class Droit
     private $iddroit;
 
     /**
-     * @var text $libelle
+     * @var text $controller
      *
-     * @ORM\Column(name="LIBELLE", type="text", nullable=false)
+     * @ORM\Column(name="controller", type="text", nullable=false)
      */
-    private $libelle;
+    private $controller;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Usertype", mappedBy="iddroit")
      */
-    private $idtype;
+    private $idrole;
 
     public function __construct()
     {
-        $this->idtype = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Idrole = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -51,46 +51,68 @@ class Droit
     }
 
     /**
-     * Set libelle
+     * Set controller
      *
-     * @param text $libelle
-     * @return Droit
+     * @param text $controller
+     * @return text
      */
-    public function setLibelle($libelle)
+    public function setController($controller)
     {
-        $this->libelle = $libelle;
+        $this->controller = $controller;
         return $this;
     }
 
     /**
-     * Get libelle
+     * Get controller
      *
      * @return text 
      */
-    public function getLibelle()
+    public function getAction()
     {
-        return $this->libelle;
+        return $this->action;
     }
+    
+    /**
+     * Set action
+     *
+     * @param text $action
+     * @return action
+     */
+    public function setAction($action)
+    {
+    	$this->action = $action;
+    	return $this;
+    }
+    
+    /**
+     * Get controller
+     *
+     * @return text
+     */
+    public function getController()
+    {
+    	return $this->controller;
+    }    
 
     /**
-     * Add idtype
+     * Add idrole
      *
-     * @param Usertype $idtype
+     * @param Usertype $Idrole
      * @return Droit
      */
-    public function addUsertype(\Usertype $idtype)
+    public function addUsertype(\Usertype $Idrole)
     {
-        $this->idtype[] = $idtype;
+        $this->idrole[] = $idrole;
         return $this;
     }
 
     /**
-     * Get idtype
+     * Get idrole
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getIdtype()
+    public function getIdrole()
     {
-        return $this->idtype;
+        return $this->idrole;
     }
 }

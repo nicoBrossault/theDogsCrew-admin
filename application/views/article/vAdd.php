@@ -37,8 +37,8 @@ foreach($article as $data){
 	$titre= array(
 		'name'=>'titre',
 		'id'=>'titre',
-		'placeholder'=>'Titre',
-		'value'=>$data->getTitre(),
+		'placeholder'=>$data->getTitre(),
+		'value'=>'',
 	);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_input($titre);
@@ -47,8 +47,8 @@ foreach($article as $data){
 			'name'=>'texte',
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
-			'placeholder'=>'Texte',
-			'value'=>$data->getTexte(),
+			'placeholder'=>$data->getTexte(),
+			'value'=>'',
 			'cols' => '40',
 			'rows' => '40',
 	);

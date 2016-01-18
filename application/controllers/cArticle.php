@@ -75,6 +75,7 @@ class CArticle extends CI_Controller {
 		
 		$queryLng = $this->doctrine->em->createQuery("SELECT l FROM langue l");
 		$langues = $queryLng->getResult();
+		
 		$this->layout->view('article/vAdd', array(
 						'titre'		=>	$titre,
 						'article'	=>	$article,

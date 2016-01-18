@@ -20,7 +20,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>Article <?=$article->getIdArticle()?> : </label>
-				<?=character_limiter($article->getTexte(),30)?>
+				<?=character_limiter($article->getTitre(),30)?>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">
