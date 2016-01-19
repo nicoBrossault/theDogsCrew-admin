@@ -2,14 +2,23 @@ Compagnie:
   type: entity
   table: compagnie
   fields:
-    idcompgnie:
+    idcompagnie:
       id: true
       type: integer
       unsigned: false
       nullable: false
-      column: idCompgnie
+      column: idCompagnie
       generator:
         strategy: IDENTITY
+    iduser:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idUser
+    idlangue:
+      type: integer
+      unsigned: false
+      nullable: false
     titre:
       type: text
       nullable: false
@@ -19,8 +28,7 @@ Compagnie:
     image:
       type: text
       nullable: false
-    idlangue:
-      type: integer
-      unsigned: false
+    date:
+      type: date
       nullable: false
   lifecycleCallbacks: {  }

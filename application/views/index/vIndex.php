@@ -1,7 +1,7 @@
 <div class="container">
 <!-- ARTICLE -->
 	<div class="col s8 m5 l4  hoverable">
-		<a href="<?php echo current_url()?>/cArticle" class="teal-text text-darken-1">
+		<a href="<?=base_url('cArticle')?>" class="teal-text text-darken-1">
 			<div class="card small teal darken-1">
 				<div class="card-image">
 					<div class="container">
@@ -83,7 +83,7 @@
 
 <!-- COMPAGNIE -->
 	<div class="col s8 m5 l4 hoverable">
-		<a href="#" class="teal-text text-darken-1">
+		<a href="<?=base_url('cCompagnie')?>" class="teal-text text-darken-1">
 			<div class="card small teal darken-1">
 				<div class="card-image">
 					<div class="container">

@@ -13,13 +13,27 @@ use Doctrine\Mapping as ORM;
 class Compagnie
 {
     /**
-     * @var integer $idcompgnie
+     * @var integer $idcompagnie
      *
-     * @Column(name="idCompgnie", type="integer", nullable=false)
+     * @Column(name="idCompagnie", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $idcompgnie;
+    private $idcompagnie;
+
+    /**
+     * @var integer $iduser
+     *
+     * @Column(name="idUser", type="integer", nullable=false)
+     */
+    private $iduser;
+
+    /**
+     * @var integer $idlangue
+     *
+     * @Column(name="idlangue", type="integer", nullable=false)
+     */
+    private $idlangue;
 
     /**
      * @var text $titre
@@ -43,21 +57,65 @@ class Compagnie
     private $image;
 
     /**
-     * @var integer $idlangue
+     * @var date $date
      *
-     * @Column(name="idlangue", type="integer", nullable=false)
+     * @Column(name="date", type="date", nullable=false)
      */
-    private $idlangue;
+    private $date;
 
 
     /**
-     * Get idcompgnie
+     * Get idcompagnie
      *
      * @return integer 
      */
-    public function getIdcompgnie()
+    public function getIdcompagnie()
     {
-        return $this->idcompgnie;
+        return $this->idcompagnie;
+    }
+
+    /**
+     * Set iduser
+     *
+     * @param integer $iduser
+     * @return Compagnie
+     */
+    public function setIduser($iduser)
+    {
+        $this->iduser = $iduser;
+        return $this;
+    }
+
+    /**
+     * Get iduser
+     *
+     * @return integer 
+     */
+    public function getIduser()
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * Set idlangue
+     *
+     * @param integer $idlangue
+     * @return Compagnie
+     */
+    public function setIdlangue($idlangue)
+    {
+        $this->idlangue = $idlangue;
+        return $this;
+    }
+
+    /**
+     * Get idlangue
+     *
+     * @return integer 
+     */
+    public function getIdlangue()
+    {
+        return $this->idlangue;
     }
 
     /**
@@ -127,24 +185,24 @@ class Compagnie
     }
 
     /**
-     * Set idlangue
+     * Set date
      *
-     * @param integer $idlangue
+     * @param date $date
      * @return Compagnie
      */
-    public function setIdlangue($idlangue)
+    public function setDate($date)
     {
-        $this->idlangue = $idlangue;
+        $this->date = $date;
         return $this;
     }
 
     /**
-     * Get idlangue
+     * Get date
      *
-     * @return integer 
+     * @return date 
      */
-    public function getIdlangue()
+    public function getDate()
     {
-        return $this->idlangue;
+        return $this->date;
     }
 }
