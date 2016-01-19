@@ -1,3 +1,13 @@
+<script src="<?=base_url()?>assets/js/jquery.js"></script>
+<?php
+	if(isset($library_src) && isset($script_foot)){
+		echo $library_src;
+		echo $script_foot;
+	}
+?>
+<script src="<?=base_url()?>assets/js/general.js"></script>
+<script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+
 <div class="container">
 <!-- ARTICLE -->
 	<div class="col s8 m5 l4  hoverable">
@@ -118,6 +128,27 @@
 				</div>
 				<div class="card-action white">
 					<b>LANGUES</b>
+				</div>
+			</div>
+		</a>
+	</div>
+
+<!-- TEXT SITE -->
+	<div class="col s8 m5 l4 offset-s0 offset-m0 offset-l4 hoverable">
+		<a href="<?=base_url('cTexte')?>" class="teal-text text-darken-1">
+			<div class="card small teal darken-1">
+				<div class="card-image">
+					<div class="container">
+						<br>
+						<br>
+						<br>
+						<div class="col s10 m10 offset-s1 offset-m1">
+				 			<img src="assets/images/reglageLang.png">
+			 			</div>
+		 			</div>
+				</div>
+				<div class="card-action white">
+					<b>TEXTE DU SITE</b>
 				</div>
 			</div>
 		</a>
