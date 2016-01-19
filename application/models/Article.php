@@ -1,12 +1,17 @@
 <?php
+
+
+
 use Doctrine\Mapping as ORM;
+
 /**
  * Article
  *
  * @Table(name="article")
  * @Entity
  */
-class Article {
+class Article
+{
     /**
      * @var integer $idarticle
      *

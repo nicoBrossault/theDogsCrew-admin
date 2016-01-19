@@ -2,36 +2,36 @@
 
 
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Languenavbar
  *
- * @Table(name="languenavbar")
- * @Entity
+ * @ORM\Table(name="languenavbar")
+ * @ORM\Entity
  */
 class Languenavbar
 {
     /**
      * @var integer $idlanguenavbar
      *
-     * @Column(name="idLangueNavBar", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="idLangueNavBar", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idlanguenavbar;
 
     /**
      * @var integer $idlangue
      *
-     * @Column(name="idLangue", type="integer", nullable=false)
+     * @ORM\Column(name="idLangue", type="integer", nullable=false)
      */
     private $idlangue;
 
     /**
      * @var string $texte
      *
-     * @Column(name="texte", type="string", length=255, nullable=false)
+     * @ORM\Column(name="texte", type="string", length=255, nullable=false)
      */
     private $texte;
 

@@ -1,26 +1,23 @@
-Droit:
+Languenavbar:
   type: entity
-  table: droit
+  table: languenavbar
   fields:
-    iddroit:
+    idlanguenavbar:
       id: true
       type: integer
       unsigned: false
       nullable: false
-      column: idDroit
+      column: idLangueNavBar
       generator:
         strategy: IDENTITY
-    controller:
-      type: text
-      nullable: false
-    action:
-      type: string
-      length: 50
-      fixed: false
-      nullable: false
-    idrole:
+    idlangue:
       type: integer
       unsigned: false
       nullable: false
-      column: idRole
+      column: idLangue
+    texte:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
   lifecycleCallbacks: {  }

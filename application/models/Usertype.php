@@ -2,6 +2,8 @@
 
 
 
+use Doctrine\Mapping as ORM;
+
 /**
  * Usertype
  *
@@ -26,26 +28,7 @@ class Usertype
      */
     private $libelle;
 
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * @ManyToMany(targetEntity="Droit", inversedBy="idtype")
-     * @JoinTable(name="droituser",
-     *   joinColumns={
-     *     @JoinColumn(name="IDTYPE", referencedColumnName="IDTYPE")
-     *   },
-     *   inverseJoinColumns={
-     *     @JoinColumn(name="IDDROIT", referencedColumnName="IDDROIT")
-     *   }
-     * )
-     */
-    private $iddroit;
 
-    public function __construct()
-    {
-        $this->iddroit = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
     /**
      * Get idtype
      *
@@ -76,27 +59,5 @@ class Usertype
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Add iddroit
-     *
-     * @param Droit $iddroit
-     * @return Usertype
-     */
-    public function addDroit(\Droit $iddroit)
-    {
-        $this->iddroit[] = $iddroit;
-        return $this;
-    }
-
-    /**
-     * Get iddroit
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getIddroit()
-    {
-        return $this->iddroit;
     }
 }

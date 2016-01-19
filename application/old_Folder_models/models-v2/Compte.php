@@ -2,50 +2,50 @@
 
 
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Compte
  *
- * @Table(name="compte")
- * @Entity
+ * @ORM\Table(name="compte")
+ * @ORM\Entity
  */
 class Compte
 {
     /**
      * @var integer $idcompte
      *
-     * @Column(name="idCompte", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="idCompte", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idcompte;
 
     /**
      * @var string $ip
      *
-     * @Column(name="ip", type="string", length=16, nullable=false)
+     * @ORM\Column(name="ip", type="string", length=16, nullable=false)
      */
     private $ip;
 
     /**
      * @var string $pays
      *
-     * @Column(name="pays", type="string", length=60, nullable=true)
+     * @ORM\Column(name="pays", type="string", length=60, nullable=true)
      */
     private $pays;
 
     /**
      * @var string $region
      *
-     * @Column(name="region", type="string", length=60, nullable=true)
+     * @ORM\Column(name="region", type="string", length=60, nullable=true)
      */
     private $region;
 
     /**
      * @var datetime $date
      *
-     * @Column(name="date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 

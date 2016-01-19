@@ -2,44 +2,47 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Droit
  *
- * @ORM\Table(name="droit")
- * @ORM\Entity
+ * @Table(name="droit")
+ * @Entity
  */
 class Droit
 {
     /**
      * @var integer $iddroit
      *
-     * @ORM\Column(name="IDDROIT", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="idDroit", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $iddroit;
 
     /**
      * @var text $controller
      *
-     * @ORM\Column(name="controller", type="text", nullable=false)
+     * @Column(name="controller", type="text", nullable=false)
      */
     private $controller;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var string $action
      *
-     * @ORM\ManyToMany(targetEntity="Usertype", mappedBy="iddroit")
+     * @Column(name="action", type="string", length=50, nullable=false)
+     */
+    private $action;
+
+    /**
+     * @var integer $idrole
+     *
+     * @Column(name="idRole", type="integer", nullable=false)
      */
     private $idrole;
 
-    public function __construct()
-    {
-        $this->Idrole = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
     /**
      * Get iddroit
      *
@@ -54,7 +57,7 @@ class Droit
      * Set controller
      *
      * @param text $controller
-     * @return text
+     * @return Droit
      */
     public function setController($controller)
     {
@@ -67,49 +70,49 @@ class Droit
      *
      * @return text 
      */
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    /**
+     * Set action
+     *
+     * @param string $action
+     * @return Droit
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return string 
+     */
     public function getAction()
     {
         return $this->action;
     }
-    
-    /**
-     * Set action
-     *
-     * @param text $action
-     * @return action
-     */
-    public function setAction($action)
-    {
-    	$this->action = $action;
-    	return $this;
-    }
-    
-    /**
-     * Get controller
-     *
-     * @return text
-     */
-    public function getController()
-    {
-    	return $this->controller;
-    }    
 
     /**
-     * Add idrole
+     * Set idrole
      *
-     * @param Usertype $Idrole
+     * @param integer $idrole
      * @return Droit
      */
-    public function addUsertype(\Usertype $Idrole)
+    public function setIdrole($idrole)
     {
-        $this->idrole[] = $idrole;
+        $this->idrole = $idrole;
         return $this;
     }
 
     /**
      * Get idrole
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return integer 
      */
     public function getIdrole()
     {

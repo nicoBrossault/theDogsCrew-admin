@@ -2,52 +2,52 @@
 
 
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Image
  *
- * @Table(name="image")
- * @Entity
+ * @ORM\Table(name="image")
+ * @ORM\Entity
  */
 class Image
 {
     /**
      * @var integer $idimage
      *
-     * @Column(name="IDIMAGE", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="IDIMAGE", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idimage;
 
     /**
      * @var text $titre
      *
-     * @Column(name="TITRE", type="text", nullable=false)
+     * @ORM\Column(name="TITRE", type="text", nullable=false)
      */
     private $titre;
 
     /**
      * @var text $description
      *
-     * @Column(name="DESCRIPTION", type="text", nullable=false)
+     * @ORM\Column(name="DESCRIPTION", type="text", nullable=false)
      */
     private $description;
 
     /**
      * @var text $url
      *
-     * @Column(name="URL", type="text", nullable=false)
+     * @ORM\Column(name="URL", type="text", nullable=false)
      */
     private $url;
 
     /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
-     * @JoinColumns({
-     *   @JoinColumn(name="idUser", referencedColumnName="IDUSER", unique=true)
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idUser", referencedColumnName="IDUSER", unique=true)
      * })
      */
     private $iduser;

@@ -48,7 +48,7 @@ foreach($article as $data){
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
 			'placeholder'=>$data->getTexte(),
-			'value'=>'',
+			'value'=>$data->getTexte(),
 			'cols' => '40',
 			'rows' => '40',
 	);

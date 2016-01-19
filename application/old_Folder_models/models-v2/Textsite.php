@@ -2,52 +2,52 @@
 
 
 
-use Doctrine\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Textsite
  *
- * @Table(name="textsite")
- * @Entity
+ * @ORM\Table(name="textsite")
+ * @ORM\Entity
  */
 class Textsite
 {
     /**
      * @var integer $idtext
      *
-     * @Column(name="idText", type="integer", nullable=false)
-     * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="idText", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idtext;
 
     /**
      * @var string $type
      *
-     * @Column(name="type", type="string", length=255, nullable=true)
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
 
     /**
      * @var string $libelle
      *
-     * @Column(name="libelle", type="string", length=60, nullable=false)
+     * @ORM\Column(name="libelle", type="string", length=60, nullable=false)
      */
     private $libelle;
 
     /**
      * @var text $text
      *
-     * @Column(name="text", type="text", nullable=false)
+     * @ORM\Column(name="text", type="text", nullable=false)
      */
     private $text;
 
     /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
-     * @JoinColumns({
-     *   @JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
      * })
      */
     private $iduser;
@@ -55,9 +55,9 @@ class Textsite
     /**
      * @var Langue
      *
-     * @OneToOne(targetEntity="Langue")
-     * @JoinColumns({
-     *   @JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
+     * @ORM\OneToOne(targetEntity="Langue")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
      * })
      */
     private $idlangue;

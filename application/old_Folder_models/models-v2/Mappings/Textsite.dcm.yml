@@ -1,0 +1,45 @@
+Textsite:
+  type: entity
+  table: textsite
+  fields:
+    idtext:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idText
+      generator:
+        strategy: IDENTITY
+    type:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    libelle:
+      type: string
+      length: 60
+      fixed: false
+      nullable: false
+    text:
+      type: text
+      nullable: false
+  oneToOne:
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        IDUSER:
+          referencedColumnName: IDUSER
+      orphanRemoval: false
+    idlangue:
+      targetEntity: Langue
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idLangue:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

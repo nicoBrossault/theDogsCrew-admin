@@ -1,46 +1,41 @@
 <?php
-
-
-
 use Doctrine\Mapping as ORM;
-
 /**
- * Textsite
+ * Article
  *
- * @Table(name="textsite")
+ * @Table(name="article")
  * @Entity
  */
-class Textsite
-{
+class Article {
     /**
-     * @var integer $idtext
+     * @var integer $idarticle
      *
-     * @Column(name="idText", type="integer", nullable=false)
+     * @Column(name="IDARTICLE", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $idtext;
+    private $idarticle;
 
     /**
-     * @var string $type
+     * @var date $date
      *
-     * @Column(name="type", type="string", length=255, nullable=true)
+     * @Column(name="DATE", type="date", nullable=false)
      */
-    private $type;
+    private $date;
 
     /**
-     * @var string $libelle
+     * @var text $titre
      *
-     * @Column(name="libelle", type="string", length=60, nullable=false)
+     * @Column(name="Titre", type="text", nullable=false)
      */
-    private $libelle;
+    private $titre;
 
     /**
-     * @var text $text
+     * @var text $texte
      *
-     * @Column(name="text", type="text", nullable=false)
+     * @Column(name="TEXTE", type="text", nullable=false)
      */
-    private $text;
+    private $texte;
 
     /**
      * @var User
@@ -64,86 +59,86 @@ class Textsite
 
 
     /**
-     * Get idtext
+     * Get idarticle
      *
      * @return integer 
      */
-    public function getIdtext()
+    public function getIdarticle()
     {
-        return $this->idtext;
+        return $this->idarticle;
     }
 
     /**
-     * Set type
+     * Set date
      *
-     * @param string $type
-     * @return Textsite
+     * @param date $date
+     * @return Article
      */
-    public function setType($type)
+    public function setDate($date)
     {
-        $this->type = $type;
+        $this->date = $date;
         return $this;
     }
 
     /**
-     * Get type
+     * Get date
      *
-     * @return string 
+     * @return date 
      */
-    public function getType()
+    public function getDate()
     {
-        return $this->type;
+        return $this->date;
     }
 
     /**
-     * Set libelle
+     * Set titre
      *
-     * @param string $libelle
-     * @return Textsite
+     * @param text $titre
+     * @return Article
      */
-    public function setLibelle($libelle)
+    public function setTitre($titre)
     {
-        $this->libelle = $libelle;
+        $this->titre = $titre;
         return $this;
     }
 
     /**
-     * Get libelle
-     *
-     * @return string 
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
-     * Set text
-     *
-     * @param text $text
-     * @return Textsite
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-        return $this;
-    }
-
-    /**
-     * Get text
+     * Get titre
      *
      * @return text 
      */
-    public function getText()
+    public function getTitre()
     {
-        return $this->text;
+        return $this->titre;
+    }
+
+    /**
+     * Set texte
+     *
+     * @param text $texte
+     * @return Article
+     */
+    public function setTexte($texte)
+    {
+        $this->texte = $texte;
+        return $this;
+    }
+
+    /**
+     * Get texte
+     *
+     * @return text 
+     */
+    public function getTexte()
+    {
+        return $this->texte;
     }
 
     /**
      * Set iduser
      *
      * @param User $iduser
-     * @return Textsite
+     * @return Article
      */
     public function setIduser(\User $iduser = null)
     {
@@ -165,7 +160,7 @@ class Textsite
      * Set idlangue
      *
      * @param Langue $idlangue
-     * @return Textsite
+     * @return Article
      */
     public function setIdlangue(\Langue $idlangue = null)
     {

@@ -1,26 +1,26 @@
-Droit:
+Compagnie:
   type: entity
-  table: droit
+  table: compagnie
   fields:
-    iddroit:
+    idcompgnie:
       id: true
       type: integer
       unsigned: false
       nullable: false
-      column: idDroit
+      column: idCompgnie
       generator:
         strategy: IDENTITY
-    controller:
+    titre:
       type: text
       nullable: false
-    action:
-      type: string
-      length: 50
-      fixed: false
+    texte:
+      type: text
       nullable: false
-    idrole:
+    image:
+      type: text
+      nullable: false
+    idlangue:
       type: integer
       unsigned: false
       nullable: false
-      column: idRole
   lifecycleCallbacks: {  }

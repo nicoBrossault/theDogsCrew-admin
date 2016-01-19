@@ -1,17 +1,17 @@
-Usertype:
+Langue:
   type: entity
-  table: usertype
+  table: langue
   fields:
-    idtype:
+    id:
       id: true
       type: integer
       unsigned: false
       nullable: false
-      column: IDTYPE
       generator:
         strategy: IDENTITY
-    libelle:
-      type: text
+    langue:
+      type: string
+      length: 60
+      fixed: false
       nullable: false
-      column: LIBELLE
   lifecycleCallbacks: {  }

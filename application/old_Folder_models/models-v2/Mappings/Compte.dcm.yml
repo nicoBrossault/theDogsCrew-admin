@@ -1,0 +1,31 @@
+Compte:
+  type: entity
+  table: compte
+  fields:
+    idcompte:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idCompte
+      generator:
+        strategy: IDENTITY
+    ip:
+      type: string
+      length: 16
+      fixed: false
+      nullable: false
+    pays:
+      type: string
+      length: 60
+      fixed: false
+      nullable: true
+    region:
+      type: string
+      length: 60
+      fixed: false
+      nullable: true
+    date:
+      type: datetime
+      nullable: false
+  lifecycleCallbacks: {  }
