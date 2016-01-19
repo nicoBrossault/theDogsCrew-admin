@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 19 Janvier 2016 à 09:46
+-- Généré le :  Mer 06 Janvier 2016 à 16:34
 -- Version du serveur :  5.6.26
 -- Version de PHP :  5.6.12
 
@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `dogscrew`
 --
-
+CREATE DATABASE dogscrew;
+use dogscrew;
 -- --------------------------------------------------------
 
 --
@@ -33,17 +34,17 @@ CREATE TABLE IF NOT EXISTS `article` (
   `DATE` date NOT NULL,
   `Titre` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `TEXTE` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `article`
 --
 
 INSERT INTO `article` (`IDARTICLE`, `IDUSER`, `idLangue`, `DATE`, `Titre`, `TEXTE`) VALUES
-(1, 1, 1, '2015-04-27', 'tests', 'tests'),
-(2, 1, 1, '2015-04-28', 'Latin', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun'),
-(3, 1, 1, '2015-10-29', 'nouvel article', 'Ceci est un nouvel article.\r\n'),
-(4, 1, 1, '2015-10-30', 'azertyi', 'areytfuligho\r\n');
+(2, 1, 1, '2015-04-28', 'L''essai', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'),
+(3, 1, 1, '2015-04-28', 'Latin', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun'),
+(4, 1, 1, '2015-10-29', 'nouvel article', '<p>Ceci est un nouvel article.</p>\r\n'),
+(5, 1, 1, '2015-10-30', 'azertyi', '<p>areytfuligho</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -70,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `compte` (
   `ip` varchar(16) NOT NULL,
   `pays` varchar(60) DEFAULT NULL,
   `region` varchar(60) DEFAULT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -80,10 +81,19 @@ CREATE TABLE IF NOT EXISTS `compte` (
 --
 
 CREATE TABLE IF NOT EXISTS `droit` (
-  `idDroit` int(3) NOT NULL,
-  `controller` text CHARACTER SET utf8 NOT NULL,
-  `action` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `idRole` int(3) NOT NULL
+  `IDDROIT` int(3) NOT NULL,
+  `LIBELLE` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `droituser`
+--
+
+CREATE TABLE IF NOT EXISTS `droituser` (
+  `IDTYPE` int(11) NOT NULL,
+  `IDDROIT` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -167,19 +177,19 @@ CREATE TABLE IF NOT EXISTS `page` (
   `texte` text CHARACTER SET ucs2 NOT NULL,
   `image` text,
   `date` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `page`
 --
 
 INSERT INTO `page` (`idPage`, `IDUSER`, `idLangue`, `titre`, `texte`, `image`, `date`) VALUES
-(1, 1, 1, 'histoire', 'En survivant aux exemples de ceux-ci l''Âge de fer germanique (la période de Vendel) les épées avaient des lames mesurant entre 28" et 32" (710 et 810 mm) de longueur et 1.7" à 2.4" (45 à 60 mm) de large. Ces le 45 tours a donné des armes de guerre a batifolé une saveur piquante seulement environ 4" à 5" (100 à 130 mm) longtemps et avait très peu de mèche dans leurs lames finissant dans le bout d''habitude contourné.', NULL, '2015-05-21'),
-(2, 1, 1, 'Compagnie', 'Ceci est la page de la compagnie en français.\r\n', 'imagesPage/bc7ff8bc00199ebb7ed1b81b6983254b.jpg', '2015-10-07'),
-(3, 1, 3, 'Kompanie', 'Ceci est la page de la compagnie en allemand\r\n', 'imagesPage/IMAG0173.jpg', '2015-10-07'),
-(4, 1, 2, 'essai', 'Ceci est une page\r\n', '', '2015-10-29'),
-(5, 1, 2, 'Company', 'It''s a description of the dogs'' crew company, in english.\r\n', 'imagesPage/b36751c4ba.jpg', '2015-10-30'),
-(6, 1, 1, 'page avec image', 'Ceci est une écroce d''arbre.\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n', 'imagesPage/ecorse.jpg', '2015-10-30');
+(2, 1, 1, 'histoire', 'En survivant aux exemples de ceux-ci l''Âge de fer germanique (la période de Vendel) les épées avaient des lames mesurant entre 28" et 32" (710 et 810 mm) de longueur et 1.7" à 2.4" (45 à 60 mm) de large. Ces le 45 tours a donné des armes de guerre a batifolé une saveur piquante seulement environ 4" à 5" (100 à 130 mm) longtemps et avait très peu de mèche dans leurs lames finissant dans le bout d''habitude contourné.', NULL, '2015-05-21'),
+(3, 1, 1, 'Compagnie', '<p>Ceci est la page de la compagnie en fran&ccedil;ais.</p>\r\n', 'imagesPage/bc7ff8bc00199ebb7ed1b81b6983254b.jpg', '2015-10-07'),
+(4, 1, 3, 'Kompanie', '<p>Ceci est la page de la compagnie en allemand</p>\r\n', 'imagesPage/IMAG0173.jpg', '2015-10-07'),
+(5, 1, 2, 'essai', '<p><strong>Ceci </strong>est <span style="color:#FF0000">l&#39;essa</span>i<u> d&#39;une page</u>.</p>\r\n', 'imagesPage/earth53.png', '2015-10-29'),
+(6, 1, 2, 'Company', '<p>It&#39;s a description of the dogs&#39; crew company, in english.</p>\r\n', 'imagesPage/b36751c4ba.jpg', '2015-10-30'),
+(7, 1, 1, 'page avec image', '<p>Ceci est une &eacute;croce d&#39;arbre.</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n\r\n<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciun</p>\r\n', 'imagesPage/ecorse.jpg', '2015-10-30');
 
 -- --------------------------------------------------------
 
@@ -194,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `textsite` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `libelle` varchar(60) NOT NULL,
   `text` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `textsite`
@@ -207,10 +217,7 @@ INSERT INTO `textsite` (`idText`, `IDUSER`, `idLangue`, `type`, `libelle`, `text
 (4, 1, 3, 'presentation', 'Darstellung', 'ceci est une présentation en allemand'),
 (5, 1, 1, 'contact', 'Nous contacter', 'Si vous voulez nous contacter, envoyé nous un message !'),
 (6, 1, 2, 'contact', 'Contact us', ''),
-(7, 1, 3, 'contact', 'Kommunizieren Sie mit uns', ''),
-(8, 1, 1, 'message accueil', 'Le site Officiel', ''),
-(9, 1, 2, 'message accueil', 'The Official Website', ''),
-(10, 1, 3, 'message accueil', 'Die offizielle Website', '');
+(7, 1, 3, 'contact', 'Kommunizieren Sie mit uns', '');
 
 -- --------------------------------------------------------
 
@@ -281,7 +288,14 @@ ALTER TABLE `compte`
 -- Index pour la table `droit`
 --
 ALTER TABLE `droit`
-  ADD PRIMARY KEY (`idDroit`);
+  ADD PRIMARY KEY (`IDDROIT`);
+
+--
+-- Index pour la table `droituser`
+--
+ALTER TABLE `droituser`
+  ADD PRIMARY KEY (`IDTYPE`,`IDDROIT`),
+  ADD KEY `FK_DROITUSER2` (`IDDROIT`);
 
 --
 -- Index pour la table `image`
@@ -339,7 +353,7 @@ ALTER TABLE `usertype`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `IDARTICLE` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `IDARTICLE` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `compagnie`
 --
@@ -354,7 +368,7 @@ ALTER TABLE `compte`
 -- AUTO_INCREMENT pour la table `droit`
 --
 ALTER TABLE `droit`
-  MODIFY `idDroit` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDDROIT` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `image`
 --
@@ -374,12 +388,12 @@ ALTER TABLE `languenavbar`
 -- AUTO_INCREMENT pour la table `page`
 --
 ALTER TABLE `page`
-  MODIFY `idPage` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `idPage` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `textsite`
 --
 ALTER TABLE `textsite`
-  MODIFY `idText` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `idText` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
@@ -400,6 +414,13 @@ ALTER TABLE `usertype`
 ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`IDUSER`) REFERENCES `user` (`IDUSER`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`idLangue`) REFERENCES `langue` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `droituser`
+--
+ALTER TABLE `droituser`
+  ADD CONSTRAINT `droituser_ibfk_1` FOREIGN KEY (`IDTYPE`) REFERENCES `usertype` (`IDTYPE`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `droituser_ibfk_2` FOREIGN KEY (`IDDROIT`) REFERENCES `droit` (`IDDROIT`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `image`
