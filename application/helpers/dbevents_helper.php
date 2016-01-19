@@ -11,7 +11,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$champ=strtoupper($lettreChamp).$subChamp;
 		$set = 'set'.$champ;
 		
-		$object = new $object;
+		//Recuperation du nom de l'objet
+		$lettreObj=$object[0];
+		$len=strlen($object);
+		$subObj=substr($object,1,$len);
+		$upperObj=strtoupper($lettreObj).$subObj;
+		
+		$object = new $upperObj();
 		$object->$set($value);
 		$ci->doctrine->em->persist($object);
 		$ci->doctrine->em->flush();
