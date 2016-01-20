@@ -8,57 +8,76 @@ class Form extends CI_Controller {
 	}
 	
 	function index(){
-		$object=$_SESSION['object'];
+		$nameObject=$_SESSION['object'];
 		
-		$lettreObj=$object[0];
-		$objUse=$object." ".$lettreObj;
+		$lettreObj=$nameObject[0];
+		$objUse=$nameObject." ".$lettreObj;
 		
 		//Recuperation de l'id
 		//Recuperation du nom de l'objet
-		$len=strlen($object);
-		$subObj=substr($object,1,$len);
+		$len=strlen($nameObject);
+		$subObj=substr($nameObject,1,$len);
 		$upperObj=strtoupper($lettreObj).$subObj;
 		
 		$id=$_POST['id'.$upperObj];
 		
-		//Recuperation de l'objet dans la base;
-		$query = $this->doctrine->em->createQuery(
-				"SELECT ".$lettreObj." FROM ".$objUse." WHERE ".$lettreObj.".id".$object."=".$id);
-		$queryObject = $query->getResult();
-		
-		$titre=$object;
+		//theme
+		$titre=$nameObject;
 		$this->layout->set_titre($titre);
 		$this->layout->th_default();
 		$this->load->helper('text');
 		$this->load->helper('security');
 		
+		//appel de l'object
+		$object = new $upperObj();
+		//appel formulaire
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		//Regle de validation
-		if(isset($_POST[$id])){
+		/*if(isset($id)){
+			echo $id."<br>";
 			$this->form_validation->set_rules('idArticle', 'Id de l\'article', 'trim');
-			
-		}
+			$set='setId'.$nameObject;
+			$object->$set($id);
+		}*/
 		if(isset($_POST['idUser'])){
+			echo $_POST['idUser']."<br>";
 			$this->form_validation->set_rules('idUser', 'Id de l\'utilisateur', 'trim');
+			$object->setIduser($object->getIduser());
 		}
 		if(isset($_POST['langue'])){
+			echo $_POST['langue']."<br>";
+			$postLangue=$_POST['langue'];
 			$this->form_validation->set_rules('langue', 'Id de la langue', 'trim');
+			$langue=$this->doctrine->em->createQuery("SELECT l
+													FROM langue l")->getResult();
+			$langueObj = new Langue();
+			foreach($langue as $data){
+				$test=utf8_encode($data->getLangue());
+				if($test==$postLangue){
+					$idLangue=$data->getId();
+				}
+			}
+			$object->setIdlangue($langueObj->getId($idLangue));
 		}
 		if(isset($_POST['date'])){
-			echo $_POST['date'];
+			echo $_POST['date']."<br>";
 			$this->form_validation->set_rules('date', 'Date', 'trim');
+			$object->setDate($_POST['date']);
 		}
-		if(isset($_POST['titre'])){					
+		if(isset($_POST['titre'])){		
+			echo $_POST['titre']."<br>";
 			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|max_length[12]|xss_clean');
 			if(empty($_POST['titre'])){
-				$_POST['titre']=isEmpty($object,$id,'titre');
+				//$_POST['titre']=isEmpty($object,$id,'titre');
+				//update($object,$id,'texte',$_POST['titre']);
 			}
-			update($object,$id,'titre',$_POST['titre']);
+			$object->setDate($_POST['titre']);
 		}
 		if(isset($_POST['texte'])){
+			echo $_POST['texte']."<br>";
 			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|max_length[300]|xss_clean');
-			update($object,$id,'texte',$_POST['texte']);
+			$object->setDate($_POST['texte']);
 		}
 		
 		if ($this->form_validation->run() == FALSE){
@@ -66,6 +85,8 @@ class Form extends CI_Controller {
 					$object=>$queryObject,
 			));
 		}else{
+			$this->doctrine->em->persist($object);
+			$this->doctrine->em->flush();
 			redirect('c'.$upperObj, 'refresh');
 		}
 	}

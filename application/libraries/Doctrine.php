@@ -48,7 +48,7 @@ class Doctrine
         $config->setAutoGenerateProxyClasses(ENVIRONMENT == 'development');
  
         // set up annotation driver
-        //$yamlDriver = new \Doctrine\ORM\Mapping\Driver\YamlDriver(APPPATH.'models/Mappings');
+		//$yamlDriver = new \Doctrine\ORM\Mapping\Driver\YamlDriver(APPPATH.'models/Mappings');
         //$config->setMetadataDriverImpl($yamlDriver);
         $driverImpl = $config->newDefaultAnnotationDriver(APPPATH.'models');
         $config->setMetadataDriverImpl($driverImpl);
