@@ -7,13 +7,13 @@ Article:
       type: integer
       unsigned: false
       nullable: false
-      column: IDARTICLE
+      column: idArticle
       generator:
         strategy: IDENTITY
     date:
       type: date
       nullable: false
-      column: DATE
+      column: date
     titre:
       type: text
       nullable: false
@@ -21,7 +21,7 @@ Article:
     texte:
       type: text
       nullable: false
-      column: TEXTE
+      column: texte
   oneToOne:
     iduser:
       targetEntity: User
@@ -29,7 +29,7 @@ Article:
       mappedBy: null
       inversedBy: null
       joinColumns:
-        IDUSER:
+        idUser:
           referencedColumnName: IDUSER
       orphanRemoval: false
     idlangue:

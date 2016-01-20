@@ -44,7 +44,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 							<div class="collapsible-body">
 								<ul>
 									<li><a href="<?=base_url("cPage")?>">Les pages</a></li>
-									<li><a href="#!">Compagnies</a></li>
+									<li><a href="<?=base_url("cCompagnie")?>">Compagnies</a></li>
 									<li><a href="#!">Images des pages</a></li>
 								</ul>
 							</div>
@@ -52,10 +52,10 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 					</ul>
 				</li>
 				<li>
-					<a href="#">Textes du Site</a>
+					<a href="<?=base_url("cTexte")?>">Textes du Site</a>
 				</li>
 				<li>
-					<a href="#">Langue du Site</a>
+					<a href="<?=base_url("cLangue")?>">Langue du Site</a>
 				</li>
 				<li>
 					<a href="#">Galerie</a>

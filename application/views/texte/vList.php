@@ -19,9 +19,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		?>
 		<li>
 			<div class="collapsible-header">
-				<label>Type : </label>
-				<?=utf8_encode($texte->getType())?>
-				<br>
 				<label>texte <?=$texte->getIdtext()?> : </label>
 				<?=utf8_encode($texte->getlibelle())?>
 			</div>

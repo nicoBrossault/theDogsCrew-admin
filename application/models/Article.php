@@ -15,7 +15,7 @@ class Article
     /**
      * @var integer $idarticle
      *
-     * @Column(name="IDARTICLE", type="integer", nullable=false)
+     * @Column(name="idArticle", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
@@ -24,7 +24,7 @@ class Article
     /**
      * @var date $date
      *
-     * @Column(name="DATE", type="date", nullable=false)
+     * @Column(name="date", type="date", nullable=false)
      */
     private $date;
 
@@ -38,7 +38,7 @@ class Article
     /**
      * @var text $texte
      *
-     * @Column(name="TEXTE", type="text", nullable=false)
+     * @Column(name="texte", type="text", nullable=false)
      */
     private $texte;
 
@@ -47,7 +47,7 @@ class Article
      *
      * @OneToOne(targetEntity="User")
      * @JoinColumns({
-     *   @JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
+     *   @JoinColumn(name="idUser", referencedColumnName="IDUSER", unique=true)
      * })
      */
     private $iduser;

@@ -46,6 +46,7 @@ class Form extends CI_Controller {
 			$this->form_validation->set_rules('langue', 'Id de la langue', 'trim');
 		}
 		if(isset($_POST['date'])){
+			echo $_POST['date'];
 			$this->form_validation->set_rules('date', 'Date', 'trim');
 		}
 		if(isset($_POST['titre'])){					

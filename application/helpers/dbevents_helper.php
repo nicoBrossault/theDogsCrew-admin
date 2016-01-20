@@ -41,17 +41,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				" WHERE ".$lettreObj.".id".$object."=".$id);
 		$queryObject = $query->getResult();
 		
-		//Recupere le nom de la fonction
-		/*$lettreChamp=$champ[0];
-		$len=strlen($champ);
-		$subChamp=substr($champ,1,$len);
-		$champ=strtoupper($lettreChamp).$subChamp;
-		$get = 'get'.$champ;*/
-		
-		print_r($queryObject);
 		foreach($queryObject as $data){
-			print_r($data);
-			$value=$data->$get();
+			$value=$data[$champ];
 		}
 		return $value;
 	}

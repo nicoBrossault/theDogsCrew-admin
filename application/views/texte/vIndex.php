@@ -15,9 +15,30 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <?php
 	$len=0;
 	$allType=array();
-	$data=array();
 	foreach ($types as $type){
-		$len+=1;
+		$test=false;
+		$var=$type->getType();
+		for($i=0;$i<count($allType);$i++){
+			if($var == $allType[$i]){
+				$test=true;
+			}		
+		}
+		if($test==false){
+			$allType[]=$var;
+		}
 	}
-	print_r($data);
+	foreach($allType as $type):
 ?>
+
+<a class="type" id="<?=$type?>">
+<div class="col s5 m6" style="color:black">
+	<div class="card hoverable">
+		<div class="card-content">
+			<span class="card-title"><?=$type?></span>
+			<p>Cliquez pour modifier les texte de type : <?=$type?></p>
+		</div>
+	</div>
+</div>
+</a>
+
+<?php endforeach ?>            

@@ -11,9 +11,8 @@ class CTexte extends CI_Controller {
 		$titre="Texte";
 		$this->layout->set_titre($titre);
 		$this->layout->th_default();
-		
-		$this->load->helper('text');
 		$this->ajaxGet();
+		
 		$queryNb = $this->doctrine->em->createQuery("SELECT t FROM textsite t");
 		$types = $queryNb->getResult();
 		
@@ -21,7 +20,15 @@ class CTexte extends CI_Controller {
 	}
 	
 	public function listText($type){
+		$this->load->helper('text');
+		$this->ajaxGet();
 		
+		$queryNb = $this->doctrine->em->createQuery("SELECT t FROM textsite t WHERE t.type='".$type."'");
+		$textes = $queryNb->getResult();
+		
+		$this->layout->view('texte/vList', array(
+						'textes'	=>	$textes,
+						));
 	}
 	
 	public function add($id){
@@ -43,6 +50,7 @@ class CTexte extends CI_Controller {
 	
 	function ajaxGet(){
 		$this->jsutils->getAndBindTo('.modifier','click','cTexte/add','#content');
+		$this->jsutils->getAndBindTo('.type','click','cTexte/listText','#content');
 		$this->jsutils->compile();
 	}
 }
