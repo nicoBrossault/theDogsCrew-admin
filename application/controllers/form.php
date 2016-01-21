@@ -91,7 +91,7 @@ class Form extends CI_Controller {
 			$object->setTexte($_POST['texte']);
 		}
 		
-		/*if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE){
 			$this->load->view($nameObject.'/vAdd',array(
 					$nameObject=>$queryObject,
 			));
@@ -99,7 +99,7 @@ class Form extends CI_Controller {
 			$this->doctrine->em->persist($object);
 			$this->doctrine->em->flush();
 			redirect('c'.$upperObj, 'refresh');
-		}*/
+		}
 	}
 }
 ?>
