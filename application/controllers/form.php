@@ -41,16 +41,24 @@ class Form extends CI_Controller {
 			$object->$set($id);
 		}*/
 		if(isset($_POST['idUser'])){
-			echo $_POST['idUser']."<br>";
 			$this->form_validation->set_rules('idUser', 'Id de l\'utilisateur', 'trim');
-			$object->setIduser($object->getIduser());
+			
+			$users=$this->doctrine->em->createQuery(
+					"SELECT u.iduser 
+					FROM user u 
+					WHERE u.iduser=".$_POST['idUser'])
+					->getResult();
+			
+			$user = new User();
+			$idUser=$users[0]['iduser'];
+			echo 'idUser :'.$user->setIduser($idUser)->getIduser().'<br>';
+			$object->setIduser($users);
 		}
 		if(isset($_POST['langue'])){
 			echo $_POST['langue']."<br>";
 			$postLangue=$_POST['langue'];
 			$this->form_validation->set_rules('langue', 'Id de la langue', 'trim');
-			$langue=$this->doctrine->em->createQuery("SELECT l
-													FROM langue l")->getResult();
+			$langue=$this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
 			$langueObj = new Langue();
 			foreach($langue as $data){
 				$test=utf8_encode($data->getLangue());
@@ -58,12 +66,15 @@ class Form extends CI_Controller {
 					$idLangue=$data->getId();
 				}
 			}
+			echo $idLangue.' idLangue <br>';
 			$object->setIdlangue($langueObj->getId($idLangue));
 		}
 		if(isset($_POST['date'])){
 			echo $_POST['date']."<br>";
 			$this->form_validation->set_rules('date', 'Date', 'trim');
-			$object->setDate($_POST['date']);
+			$date = new DateTime($_POST['date']);
+			//echo $date->format('Y-m-d')."<br>";
+			$object->setDate($date);
 		}
 		if(isset($_POST['titre'])){		
 			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|max_length[12]|xss_clean');
