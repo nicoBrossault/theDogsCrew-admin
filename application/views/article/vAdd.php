@@ -31,7 +31,7 @@ foreach($article as $data){
 	$date = $data->getDate()->format('Y-m-d');
 ?>
 	<label for="date"><h5>Date</h5></label>
-	<input type="date" name="date" id="date" placeholder"<?=$date?>" value="<?=$date?>" class="datepicker" />
+	<input type="date" name="date" id="date" placeholder"<?=$date?>" value="<?=$date?>" />
 <?php
 	
 	$titre= array(

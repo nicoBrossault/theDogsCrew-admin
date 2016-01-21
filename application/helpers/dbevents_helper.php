@@ -1,22 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-	function isEmpty($object, $id, $champ){
+	function isEmpty($nameObject, $id, $champ){
 		$ci = get_instance();
-		$lettreObj=$object[0];
-		$objUse=$object." ".$lettreObj;
+		$lettreObj=$nameObject[0];
+		$objUse=$nameObject." ".$lettreObj;
 		
 		//Recuperation de l'id
 		//Recuperation du nom de l'objet
-		$len=strlen($object);
-		$subObj=substr($object,1,$len);
+		$len=strlen($nameObject);
+		$subObj=substr($nameObject,1,$len);
 		$upperObj=strtoupper($lettreObj).$subObj;
 		
 		//Recuperation de l'objet dans la base;
 		$query = $ci->doctrine->em->createQuery(
 				"SELECT ".$lettreObj.".".$champ.
 				" FROM ".$objUse.
-				" WHERE ".$lettreObj.".id".$object."=".$id);
+				" WHERE ".$lettreObj.".id".$nameObject."=".$id);
 		$queryObject = $query->getResult();
 		
 		foreach($queryObject as $data){

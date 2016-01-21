@@ -66,23 +66,25 @@ class Form extends CI_Controller {
 			$object->setDate($_POST['date']);
 		}
 		if(isset($_POST['titre'])){		
-			echo $_POST['titre']."<br>";
 			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|max_length[12]|xss_clean');
 			if(empty($_POST['titre'])){
-				//$_POST['titre']=isEmpty($object,$id,'titre');
-				//update($object,$id,'texte',$_POST['titre']);
+				$value=isEmpty($nameObject,$id,'titre');
+				echo $value."<br>";
+				$object->setTitre($value);
+			}else{
+				echo $_POST['titre']."<br>";
+				$object->setTitre($_POST['titre']);
 			}
-			$object->setDate($_POST['titre']);
 		}
 		if(isset($_POST['texte'])){
 			echo $_POST['texte']."<br>";
 			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|max_length[300]|xss_clean');
-			$object->setDate($_POST['texte']);
+			$object->setTexte($_POST['texte']);
 		}
 		
 		if ($this->form_validation->run() == FALSE){
-			$this->load->view($object.'/vAdd',array(
-					$object=>$queryObject,
+			$this->load->view($nameObject.'/vAdd',array(
+					$nameObject=>$queryObject,
 			));
 		}else{
 			$this->doctrine->em->persist($object);
