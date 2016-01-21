@@ -29,6 +29,11 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?=$article->getIdArticle()?>
 						<br>
 						<br>
+						<label style="font-size:20px;">Langue : </label>
+						<br>
+						<?=utf8_encode($article->getIdlangue()->getLangue())?>
+						<br>
+						<br>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
 						<?=$article->getTexte()?>

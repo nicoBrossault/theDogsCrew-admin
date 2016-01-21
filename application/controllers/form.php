@@ -34,66 +34,64 @@ class Form extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		//Regle de validation
-		/*if(isset($id)){
-			echo $id."<br>";
+		if(isset($id)){
 			$this->form_validation->set_rules('idArticle', 'Id de l\'article', 'trim');
 			$set='setId'.$nameObject;
 			$object->$set($id);
-		}*/
+		}
 		if(isset($_POST['idUser'])){
+			$idUser=$_POST['idUser'];
 			$this->form_validation->set_rules('idUser', 'Id de l\'utilisateur', 'trim');
 			
-			$users=$this->doctrine->em->createQuery(
-					"SELECT u.iduser 
-					FROM user u 
-					WHERE u.iduser=".$_POST['idUser'])
-					->getResult();
+			$queryUser = $this->doctrine->em->createQuery(
+						"SELECT u 
+						FROM user u 
+						WHERE u.iduser=".$idUser)->getResult();
 			
-			$user = new User();
-			$idUser=$users[0]['iduser'];
-			echo 'idUser :'.$user->setIduser($idUser)->getIduser().'<br>';
-			$object->setIduser($users);
+			
+			foreach($queryUser as $dataUser){
+					$object->setIduser($dataUser->getIduser());
+					echo $object->getIduser()->getIduser();
+			}
 		}
+		
 		if(isset($_POST['langue'])){
-			echo $_POST['langue']."<br>";
 			$postLangue=$_POST['langue'];
 			$this->form_validation->set_rules('langue', 'Id de la langue', 'trim');
-			$langue=$this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
-			$langueObj = new Langue();
+			
+			//Recuperation de l'objet dans la base;
+			$langue=$this->doctrine->em->createQuery(
+					"SELECT l FROM langue l")->getResult();
+			
 			foreach($langue as $data){
 				$test=utf8_encode($data->getLangue());
 				if($test==$postLangue){
-					$idLangue=$data->getId();
+					$object->setIdlangue($data->getId());
+					echo $object->getIdlangue();
 				}
 			}
-			echo $idLangue.' idLangue <br>';
-			$object->setIdlangue($langueObj->getId($idLangue));
 		}
+		
 		if(isset($_POST['date'])){
-			echo $_POST['date']."<br>";
 			$this->form_validation->set_rules('date', 'Date', 'trim');
 			$date = new DateTime($_POST['date']);
-			//echo $date->format('Y-m-d')."<br>";
 			$object->setDate($date);
 		}
 		if(isset($_POST['titre'])){		
 			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|max_length[12]|xss_clean');
 			if(empty($_POST['titre'])){
 				$value=isEmpty($nameObject,$id,'titre');
-				echo $value."<br>";
 				$object->setTitre($value);
 			}else{
-				echo $_POST['titre']."<br>";
 				$object->setTitre($_POST['titre']);
 			}
 		}
 		if(isset($_POST['texte'])){
-			echo $_POST['texte']."<br>";
 			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|max_length[300]|xss_clean');
 			$object->setTexte($_POST['texte']);
 		}
 		
-		if ($this->form_validation->run() == FALSE){
+		/*if ($this->form_validation->run() == FALSE){
 			$this->load->view($nameObject.'/vAdd',array(
 					$nameObject=>$queryObject,
 			));
@@ -101,7 +99,7 @@ class Form extends CI_Controller {
 			$this->doctrine->em->persist($object);
 			$this->doctrine->em->flush();
 			redirect('c'.$upperObj, 'refresh');
-		}
+		}*/
 	}
 }
 ?>

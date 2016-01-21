@@ -74,6 +74,18 @@ class Article
     }
 
     /**
+     * Set idArticle
+     *
+     * @param int $idarticle
+     * @return integer
+     */
+    public function setIdarticle($idarticle)
+    {
+    	$this->idarticle = $idarticle;
+    	return $this;
+    }
+    
+    /**
      * Set date
      *
      * @param date $date

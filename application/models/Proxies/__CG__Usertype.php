@@ -51,6 +51,12 @@ class Usertype extends \Usertype implements \Doctrine\ORM\Proxy\Proxy
         return parent::getIdtype();
     }
 
+    public function setIdtype($idType)
+    {
+        $this->__load();
+        return parent::setIdtype($idType);
+    }
+
     public function setLibelle($libelle)
     {
         $this->__load();

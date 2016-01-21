@@ -42,6 +42,12 @@ class User extends \User implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    public function setIduser($iduser)
+    {
+        $this->__load();
+        return parent::setIduser($iduser);
+    }
+
     public function getIduser()
     {
         if ($this->__isInitialized__ === false) {
