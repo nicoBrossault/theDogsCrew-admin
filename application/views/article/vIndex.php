@@ -11,6 +11,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 ?>
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+
 <div class="list">
 	<ul class="collapsible popout" data-collapsible="accordion" style="box-shadow:none">
 		<?php
@@ -18,7 +19,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		?>
 		<li>
 			<div class="collapsible-header">
-				<label>Article <?=$article->getIdArticle()?> : </label>
+				<label>Article : </label>
 				<?=character_limiter($article->getTitre(),30)?>
 			</div>
 			<div class="collapsible-body white">

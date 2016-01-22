@@ -57,7 +57,7 @@ class CArticle extends CI_Controller {
 		if($min < 0){
 			$min = 0;
 		}
-		$nCondition = "WHERE a.idarticle >".$min." AND a.idarticle <=".$num." ORDER BY a.date ASC";
+		$nCondition = "WHERE a.idarticle >".$min." AND a.idarticle <=".$num." ORDER BY a.date DESC";
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a ".$nCondition);
 		return $varPage=array(	'articles'	=>	$queryNb->getResult(),
 								'nbPages'	=>	$nbPages,
@@ -72,10 +72,12 @@ class CArticle extends CI_Controller {
 		
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a WHERE a.idarticle =".$id);
 		$article = $queryNb->getResult();
+		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
 		
 		$this->layout->view('article/vAdd', array(
 						'titre'		=>	$titre,
 						'article'	=>	$article,
+						'langues'	=>	$langues,
 						));
 	}
 	

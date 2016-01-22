@@ -13,7 +13,6 @@ class Layout {
 */    
 	public function __construct(){
 		$this->CI = get_instance();
-		$this->var['output_content'] = '';
 	}
 	
 	public function set_theme($theme){
@@ -40,9 +39,8 @@ class Layout {
 */
 	public function th_default(){
 		$this->CI->load->view('theme/content/vMenu', array(
-				'titre' 			=> 	$this->titre,
-				'output_content' 	=> 	$this->output_content,
-		));
+								'titre'=>$this->titre,
+							));
 	}
 	
 	public function setContent($content){

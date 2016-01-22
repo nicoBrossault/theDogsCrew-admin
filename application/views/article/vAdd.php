@@ -18,20 +18,24 @@ foreach($article as $data){
 	
 	echo form_hidden('idUser',$data->getIduser()->getIduser());
 	
-	$nomLangue=$data->getIdlangue()->getLangue();
-	$langue= array(
-			'name'=>'langue',
-			'id'=>'langue',
-			'placeholder'=>'langue',
-			'value'=>utf8_encode($nomLangue),
-	);
-	echo '<label for="langue"><h5>Langue</h5></label>';
-	echo form_input($langue);
-	
 	$date = $data->getDate()->format('Y-m-d');
-?>
-	<label for="date"><h5>Date</h5></label>
-	<input type="date" name="date" id="date" placeholder"<?=$date?>" value="" class="datepicker" />
+?>	
+  
+<label for="langue"><h5>Langue</h5></label>
+<select id="langue" name="langue" style="display:block">
+	<?php foreach($langues as $datalangue): ?>
+	<option value="<?=utf8_encode($optionLangue[]=$datalangue->getLangue())?>"
+		<?php if(utf8_encode($data->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
+		{echo "selected='selected'";}?>
+	>
+		<?=utf8_encode($optionLangue[]=$datalangue->getLangue())?>
+	</option>
+	<?php endforeach; ?>
+</select>
+
+<label for="date"><h5>Date</h5></label>
+<input type="date" name="date" id="date" placeholder"<?=$date?>" value="" class="datepicker" />
+
 <?php
 	
 	$titre= array(
@@ -48,12 +52,13 @@ foreach($article as $data){
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
 			'placeholder'=>$data->getTexte(),
-			'value'=>$data->getTexte(),
+			'value'=>'',
 			'cols' => '40',
 			'rows' => '40',
 	);
 	echo '<label for="texte"><h5>Texte</h5></label>';
 	echo form_textarea($texte);
+	echo '<div id="legende"></div>';
 	
 	echo form_submit('envoi', 'Valider');     
 	echo form_close();
