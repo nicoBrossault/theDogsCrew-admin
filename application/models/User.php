@@ -58,18 +58,7 @@ class User
      * })
      */
     private $idtype;
-	
-    /**
-     * Set idUser
-     *
-     * @param int $iduser
-     * @return User
-     */
-    public function setIduser($iduser)
-    {
-    	$this->iduser = $iduser;
-    	return $this;
-    }
+
 
     /**
      * Get iduser

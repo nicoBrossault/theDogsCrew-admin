@@ -43,6 +43,13 @@ class Article
     private $texte;
 
     /**
+     * @var integer $idpage
+     *
+     * @Column(name="idPage", type="integer", nullable=true)
+     */
+    private $idpage;
+
+    /**
      * @var User
      *
      * @OneToOne(targetEntity="User")
@@ -73,18 +80,6 @@ class Article
         return $this->idarticle;
     }
 
-    /**
-     * Set idArticle
-     *
-     * @param int $idarticle
-     * @return integer
-     */
-    public function setIdarticle($idarticle)
-    {
-    	$this->idarticle = $idarticle;
-    	return $this;
-    }
-    
     /**
      * Set date
      *
@@ -149,6 +144,28 @@ class Article
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set idpage
+     *
+     * @param integer $idpage
+     * @return Article
+     */
+    public function setIdpage($idpage)
+    {
+        $this->idpage = $idpage;
+        return $this;
+    }
+
+    /**
+     * Get idpage
+     *
+     * @return integer 
+     */
+    public function getIdpage()
+    {
+        return $this->idpage;
     }
 
     /**

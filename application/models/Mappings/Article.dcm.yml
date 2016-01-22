@@ -13,7 +13,6 @@ Article:
     date:
       type: date
       nullable: false
-      column: date
     titre:
       type: text
       nullable: false
@@ -21,7 +20,11 @@ Article:
     texte:
       type: text
       nullable: false
-      column: texte
+    idpage:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: idPage
   oneToOne:
     iduser:
       targetEntity: User

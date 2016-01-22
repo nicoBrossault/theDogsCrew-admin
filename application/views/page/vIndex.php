@@ -60,8 +60,18 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<i class="large material-icons">mode_edit</i>
 					</a>
 					<ul>
-						<li><a class="btn-floating red" id="<?=$page->getIdpage()?>"><i class="material-icons modifier">mode_edit</i></a></li>
-						<li><a class="btn-floating yellow darken-1" id="<?=$page->getIdpage()?>"><i class="material-icons supprimer">delete</i></a></li>
+						<li>
+							<a class="btn-floating red modifier" id="<?=$page->getIdpage()?>">
+								<i class="material-icons">mode_edit</i>
+								<?=$page->getIdpage()?>
+							</a>
+						</li>
+						<li>
+							<a class="btn-floating yellow darken-1 supprimer" id="<?=$page->getIdpage()?>">
+								<i class="material-icons">delete</i>
+								<?=$page->getIdpage()?>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

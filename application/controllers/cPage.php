@@ -34,9 +34,7 @@ class CPage extends CI_Controller {
 	
 	public function listPages(){
 		$this->load->helper('text');
-		$this->jsutils->getAndBindTo('.page','click','cPage/getId','#content');
-		$this->jsutils->getAndBindTo('.modifier','click','cPage/add','#content');
-		$this->jsutils->compile();
+		$this->ajaxGet();		
 	
 		$varPage = $this->pagination();
 	
@@ -68,15 +66,21 @@ class CPage extends CI_Controller {
 		
 	}
 	
-	public function add(){
-		$ajaxReady=false;
+	public function add($id){
+		$_SESSION['object']="page";
 		$titre="Modifier/ Ajouter une page :";
+		$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
+		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
 		$this->layout->view('page/vAdd', array(
-						'titre'=>$titre,
-						'ajaxReady'=>$ajaxReady,));
+						'titre'		=>	$titre,
+						'page'		=>	$page,
+						'langues'	=>	$langues,
+						));
 	}
 	
 	function ajaxGet(){
-		echo "Exemple de get sur click";
+		$this->jsutils->getAndBindTo('.page','click','cPage/getId','#content');
+		$this->jsutils->getAndBindTo('.modifier','click','cPage/add','#content');
+		$this->jsutils->compile();
 	}
 }

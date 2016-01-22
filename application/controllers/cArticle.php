@@ -73,11 +73,13 @@ class CArticle extends CI_Controller {
 		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a WHERE a.idarticle =".$id);
 		$article = $queryNb->getResult();
 		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
+		$pages = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
 		
 		$this->layout->view('article/vAdd', array(
 						'titre'		=>	$titre,
 						'article'	=>	$article,
 						'langues'	=>	$langues,
+						'pages'		=>	$pages,
 						));
 	}
 	

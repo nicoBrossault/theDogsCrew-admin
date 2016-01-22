@@ -38,8 +38,7 @@ class Form extends CI_Controller {
 			$object = $this->doctrine->em->find($upperObj, $id);
 		}else{
 			$object = new $upperObj();
-		}
-		
+		}		
 		if(isset($_POST['idUser']) && !empty($_POST['idUser'])){
 			//echo $_POST['idUser']."<br>";
 			$idUser=$_POST['idUser'];
@@ -54,15 +53,13 @@ class Form extends CI_Controller {
 					$object->setIduser($dataUser);
 			}
 		}
-
 		if(isset($_POST['langue']) && !empty($_POST['langue'])){
 			//echo "Recup : ".$_POST['langue']."<br>";
 			$postLangue=$_POST['langue'];
 			$this->form_validation->set_rules('langue', 'Id de la langue', 'trim');
 
 			//Recuperation de l'objet dans la base;
-			$langue=$this->doctrine->em->createQuery(
-					"SELECT l FROM langue l")->getResult();
+			$langue=$this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
 
 			foreach($langue as $data){
 				$test=utf8_encode($data->getLangue());
@@ -73,7 +70,6 @@ class Form extends CI_Controller {
 				}
 			}
 		}
-
 		if(isset($_POST['date']) && !empty($_POST['date'])){
 			//echo $_POST['date']."<br>";
 			$this->form_validation->set_rules('date', 'Date', 'trim');
@@ -87,10 +83,22 @@ class Form extends CI_Controller {
 		}
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo $_POST['texte']."<br>";
-			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|max_length[301]|xss_clean');
+			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|xss_clean');
 			$object->setTexte($_POST['texte']);
 		}
-
+		if(isset($_POST['page']) && !empty($_POST['page'])){
+			//echo $_POST['page']."<br>";
+			$idPage=$_POST['page'];
+			$this->form_validation->set_rules('page', 'Id de la page', 'trim');
+			//Recuperation de l'objet dans la base;
+			$page=$this->doctrine->em->createQuery("SELECT p.idpage FROM page p WHERE p.idpage=".$idPage)->getResult();
+			
+			foreach($page as $dataPage){
+				$object->setIdpage($dataPage['idpage']);
+				
+			}
+		}
+		
 		if ($this->form_validation->run() == FALSE){
 			//echo 'test false';
 			$object = $this->doctrine->em->createQuery(

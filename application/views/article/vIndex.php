@@ -51,6 +51,21 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 								echo "Unknown Time";
 							}				
 						?>
+						<br>
+						<br>
+						<label style="font-size:20px;">Page Associée : </label>
+						<br>
+						<?php if($article->getIdpage()!=NULL):
+							$page=$this->doctrine->em->find('Page', $article->getIdpage());
+						?>
+							<a href="<?=base_url('cPage')?>/add/<?=$page->getIdpage()?>">
+								<?=$page->getTitre()?>
+							</a>
+						<?php else: ?>
+							Aucune Page Associée.
+						<?php endif; ?>
+						<br>
+						<br>
 					</div>
 				</div>
 				<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">

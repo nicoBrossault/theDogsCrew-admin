@@ -40,18 +40,6 @@ class Usertype
     }
 
     /**
-     * Set IdType
-     *
-     * @param int $idtype
-     * @return integer
-     */
-    public function setIdtype($idType)
-    {
-    	$this->idtype = $idType;
-    	return $this;
-    }
-    
-    /**
      * Set libelle
      *
      * @param text $libelle

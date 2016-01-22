@@ -17,7 +17,6 @@ $(document).ready(function() {
     $(".materialize-textarea").keydown(function(limit) {
       //Définir la limite à atteindre
       var limit = "5";
-      var limitMax= "300"
 
       //Récupérer le nombre de caractères dans la zone de texte
       var currlength = $(this).val().length;
@@ -27,7 +26,7 @@ $(document).ready(function() {
         $("#legende")
         .removeClass("insuffisant")
         .addClass("suffisant")
-        .html("Vous avez saisi " + currlength + " caractères sur " + limitMax)
+        .html("Vous avez saisi " + currlength + " caractères")
         .css('color','black');
         $(".materialize-textarea").css('color','black');
       }
@@ -35,19 +34,10 @@ $(document).ready(function() {
         $("#legende")
         .removeClass("suffisant")
         .addClass("insuffisant")
-        .html("Vous avez saisi " + currlength + " caractères sur " + limit + "minimum sur "+ limitMax + "maximum")
+        .html("Vous avez saisi " + currlength + " caractères sur " + limit + " minimum")
         .css('color','red');
         $(".materialize-textarea").css('color','red');
       }
-      if(currlength > limitMax){
-    	  $("#legende")
-          .removeClass("suffisant")
-          .addClass("insuffisant")
-          .html("Vous avez saisi " + currlength + " caractères sur " + limitMax + " maximum" )
-          .css('color','red');
-    	  $(".materialize-textarea").css('color','red');
-      }
-
     });
 	        
 })
