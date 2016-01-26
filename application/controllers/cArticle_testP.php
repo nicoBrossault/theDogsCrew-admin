@@ -1,21 +1,27 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class CArticle extends CI_Controller {
+class CArticle_testP extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
 	}
 	
-public function index($id=1){
+	public function index(){
+		$this->load->helper('text');
+		
 		$titre="Articles";
 		$this->layout->set_titre($titre);
 		$this->layout->th_default();
-		$this->load->helper('text');
-    	
-    	$config['base_url'] =base_url().'/cArticle/index';
+		
+		$articles=$this->pagination(1);
+    }
+    
+    public function pagination($numP){
+    	$this->ajaxGet();
+    	$config['base_url'] = base_url('cArticle_testP')."/pagination";
     	$config['total_rows'] = $this->count();
-    	$config['per_page'] = '10';
+    	$config['per_page'] = '2';
     	$per_page=$config['per_page'];
     	$config['full_tag_open'] = '<ul class="pagination">';
     	$config['full_tag_close'] = '</ul>';
@@ -25,12 +31,9 @@ public function index($id=1){
         $config ['num_tag_close'] = '</li>';
 		
 		$this->pagination->initialize($config);
-		$articles=$this->get_Article($id, $per_page);
+		$articles=$this->get_Article($numP, $per_page);
 		
-		$this->jsutils->getAndBindTo('.modifier','click',base_url().'/cArticle/add','#content');
-		$this->jsutils->compile();
-		
-		$this->layout->view("article/vIndex",array('articles'=>$articles));
+		$this->layout->view("article/vIndex-testP",array('articles'=>$articles));
 	}
     
     function get_Article($page,$per_page){
@@ -58,8 +61,7 @@ public function index($id=1){
 		$_SESSION['object']="article";
 		$titre="Modifier/ Ajouter un article :";
 		
-		$queryNb = $this->doctrine->em->createQuery("SELECT a FROM article a WHERE a.idarticle =".$id);
-		$article = $queryNb->getResult();
+		$article = $this->doctrine->em->createQuery("SELECT a FROM article a WHERE a.idarticle =".$id)->getResult();
 		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
 		$pages = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
 		
@@ -72,8 +74,8 @@ public function index($id=1){
 	}
 	
 	function ajaxGet(){
-		$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
-		$this->jsutils->getAndBindTo('.modifier','click','add','#content');
+		//$this->jsutils->getAndBindTo('.page','click','cArticle/getId','#content');
+		$this->jsutils->getAndBindTo('.modifier','click','cArticle_testP/add','#content');
 		$this->jsutils->compile();
 	}
 }

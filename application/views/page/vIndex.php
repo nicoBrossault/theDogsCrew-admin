@@ -38,7 +38,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?php if($page->getImage()!="") :?>
 							<label style="font-size:20px;">Image : </label>
 							<br>
-							<img src="../theDogsCrew-site/<?=$page->getImage()?>" style="width:20%">
+							<img src="/theDogsCrew/theDogsCrew-site/<?=$page->getImage()?>" style="width:20%">
 							<br>
 							<br>
 						<?php endif ?>
@@ -46,12 +46,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<br>
 						<?php
 							$date = $page->getDate();
-							$result = $date->format('Y-m-d');
-							if ($result) {
-								echo $result;
-							} else { // format failed
-								echo "Unknown Time";
-							}				
+							echo $date->format('Y-m-d');			
 						?>
 					</div>
 				</div>
@@ -80,13 +75,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	</ul>
 </div>
 <br>
-<ul class="pagination">
-	<?php for ($i=0; $i<$nbPages; $i++): ?>
-		<?php if($numP==($i+1)):?>
-			<li class="page active" id="<?=$i+1 ?>">
-		<?php else : ?>
-			<li class="waves-effect page" id="<?=$i+1 ?>">
-		<?php  endif ?>
-			<a><?=$i+1 ?></a></li>
-	<?php endfor ?>
-</ul>
+<?php
+	echo "<br>".$this->pagination->create_links();
+?>

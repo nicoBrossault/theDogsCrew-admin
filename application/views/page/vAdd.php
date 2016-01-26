@@ -2,7 +2,7 @@
 use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 foreach($page as $data){
-	echo form_open('form');
+	echo form_open_multipart('form');
 	
 	echo form_hidden('idPage',$data->getIdpage());
 	
@@ -25,6 +25,22 @@ foreach($page as $data){
 
 <label for="date"><h5>Date</h5></label>
 <input type="date" name="date" id="date" placeholder"<?=$date?>" value="<?=$date?>" class="datepicker" />
+
+<label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
+<input type="file" name="fileImg"/>
+
+<label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
+<select class="icons" id="existImg" name="existImg" style="display:block">
+	<?php 
+	$dir = '../theDogsCrew-site/imagesPage/';
+	$fileImages = scandir($dir);
+	$exist=false;
+	foreach($fileImages as $fileImage):?>
+	<option value="<?=$fileImage?>">
+		<?=$fileImage?>
+	</option>
+	<?php endforeach; ?>
+</select>
 
 <?php
 	

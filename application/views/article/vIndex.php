@@ -20,7 +20,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>Article : </label>
-				<?=character_limiter($article->getTitre(),30)?>
+				<?=$article->getTitre()?>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">
@@ -91,14 +91,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<?php endforeach; ?>	
 	</ul>
 </div>
-<br>
-<ul class="pagination">
-	<?php for ($i=0; $i<$nbPages; $i++): ?>
-		<?php if($numA==($i+1)):?>
-			<li class="page active" id="<?=$i+1 ?>">
-		<?php else : ?>
-			<li class="waves-effect page" id="<?=$i+1 ?>">
-		<?php  endif ?>
-			<a><?=$i+1 ?></a></li>
-	<?php endfor ?>
-</ul>
+
+<?php
+	echo "<br>".$this->pagination->create_links();
+?>

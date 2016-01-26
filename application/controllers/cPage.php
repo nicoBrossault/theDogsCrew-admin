@@ -7,15 +7,42 @@ class CPage extends CI_Controller {
 		parent::__construct();
 	}
 	
-	public function index(){
-		$titre="Page";
+	public function index($id=1){
+		$titre="Pages";
 		$this->layout->set_titre($titre);
 		$this->layout->th_default();
-		
 		$this->load->helper('text');
+    	
+    	$config['base_url'] =base_url().'/cPage/index';
+    	$config['total_rows'] = $this->count();
+    	$config['per_page'] = '10';
+    	$per_page=$config['per_page'];
+    	$config['full_tag_open'] = '<ul class="pagination">';
+    	$config['full_tag_close'] = '</ul>';
+    	$config['cur_tag_open'] = '<li class="active">';
+        $config['cur_tag_close'] = '</li>';
+        $config ['num_tag_open'] = '<li class="waves-effect">';
+        $config ['num_tag_close'] = '</li>';
 		
-		$this->listPages();
+		$this->pagination->initialize($config);
+		$pages=$this->get_Page($id, $per_page);
+		
+		$this->jsutils->getAndBindTo('.modifier','click',base_url().'/cPage/add','#content');
+		$this->jsutils->compile();
+		
+		$this->layout->view("page/vIndex",array('pages'=>$pages));
 	}
+    
+    function get_Page($page,$per_page){
+    	$min = (($page)*$per_page)-($per_page);
+    	$num = $min + $per_page;
+    	
+    	return $this->doctrine->em->createQuery(
+    			"SELECT p
+    			FROM page p 
+    			WHERE p.idpage >".$min." AND p.idpage <=".$num." 
+    			ORDER BY p.date DESC")->getResult();
+    }
 	
 	public function count(){
 		$query = $this->doctrine->em->createQuery("SELECT p FROM page p");
@@ -25,45 +52,6 @@ class CPage extends CI_Controller {
 			$countPages+=1;
 		}
 		return $countPages;
-	}
-	
-	public function getId($id){
-		$_SESSION['pageP']=$id;
-		$this->listPages();
-	}
-	
-	public function listPages(){
-		$this->load->helper('text');
-		$this->ajaxGet();		
-	
-		$varPage = $this->pagination();
-	
-		$this->layout->view('page/vIndex', $data=$varPage);
-	}
-	
-	public function pagination(){
-		if(!isset($_SESSION['pageP'])){
-			$_SESSION['pageP'] = 1;
-		}
-		
-		$page=$_SESSION['pageP'];
-		$nbPerPage = 5;
-		$countPages = $this->count();
-		
-		$nbPages=ceil($countPages/$nbPerPage);
-		
-		$min = (($page)*$nbPerPage)-($nbPerPage);
-		$num = $min + $nbPerPage;
-		if($min < 0){
-			$min = 0;
-		}
-		$nCondition = "WHERE p.idpage >".$min." AND p.idpage <=".$num." ORDER BY p.date ASC";
-		$queryNb = $this->doctrine->em->createQuery("SELECT p FROM page p ".$nCondition);
-		return $varPage=array(	'pages'		=>	$queryNb->getResult(),
-								'nbPages'	=>	$nbPages,
-								'numP'		=>	$numP=$_SESSION['pageP']
-								);
-		
 	}
 	
 	public function add($id){
@@ -76,11 +64,5 @@ class CPage extends CI_Controller {
 						'page'		=>	$page,
 						'langues'	=>	$langues,
 						));
-	}
-	
-	function ajaxGet(){
-		$this->jsutils->getAndBindTo('.page','click','cPage/getId','#content');
-		$this->jsutils->getAndBindTo('.modifier','click','cPage/add','#content');
-		$this->jsutils->compile();
 	}
 }
