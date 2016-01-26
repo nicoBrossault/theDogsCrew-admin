@@ -40,6 +40,7 @@ foreach($page as $data){
 		<?=$fileImage?>
 	</option>
 	<?php endforeach; ?>
+	<option value="NULL">Aucune Image</option>
 </select>
 
 <?php

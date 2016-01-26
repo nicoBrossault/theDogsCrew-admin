@@ -128,10 +128,14 @@ class Form extends CI_Controller {
 		}
 		if(isset($_POST['existImg']) && !empty($_POST['existImg'])){
 			//echo "Recup Img: ".$_POST['existImg']."<br>";
-			$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
-			$urlImg='imagesPage/'.$_POST['existImg'];
-			$object->setImage($urlImg);
-			//echo $object->getImage()."<br>";
+			if($_POST['existImg']=="NULL"){
+				$object->setImage(NULL);
+			}else{
+				$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
+				$urlImg='imagesPage/'.$_POST['existImg'];
+				$object->setImage($urlImg);
+				//echo $object->getImage()."<br>";
+			}
 		}
 		
 		
