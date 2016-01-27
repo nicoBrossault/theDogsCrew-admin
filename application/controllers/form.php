@@ -31,7 +31,7 @@ class Form extends CI_Controller {
 		
 		//Regle de validation
 		//appel de l'object
-		if(isset($_POST['id'.$upperObj])){
+		if(isset($_POST['id'.$upperObj]) && !empty($_POST['id'.$upperObj])){
 			$id=$_POST['id'.$upperObj];
 			//echo "id : ".$id."<br>";
 			$this->form_validation->set_rules('idArticle', 'Id de l\'article', 'trim');
@@ -48,7 +48,7 @@ class Form extends CI_Controller {
 						"SELECT u
 						FROM user u
 						WHERE u.iduser=".$idUser)->getResult();
-
+			
 			foreach($queryUser as $dataUser){
 					$object->setIduser($dataUser);
 			}

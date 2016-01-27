@@ -8,7 +8,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	
 	echo form_hidden('idPage',NULL);
 	
-	echo form_hidden('idUser',1);
+	echo form_hidden('idUser',$_SESSION['user']);
 ?>	
   
 <label for="langue"><h5>Langue</h5></label>

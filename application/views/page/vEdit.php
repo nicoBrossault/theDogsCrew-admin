@@ -25,12 +25,27 @@ foreach($page as $data){
 	</option>
 	<?php endforeach; ?>
 </select>
+<br>
+<br>
+<br>
+<br>
+
 
 <label for="date"><h5>Date</h5></label>
 <input type="date" name="date" value="<?=$date?>" class="datepicker" />
+<br>
+<br>
+<br>
+<br>
+
 
 <label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
 <input type="file" name="fileImg"/>
+<br>
+<br>
+<br>
+<br>
+
 
 <label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
 <select class="icons" id="existImg" name="existImg" style="display:block">
@@ -38,20 +53,32 @@ foreach($page as $data){
 	$dir = '../theDogsCrew-site/imagesPage/';
 	$fileImages = scandir($dir);
 	$exist=false;
-	foreach($fileImages as $fileImage):?>
-	<option value="<?=$fileImage?>">
+	foreach($fileImages as $fileImage):
+		if($data->getImage()){
+			$nomImg=explode('/',$data->getImage());
+			$nomImg=$nomImg[1];
+		}else{
+			$nomImg=NULL;
+		}
+	?>
+	<option value="<?=$fileImage?>"<?php if($fileImage==$nomImg):?> selected<?php endif;?>>
 		<?=$fileImage?>
 	</option>
 	<?php endforeach; ?>
 	<option value="NULL">Aucune Image</option>
 </select>
+<br>
+<br>
+<br>
+<br>
+
 
 <?php
 	
 	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$data->getTitre(),'value'=>$data->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_input($titre);
-	echo "<i>Minimum 5 caractère.</i>";
+	echo "<i>Minimum 5 caractère.</i><br><br><br><br><br>";
 	
 	$texte= array(
 			'name'=>'texte',
