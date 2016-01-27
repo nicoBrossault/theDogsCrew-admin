@@ -31,7 +31,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 ?>
 
 <a class="type" id="<?=$type?>">
-<div class="col s5 m6" style="color:black">
+<div class="col s10 m6" style="color:black; min-height:180px;">
 	<div class="card hoverable">
 		<div class="card-content">
 			<span class="card-title"><?=$type?></span>

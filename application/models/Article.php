@@ -54,7 +54,7 @@ class Article
      *
      * @OneToOne(targetEntity="User")
      * @JoinColumns({
-     *   @JoinColumn(name="idUser", referencedColumnName="IDUSER", unique=true)
+     *   @JoinColumn(name="idUser", referencedColumnName="idUser", unique=true)
      * })
      */
     private $iduser;

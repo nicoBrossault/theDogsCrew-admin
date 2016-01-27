@@ -64,7 +64,7 @@ class Page
      *
      * @OneToOne(targetEntity="User")
      * @JoinColumns({
-     *   @JoinColumn(name="IDUSER", referencedColumnName="IDUSER", unique=true)
+     *   @JoinColumn(name="idUser", referencedColumnName="idUser", unique=true)
      * })
      */
     private $iduser;

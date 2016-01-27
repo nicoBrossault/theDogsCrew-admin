@@ -28,6 +28,7 @@ class CPage extends CI_Controller {
 		$pages=$this->get_Page($id, $per_page);
 		
 		$this->jsutils->getAndBindTo('.modifier','click',base_url().'/cPage/add','#content');
+		$this->jsutils->getAndBindTo('.addPage','click',base_url().'/cPage/add','#content');
 		$this->jsutils->compile();
 		
 		$this->layout->view("page/vIndex",array('pages'=>$pages));
@@ -54,15 +55,22 @@ class CPage extends CI_Controller {
 		return $countPages;
 	}
 	
-	public function add($id){
+	public function add($id=NULL){
 		$_SESSION['object']="page";
 		$titre="Modifier/ Ajouter une page :";
-		$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
 		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
-		$this->layout->view('page/vAdd', array(
-						'titre'		=>	$titre,
-						'page'		=>	$page,
-						'langues'	=>	$langues,
-						));
+		if($id==NULL){
+			$this->layout->view('page/vAdd', array(
+					'titre'		=>	$titre,
+					'langues'	=>	$langues,
+			));
+		}else{
+			$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
+			$this->layout->view('page/vEdit', array(
+					'titre'		=>	$titre,
+					'page'		=>	$page,
+					'langues'	=>	$langues,
+			));
+		}		
 	}
 }

@@ -15,7 +15,7 @@ class User
     /**
      * @var integer $iduser
      *
-     * @Column(name="IDUSER", type="integer", nullable=false)
+     * @Column(name="idUser", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
@@ -24,28 +24,28 @@ class User
     /**
      * @var text $nom
      *
-     * @Column(name="NOM", type="text", nullable=false)
+     * @Column(name="nom", type="text", nullable=false)
      */
     private $nom;
 
     /**
      * @var text $prenom
      *
-     * @Column(name="PRENOM", type="text", nullable=false)
+     * @Column(name="prenom", type="text", nullable=false)
      */
     private $prenom;
 
     /**
      * @var text $mail
      *
-     * @Column(name="MAIL", type="text", nullable=false)
+     * @Column(name="mail", type="text", nullable=false)
      */
     private $mail;
 
     /**
      * @var text $mdp
      *
-     * @Column(name="MDP", type="text", nullable=false)
+     * @Column(name="mdp", type="text", nullable=false)
      */
     private $mdp;
 
@@ -54,7 +54,7 @@ class User
      *
      * @OneToOne(targetEntity="Usertype")
      * @JoinColumns({
-     *   @JoinColumn(name="IDTYPE", referencedColumnName="IDTYPE", unique=true)
+     *   @JoinColumn(name="idType", referencedColumnName="idType", unique=true)
      * })
      */
     private $idtype;

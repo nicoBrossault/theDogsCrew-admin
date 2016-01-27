@@ -4,24 +4,30 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <?php
 
+foreach($page as $data){
 	echo form_open_multipart('form');
 	
-	echo form_hidden('idPage',NULL);
+	echo form_hidden('idPage',$data->getIdpage());
 	
-	echo form_hidden('idUser',1);
+	echo form_hidden('idUser',$data->getIduser()->getIduser());
+	
+	$date = $data->getDate()->format('Y-m-d');
 ?>	
   
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
 	<?php foreach($langues as $datalangue): ?>
-	<option value="<?=utf8_encode($datalangue->getLangue())?>">
+	<option value="<?=utf8_encode($datalangue->getLangue())?>"
+		<?php if(utf8_encode($data->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
+		{echo "selected='selected'";}?>
+	>
 		<?=utf8_encode($datalangue->getLangue())?>
 	</option>
 	<?php endforeach; ?>
 </select>
 
 <label for="date"><h5>Date</h5></label>
-<input type="date" name="date" value="" class="datepicker" />
+<input type="date" name="date" value="<?=$date?>" class="datepicker" />
 
 <label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
 <input type="file" name="fileImg"/>
@@ -42,7 +48,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 <?php
 	
-	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>'','value'=>'');
+	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$data->getTitre(),'value'=>$data->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_input($titre);
 	echo "<i>Minimum 5 caractère.</i>";
@@ -51,8 +57,8 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 			'name'=>'texte',
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
-			'placeholder'=>'',
-			'value'=>'',
+			'placeholder'=>utf8_encode($data->getTexte()),
+			'value'=>utf8_encode($data->getTexte()),
 			'cols' => '40','rows' => '40');
 	echo '<label for="texte"><h5>Texte</h5></label>';
 	echo form_textarea($texte);
@@ -60,4 +66,5 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	
 	echo form_submit('envoi', 'Valider');     
 	echo form_close();
+}
 ?>

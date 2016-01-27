@@ -7,25 +7,21 @@ User:
       type: integer
       unsigned: false
       nullable: false
-      column: IDUSER
+      column: idUser
       generator:
         strategy: IDENTITY
     nom:
       type: text
       nullable: false
-      column: NOM
     prenom:
       type: text
       nullable: false
-      column: PRENOM
     mail:
       type: text
       nullable: false
-      column: MAIL
     mdp:
       type: text
       nullable: false
-      column: MDP
   oneToOne:
     idtype:
       targetEntity: Usertype
@@ -33,7 +29,7 @@ User:
       mappedBy: null
       inversedBy: null
       joinColumns:
-        IDTYPE:
-          referencedColumnName: IDTYPE
+        idType:
+          referencedColumnName: idType
       orphanRemoval: false
   lifecycleCallbacks: {  }

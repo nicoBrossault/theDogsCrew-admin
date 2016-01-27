@@ -20,6 +20,10 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			<div class="collapsible-header">
 				<label>Compagnie <?=$comp->getIdcompagnie()?> : </label>
 				<?=character_limiter($comp->getTitre(),30)?>
+				<i style='font-size:10px; color: gray;'>
+					<?=utf8_encode($this->doctrine->em->find('langue',$comp->getIdlangue())->getLangue())?>
+				</i>
+				
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">

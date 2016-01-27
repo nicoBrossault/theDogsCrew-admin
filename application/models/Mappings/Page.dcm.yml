@@ -40,7 +40,7 @@ Page:
       mappedBy: null
       inversedBy: null
       joinColumns:
-        IDUSER:
-          referencedColumnName: IDUSER
+        idUser:
+          referencedColumnName: idUser
       orphanRemoval: false
   lifecycleCallbacks: {  }

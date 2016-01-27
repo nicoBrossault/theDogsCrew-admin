@@ -10,38 +10,27 @@
 
 <div class="container">
 <!-- ARTICLE -->
-	<div class="col s8 m5 l4  hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cArticle')?>" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/article.png">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">insert_comment</i>
 				</div>
 				<div class="card-action white">
 					<b>ARTICLES</b>
 				</div>
-		</div>
+			</div>
 		</a>
 	</div>
 	
 <!-- PAGE -->	
-	<div class="col s8 m5 l4 hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cPage')?>" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/page.png">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">library_books</i>
 				</div>
 				<div class="card-action white">
 					<b>PAGES</b>
@@ -51,18 +40,12 @@
 	</div>
 
 <!-- GALERIE -->	
-	<div class="col s8 m5 l4 hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="#" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/galerie.png">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">photo_library</i>
 				</div>
 				<div class="card-action white">
 					<b>GALERIE</b>
@@ -72,17 +55,12 @@
 	</div>
 
 <!-- IMAGE PAGE -->	
-	<div class="col s8 m5 l4 hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="#" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<div class="col s12 m12">
-				 			<img src="assets/images/imgPage.png">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">art_track</i>
 				</div>
 				<div class="card-action white">
 					<b>IMAGES PAGES</b>
@@ -92,18 +70,12 @@
 	</div>
 
 <!-- COMPAGNIE -->
-	<div class="col s8 m5 l4 hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cCompagnie')?>" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/banner-rond-01.png" style="margin-left:-5px;">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">pets</i>
 				</div>
 				<div class="card-action white">
 					<b>COMPAGNIE</b>
@@ -113,39 +85,27 @@
 	</div>
 
 <!-- LANGUE -->
-	<div class="col s8 m5 l4 hoverable">
+	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/reglageLang.png">
-			 			</div>
-		 			</div>
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">language</i>
 				</div>
 				<div class="card-action white">
-					<b>LANGUES</b>
+					<b>Langue</b>
 				</div>
 			</div>
 		</a>
 	</div>
 
 <!-- TEXT SITE -->
-	<div class="col s8 m5 l4 offset-s0 offset-m0 offset-l4 hoverable">
-		<a href="<?=base_url('cTexte')?>" class="teal-text text-darken-1">
-			<div class="card small teal darken-1">
-				<div class="card-image">
-					<div class="container">
-						<br>
-						<br>
-						<br>
-						<div class="col s10 m10 offset-s1 offset-m1">
-				 			<img src="assets/images/reglageLang.png">
-			 			</div>
-		 			</div>
+	<div class="col s10 m6 l4 offset-m3 offset-l4 hoverable">
+		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
+			<div class="card teal darken-1">
+				<div class="card-content white-text" 
+				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
+					<i class="material-icons" style="font-size:80px;">view_compact</i>
 				</div>
 				<div class="card-action white">
 					<b>TEXTE DU SITE</b>

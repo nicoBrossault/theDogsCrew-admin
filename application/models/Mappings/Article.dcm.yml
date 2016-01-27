@@ -33,7 +33,7 @@ Article:
       inversedBy: null
       joinColumns:
         idUser:
-          referencedColumnName: IDUSER
+          referencedColumnName: idUser
       orphanRemoval: false
     idlangue:
       targetEntity: Langue

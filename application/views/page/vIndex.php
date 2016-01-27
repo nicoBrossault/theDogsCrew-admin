@@ -20,7 +20,10 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>page <?=$page->getIdpage()?> : </label>
-				<?=character_limiter($page->getTitre(),30)?>
+				<?=character_limiter($page->getTitre(),30)?> 
+				<i style='font-size:10px; color: gray;'>
+					<?=utf8_encode($page->getIdlangue()->getLangue())?>
+				</i>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">
@@ -50,7 +53,8 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						?>
 					</div>
 				</div>
-				<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+        
+				<div class="fixed-action-btn horizontal" style="bottom: 45px; right:96px;">
 					<a class="btn-floating btn-large red">
 						<i class="large material-icons">mode_edit</i>
 					</a>
@@ -73,6 +77,11 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		</li>
 		<?php endforeach; ?>	
 	</ul>
+</div>
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
+	  	<i class="material-icons">add</i>
+	</a>
 </div>
 <br>
 <?php

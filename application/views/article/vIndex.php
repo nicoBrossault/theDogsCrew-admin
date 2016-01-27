@@ -21,6 +21,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			<div class="collapsible-header">
 				<label>Article : </label>
 				<?=$article->getTitre()?>
+				<i style='font-size:10px; color: gray;'>
+					<?=utf8_encode($article->getIdlangue()->getLangue())?>
+				</i>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">

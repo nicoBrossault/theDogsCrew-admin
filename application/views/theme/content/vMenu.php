@@ -2,7 +2,6 @@
 use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 ?>
 <!DOCTYPE html>
-<html>
 	<head>
 		<title>Admin <?=$titre?></title>
 		<meta charset="UTF-8">
@@ -12,10 +11,10 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
 	</head>
 	<body>
-		<nav class="teal darken-1" style="margin-bottom: 5%;">
+		<nav class="teal darken-1" style="margin-bottom: 5%; color:gray">
 			<span class="brand-logo right" style="margin-right:33%;"><?=$titre?></span>
   			<ul id="slide-out" class="side-nav fixed">
-  				<div class="card" style="margin-top:-30px;">
+  				<div class="card" style="margin-top:-20px;">
 					<div class="card-image">
 						<img src="<?=base_url()?>assets/images/epee.jpg">
 					</div>
@@ -28,36 +27,63 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 						<span class="card-title grey-text text-darken-4">The Dogs' Crew
 							<i class="material-icons right" style="margin-top:8px;">close</i>
 						</span>
-						<a href="#">user</a>
-						<a href="<?=base_url()?>">Home</a>
+						<?php if(isset($_SESSION['user'])):
+							$user=$this->doctrine->em->find('user',$_SESSION['user']);
+						?>
+							<a href="#">
+								<i class="material-icons left">account_circle</i>
+								<?=$user->getPrenom()?>
+							</a>
+						<?php endif; ?>
+						<a href="<?=base_url()?>">
+							<i class="material-icons left">home</i>
+							Home
+						</a>
 					</div>
 				</div>
 				<li>
+					<i class="material-icons left">insert_comment</i>
 					<a href="<?=base_url("cArticle")?>">Articles</a>
 				</li>
 				<li>
 					<ul class="collapsible" data-collapsible="accordion">
 						<li>
 							<div class="collapsible-header" style="margin-left:-6%">
-								<a>Pages</a>
+								<i class="material-icons left">library_books</i>
+								<a>
+									Pages
+									<i class="material-icons right">keyboard_arrow_down</i>
+								</a>
 							</div>
 							<div class="collapsible-body">
 								<ul>
-									<li><a href="<?=base_url("cPage")?>">Les pages</a></li>
-									<li><a href="<?=base_url("cCompagnie")?>">Compagnies</a></li>
-									<li><a href="#!">Images des pages</a></li>
+									<li>
+										<i class="material-icons left">library_books</i>
+										<a href="<?=base_url("cPage")?>">Les pages</a>
+									</li>
+									<li>
+										<i class="material-icons left">pets</i>
+										<a href="<?=base_url("cCompagnie")?>">Compagnies</a>
+									</li>
+									<li>
+										<i class="material-icons left">art_track</i>
+										<a href="#!">Images des pages</a>
+									</li>
 								</ul>
 							</div>
 						</li>
 					</ul>
 				</li>
 				<li>
+					<i class="material-icons left">view_compact</i>
 					<a href="<?=base_url("cTexte")?>">Textes du Site</a>
 				</li>
 				<li>
+					<i class="material-icons left">language</i>
 					<a href="<?=base_url("cLangue")?>">Langue du Site</a>
 				</li>
 				<li>
+					<i class="material-icons left">photo_library</i>
 					<a href="#">Galerie</a>
 				</li>
 			</ul>
@@ -67,5 +93,5 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		</nav>
 		
 		<div class="row">
-			<div class="col s10 m10 l9 offset-s1 offset-m2 offset-l3">	
+			<div class="col s10 m10 l9 offset-s1 offset-m1 offset-l3">	
 			

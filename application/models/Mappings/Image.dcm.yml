@@ -30,6 +30,6 @@ Image:
       inversedBy: null
       joinColumns:
         idUser:
-          referencedColumnName: IDUSER
+          referencedColumnName: idUser
       orphanRemoval: false
   lifecycleCallbacks: {  }

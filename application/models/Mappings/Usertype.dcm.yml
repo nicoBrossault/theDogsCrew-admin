@@ -7,11 +7,10 @@ Usertype:
       type: integer
       unsigned: false
       nullable: false
-      column: IDTYPE
+      column: idType
       generator:
         strategy: IDENTITY
     libelle:
       type: text
       nullable: false
-      column: LIBELLE
   lifecycleCallbacks: {  }

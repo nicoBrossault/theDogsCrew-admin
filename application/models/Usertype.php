@@ -15,7 +15,7 @@ class Usertype
     /**
      * @var integer $idtype
      *
-     * @Column(name="IDTYPE", type="integer", nullable=false)
+     * @Column(name="idType", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
@@ -24,7 +24,7 @@ class Usertype
     /**
      * @var text $libelle
      *
-     * @Column(name="LIBELLE", type="text", nullable=false)
+     * @Column(name="libelle", type="text", nullable=false)
      */
     private $libelle;
 
