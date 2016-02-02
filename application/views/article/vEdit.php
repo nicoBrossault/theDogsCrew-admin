@@ -11,15 +11,20 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 <?php
-	echo form_open('formComp');	
-	echo form_hidden('idCompagnie',NULL);	
-	echo form_hidden('idUser',$_SESSION['user']);
+echo form_open('formArticle');
+echo form_hidden('idArticle',$article->getIdarticle());
+echo form_hidden('idUser',$article->getIduser()->getIduser());
 
-?>
+$date = $article->getDate()->format('Y-m-d');
+?>	
+  
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
 	<?php foreach($langues as $datalangue): ?>
-	<option value="<?=utf8_encode($datalangue->getLangue())?>">
+	<option value="<?=utf8_encode($datalangue->getLangue())?>"
+		<?php if(utf8_encode($article->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
+		{echo "selected='selected'";}?>
+	>
 		<?=utf8_encode($datalangue->getLangue())?>
 	</option>
 	<?php endforeach; ?>
@@ -28,62 +33,46 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <br>
 <br>
 <br>
-<label for="date"><h5>Date</h5></label>
-<input type="date" name="date" value="<?=$date = date('Y-m-d');?>" class="datepicker" required/>
-<br>
-<br>
-<br>
-<br>
 
-<label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
-<input type="file" name="fileImg"/>
-<br>
-<br>
-<br>
-<br>
-
-<label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
-<select class="icons" id="existImg" name="existImg" style="display:block">
-	<?php 
-	$dir = '../theDogsCrew-site/imagesPage/';
-	$fileImages = scandir($dir);
-	$exist=false;
-		
-	foreach($fileImages as $fileImage){
-		$count+=1;
-	}
-	for($i=2; $i<$count; $i++):
-	?>
-	<option value="<?=$fileImages[$i]?>">
-		<?=$fileImages[$i]?>
+<label for="page"><h5>Page</h5></label>
+<select id="page" name="page" style="display:block">
+	<option value="NULL"<?php if($article->getIdpage()==NULL):?> selected <?php endif;?>>
+		Aucune Page
 	</option>
-	<?php endfor; ?>
-	<option value="NULL" selected >Aucune Image</option>
+	
+	<?php foreach($page as $dataPage): ?>
+	<option value="<?=$dataPage->getIdpage()?>"
+		<?php if($dataPage->getIdpage()==$article->getIdpage())
+		{echo "selected='selected'";}?>
+	>
+		<?=utf8_encode($dataPage->getTitre())?>
+	</option>
+	<?php endforeach; ?>
 </select>
 <br>
 <br>
 <br>
 <br>
 
-<?php
-	
-	$titre= array(
-		'name'=>'titre',
+<label for="date"><h5>Date</h5></label>
+<input type="date" name="date" id="date" placeholder"<?=$date?>" value="<?=$date?>" class="datepicker" />
+<br>
+<br>
+<br>
+<br>
+
+<?php	
+$titre= array('name'=>'titre',
 		'id'=>'titre',
-		'placeholder'=>'Le titre de cette page',
-		'value'=>'',
-	);
-	echo '<label for="titre"><h5>Titre</h5></label>';
-	echo form_error('titre','<span class="error" style="color:red">','</span>');
-	echo form_input($titre);
-	echo "<i>Minimum 5 caractère.</i><br><br><br><br><br>";
+		'placeholder'=>'Titre de l\'article',
+		'value'=>utf8_encode($article->getTitre()),
+);
+echo '<label for="titre"><h5>Titre</h5></label>';
+echo form_input($titre);
+echo "<i>Minimum 5 caractère.</i><br><br><br><br>";
 ?>
+<label for="texte"><h5>Texte</h5></label>
 <div class="row">
-	<div class="func col s1 m1 l1 btn waves-effect waves-light " id='p' style="margin-left: 5px;">
-		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Nouveau paragraphe : écrire entre les balises">		
-			<i class="material-icons">format_textdirection_l_to_r</i>
-		</div>
-	</div>
 	<div class="func col s1 m1 l1 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Souligne : écrire entre les balises">
 			<i class="material-icons">format_underlined</i>
@@ -110,20 +99,23 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		</div>
 	</div>
 </div>
-<?php	
-	$texte= array(
-			'name'=>'texte',
-			'id'=>'texte',
-			'class'=>"materialize-textarea",
-			'placeholder'=>'Le texte de la compagnie',
-			'value'=>'',
-			'cols' => '40',
-			'rows' => '40',
-	);
-	echo '<label for="texte"><h5>Texte</h5></label>';
-	echo form_error('texte','<span class="error" style="color:red">','</span>');
-	echo form_textarea($texte);
-	
-	echo form_submit('envoi', 'Valider');     
-	echo form_close();
+<?php
+$texte= array(
+		'name'=>'texte',
+		'id'=>'texte',
+		'class'=>"materialize-textarea article",
+		'placeholder'=>'Texte de l\'article',
+		'value'=>utf8_encode($article->getTexte()),
+		'cols' => '40',
+		'rows' => '40'
+);
+echo form_textarea($texte);
+echo '<div id="legende"></div>';
+
+echo form_submit('envoi', 'Valider');     
+echo form_close();
 ?>
+<br>
+<br>
+<br>
+<br>

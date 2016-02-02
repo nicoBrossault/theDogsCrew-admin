@@ -13,9 +13,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cArticle')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">insert_comment</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">insert_comment</i>
 				</div>
 				<div class="card-action white">
 					<b>ARTICLES</b>
@@ -28,9 +27,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cPage')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">library_books</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">library_books</i>
 				</div>
 				<div class="card-action white">
 					<b>PAGES</b>
@@ -43,9 +41,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="#" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">photo_library</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">photo_library</i>
 				</div>
 				<div class="card-action white">
 					<b>GALERIE</b>
@@ -58,9 +55,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="#" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">art_track</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">art_track</i>
 				</div>
 				<div class="card-action white">
 					<b>IMAGES PAGES</b>
@@ -73,9 +69,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cCompagnie')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">pets</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">pets</i>
 				</div>
 				<div class="card-action white">
 					<b>COMPAGNIE</b>
@@ -88,9 +83,8 @@
 	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">language</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">language</i>
 				</div>
 				<div class="card-action white">
 					<b>Langue</b>
@@ -103,9 +97,8 @@
 	<div class="col s10 m6 l4 offset-m3 offset-l4 hoverable">
 		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
-				<div class="card-content white-text" 
-				style="padding-top:10%; padding-bottom:10%; padding-left:25%">
-					<i class="material-icons" style="font-size:80px;">view_compact</i>
+				<div class="card-content white-text center-align">
+					<i class="large material-icons">view_compact</i>
 				</div>
 				<div class="card-action white">
 					<b>TEXTE DU SITE</b>

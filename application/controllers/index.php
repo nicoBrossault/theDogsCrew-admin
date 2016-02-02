@@ -37,12 +37,12 @@ class Index extends CI_Controller {
 					$isUser=true;
 					$idUser=$user->getIduser();
 				}else{
-					$msg="mail invalide : ".$_POST['mailUser']."<br>";
+					$msg="Mail invalide : ".$_POST['mailUser']."<br>";
 					$isUser=false;
 				}
 			}
 		}
-		if(isset($_POST['mdp'])){
+		if(isset($_POST['mdp']) && $isUser){
 			$this->form_validation
 			->set_rules('mdp', 'Mot de passe', 'required', 'trim|required|xss_clean');
 			
@@ -51,7 +51,7 @@ class Index extends CI_Controller {
 			if($testUser->getMdp()==sha1($_POST['mdp'])){
 				$isUser=true;
 			}else{
-				$msg.="mot de passe invalide : ".$_POST['mdp']."<br>";
+				$msg.="Mot de passe invalide";
 				$isUser=false;
 			}
 		}

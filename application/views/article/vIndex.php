@@ -20,7 +20,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>Article : </label>
-				<?=$article->getTitre()?>
+				<?=utf8_encode($article->getTitre())?>
 				<i style='font-size:10px; color: gray;'>
 					<?=utf8_encode($article->getIdlangue()->getLangue())?>
 				</i>
@@ -40,7 +40,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<br>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
-						<?=$article->getTexte()?>
+						<?=utf8_encode($article->getTexte())?>
 						<br>
 						<br>
 						<label style="font-size:20px;">Date : </label>
@@ -71,7 +71,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<br>
 					</div>
 				</div>
-				<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+				<div class="fixed-action-btn horizontal" style="bottom: 45px; right:96px;">
 					<a class="btn-floating btn-large red">
 						<i class="large material-icons">mode_edit</i>
 					</a>
@@ -94,7 +94,12 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<?php endforeach; ?>	
 	</ul>
 </div>
-
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
+	  	<i class="material-icons">add</i>
+	</a>
+</div>
+<br>
 <?php
 	echo "<br>".$this->pagination->create_links();
 ?>

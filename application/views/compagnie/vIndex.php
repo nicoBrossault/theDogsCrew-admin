@@ -19,7 +19,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>Compagnie <?=$comp->getIdcompagnie()?> : </label>
-				<?=character_limiter($comp->getTitre(),30)?>
+				<?=$comp->getTitre()?>
 				<i style='font-size:10px; color: gray;'>
 					<?=utf8_encode($this->doctrine->em->find('langue',$comp->getIdlangue())->getLangue())?>
 				</i>
@@ -41,7 +41,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?php if(!empty($comp->getImage())) :?>
 							<label style="font-size:20px;">Image : </label>
 							<br>
-							<img src="../theDogsCrew-site/<?=$comp->getImage()?>" style="width:20%">
+							<img src="/theDogsCrew/theDogsCrew-site/<?=$comp->getImage()?>" style="width:20%">
 							<br>
 							<br>
 						<?php endif ?>
@@ -58,7 +58,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						?>
 					</div>
 				</div>
-				<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+				<div class="fixed-action-btn horizontal" style="bottom: 45px; right:96px;;">
 					<a class="btn-floating btn-large red">
 						<i class="large material-icons">mode_edit</i>
 					</a>
@@ -81,4 +81,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		</li>
 		<?php endforeach; ?>	
 	</ul>
+</div>
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
+	  	<i class="material-icons">add</i>
+	</a>
 </div>

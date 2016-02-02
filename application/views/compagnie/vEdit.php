@@ -11,15 +11,21 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 <?php
-	echo form_open('formComp');	
-	echo form_hidden('idCompagnie',NULL);	
-	echo form_hidden('idUser',$_SESSION['user']);
 
+foreach($comp as $data){
+	echo form_open_multipart('formComp');
+	echo form_hidden('idcompagnie',$data->getIdcompagnie());	
+	echo form_hidden('idUser',$data->getIduser());
+	$date = $data->getDate()->format('Y-m-d');
 ?>
+
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
-	<?php foreach($langues as $datalangue): ?>
-	<option value="<?=utf8_encode($datalangue->getLangue())?>">
+	<?php foreach($langues as $datalangue):?>
+	<option value="<?=utf8_encode($datalangue->getLangue())?>"
+		<?php if(utf8_encode($this->doctrine->em->find('langue',$data->getIdlangue())->getLangue())==utf8_encode($datalangue->getLangue()))
+		{echo "selected='selected'";}?>
+	>
 		<?=utf8_encode($datalangue->getLangue())?>
 	</option>
 	<?php endforeach; ?>
@@ -28,8 +34,9 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <br>
 <br>
 <br>
+
 <label for="date"><h5>Date</h5></label>
-<input type="date" name="date" value="<?=$date = date('Y-m-d');?>" class="datepicker" required/>
+<input type="date" name="date" value="<?=$date?>" class="datepicker" />
 <br>
 <br>
 <br>
@@ -48,17 +55,24 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	$dir = '../theDogsCrew-site/imagesPage/';
 	$fileImages = scandir($dir);
 	$exist=false;
+	
+	if($data->getImage()){
+		$nomImg=explode('/',$data->getImage());
+		$nomImg=$nomImg[1];
+	}else{
+		$nomImg=NULL;
+	}
 		
 	foreach($fileImages as $fileImage){
 		$count+=1;
 	}
 	for($i=2; $i<$count; $i++):
 	?>
-	<option value="<?=$fileImages[$i]?>">
+	<option value="<?=$fileImages[$i]?>"<?php if($fileImages[$i]==$nomImg):?> selected <?php endif;?>>
 		<?=$fileImages[$i]?>
 	</option>
 	<?php endfor; ?>
-	<option value="NULL" selected >Aucune Image</option>
+	<option value="NULL" <?php if($nomImg==NULL):?> selected <?php endif;?>>Aucune Image</option>
 </select>
 <br>
 <br>
@@ -67,14 +81,9 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 <?php
 	
-	$titre= array(
-		'name'=>'titre',
-		'id'=>'titre',
-		'placeholder'=>'Le titre de cette page',
-		'value'=>'',
-	);
+	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$data->getTitre(),'value'=>$data->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
-	echo form_error('titre','<span class="error" style="color:red">','</span>');
+	echo form_error('titre','<span class="error">','</span>');
 	echo form_input($titre);
 	echo "<i>Minimum 5 caractère.</i><br><br><br><br><br>";
 ?>
@@ -110,20 +119,24 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		</div>
 	</div>
 </div>
-<?php	
+<?php
 	$texte= array(
 			'name'=>'texte',
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
-			'placeholder'=>'Le texte de la compagnie',
-			'value'=>'',
-			'cols' => '40',
-			'rows' => '40',
-	);
+			'placeholder'=>utf8_encode($data->getTexte()),
+			'value'=>utf8_encode($data->getTexte()),
+			'cols' => '40','rows' => '40');
 	echo '<label for="texte"><h5>Texte</h5></label>';
-	echo form_error('texte','<span class="error" style="color:red">','</span>');
+	echo form_error('texte','<span class="error">','</span>');
 	echo form_textarea($texte);
+	echo '<div id="legende"></div>';
 	
 	echo form_submit('envoi', 'Valider');     
 	echo form_close();
+}
 ?>
+<br>
+<br>
+<br>
+<br>

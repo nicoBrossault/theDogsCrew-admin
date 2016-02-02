@@ -46,16 +46,21 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 					<a href="<?=base_url("cArticle")?>">Articles</a>
 				</li>
 				<li>
-					<ul class="collapsible" data-collapsible="accordion">
+					<ul class="collapsiblePage">
 						<li>
-							<div class="collapsible-header" style="margin-left:-6%">
+							<div class="collapsiblePage-header" style="margin-left:-6%">
 								<i class="material-icons left">library_books</i>
 								<a>
 									Pages
-									<i class="material-icons right">keyboard_arrow_down</i>
+									<i class="material-icons right open divCircle teal darken-1 center-align">
+										keyboard_arrow_down
+									</i>
+									<i class="material-icons right close divCircle teal darken-1 center-align">
+										keyboard_arrow_up
+									</i>
 								</a>
 							</div>
-							<div class="collapsible-body">
+							<div class="collapsiblePage-body">
 								<ul>
 									<li>
 										<i class="material-icons left">library_books</i>
@@ -67,7 +72,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 									</li>
 									<li>
 										<i class="material-icons left">art_track</i>
-										<a href="#!">Images des pages</a>
+										<a href="<?=base_url("cImagePage")?>">Images Pages</a>
 									</li>
 								</ul>
 							</div>
