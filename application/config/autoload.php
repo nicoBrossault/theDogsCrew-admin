@@ -135,4 +135,13 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array("Article","User","Langue","Usertype","Page","Compagnie","textsite");
+$autoload['model'] = array(
+		"Article",
+		"User",
+		"Langue",
+		"Usertype",
+		"Page",
+		"Compagnie",
+		"textsite",
+		"Languenavbar"
+);

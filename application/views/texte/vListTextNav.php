@@ -15,27 +15,30 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <div class="list">
 	<ul class="collapsible popout" data-collapsible="accordion" style="box-shadow:none">
 		<?php
-			foreach ($textes as $texte):
+			foreach ($textNav as $texte):
 		?>
 		<li>
 			<div class="collapsible-header">
-				<label>texte <?=$texte->getIdtext()?> : </label>
-				<?=utf8_encode($texte->getlibelle())?>
-				<i style='font-size:10px; color: gray;'>
-					<?=utf8_encode($texte->getIdlangue()->getLangue())?>
-				</i>
+				Texte pour la NavBar en 
+				<?=utf8_encode($this->doctrine->em->find('langue',$texte->getIdlangue())->getLangue())?>
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">
 					<div class="col m10 s10 offset-m1 offset-s1" style="padding-top:3%; padding-bottom:3%">
 						<label style="font-size:20px;">Identifiant : </label>
 						<br>
-						<?=$texte->getIdtext()?>
+						<?=$texte->getIdlanguenavbar()?>
 						<br>
 						<br>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
-						<?=utf8_encode($texte->getText())?>
+						<?php $textNav=explode("-",$texte->getTexte());?>
+							Texte pour le bouton "Plus" : <?=$textNav[0]?><br>
+							Texte pour le bouton "Accueil" : <?=$textNav[1]?><br>
+							Texte pour le bouton "Compagnie" : <?=$textNav[2]?><br>
+							Texte pour le bouton "Article" : <?=$textNav[3]?><br>
+							Texte pour le bouton "Galerie" : <?=$textNav[4]?><br>
+							Texte pour le bouton "Contact" : <?=$textNav[5]?><br>
 						<br>
 					</div>
 				</div>
@@ -45,15 +48,15 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 					</a>
 					<ul>
 						<li>
-							<a class="btn-floating red modifier" id="<?=$texte->getIdtext()?>">
+							<a class="btn-floating red modifierTextNav" id="<?=$texte->getIdlanguenavbar()?>">
 								<i class="material-icons">mode_edit</i>
-								<?=$texte->getIdtext()?>
+								<?=$texte->getIdlanguenavbar()?>
 							</a>
 						</li>
 						<li>
-							<a class="btn-floating yellow darken-1 supprimer" id="<?=$texte->getIdtext()?>">
+							<a class="btn-floating yellow darken-1 supprimerTextNav" id="<?=$texte->getIdlanguenavbar()?>">
 								<i class="material-icons">delete</i>
-								<?=$texte->getIdtext()?>
+								<?=$texte->getIdlanguenavbar()?>
 							</a>
 						</li>
 					</ul>

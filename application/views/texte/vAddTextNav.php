@@ -13,9 +13,8 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <?php
 	echo form_open('formText');
 	echo form_hidden('idText',$texte->getIdtext());
-	echo form_hidden('idUser',$texte->getIduser()->getIduser());
 	
-	$nomLangue=$texte->getIdlangue()->getLangue();
+	$nomLangue=utf8_encode($this->doctrine->em->find('langue',$texte->getIdlangue())->getLangue());
 	$langue= array(
 			'name'=>'langue',
 			'id'=>'langue',
@@ -25,23 +24,12 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	echo '<label for="langue"><h5>Langue</h5></label>';
 	echo form_input($langue);
 	
-	echo form_hidden('type',$texte->getType());
-	
-	$libelle= array(
-		'name'=>'libelle',
-		'id'=>'libelle',
-		'placeholder'=>utf8_encode($texte->getLibelle()),
-		'value'=>utf8_encode($texte->getLibelle()),
-	);
-	echo '<label for="libelle"><h5>Libelle</h5></label>';
-	echo form_input($libelle);
-	
 	$texte= array(
 			'name'=>'texte',
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
-			'placeholder'=>$texte->getText(),
-			'value'=>$texte->getText(),
+			'placeholder'=>$textNav->getTexte(),
+			'value'=>$textNav->getTexte(),
 			'cols' => '40',
 			'rows' => '40',
 	);

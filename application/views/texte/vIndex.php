@@ -41,4 +41,16 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 </div>
 </a>
 
-<?php endforeach ?>            
+<?php endforeach ?>
+
+<a class="textNav" id="textNav">
+	<div class="col s10 m6 offset-s1 offset-m3" style="color:black; min-height:180px;">
+		<div class="card hoverable">
+			<div class="card-content">
+				<span class="card-title">Les texte de la NavBar : </span>
+				<p>Cliquez pour modifier les texte de la NavBar.</p>
+			</div>
+		</div>
+	</div>
+</a>
+            

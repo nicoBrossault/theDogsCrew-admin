@@ -14,6 +14,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	echo form_open('formText');
 	echo form_hidden('idText',$texte->getIdtext());
 	echo form_hidden('idUser',$texte->getIduser()->getIduser());
+	echo form_hidden('type',$texte->getType());
 	
 	$nomLangue=$texte->getIdlangue()->getLangue();
 	$langue= array(
@@ -23,6 +24,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 			'value'=>utf8_encode($nomLangue),
 	);
 	echo '<label for="langue"><h5>Langue</h5></label>';
+	echo form_error('titre','<span class="error">','</span>');
 	echo form_input($langue);
 	
 	echo form_hidden('type',$texte->getType());
@@ -34,6 +36,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		'value'=>utf8_encode($texte->getLibelle()),
 	);
 	echo '<label for="libelle"><h5>Libelle</h5></label>';
+	echo form_error('titre','<span class="error">','</span>');
 	echo form_input($libelle);
 	
 	$texte= array(
@@ -46,6 +49,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 			'rows' => '40',
 	);
 	echo '<label for="texte"><h5>Texte</h5></label>';
+	echo form_error('titre','<span class="error">','</span>');
 	echo form_textarea($texte);
 	
 	echo form_submit('envoi', 'Valider');     
