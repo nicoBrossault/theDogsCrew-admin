@@ -10,7 +10,7 @@
 		<div class="card hoverable">
 			<div class="card-title teal darken-1 white-text" style="text-align:center; padding:2%">
 				<?php if(!isset($msg)):?>
-					<b>Supprimer la page "<?php foreach($comp as $data): echo $data->getTitre(); endforeach;?>" ?</b>
+					<b>Supprimer la page "<?=$comp->getTitre()?>" ?</b>
 				<?php else : echo $msg?>
 				<?php endif; ?>
 			</div>
@@ -21,12 +21,12 @@
 						<i class="material-icons left">check_circle</i>
 					</a>
 					
-					<a href="<?=base_url('cPage')?>" class="btn waves-effect waves-light cancel" id="annuler">
+					<a href="<?=base_url('cCompagnie')?>" class="btn waves-effect waves-light cancel" id="annuler">
 						Annuler
 						<i class="material-icons left">highlight_off</i>
 					</a>
 				<?php else : ?>
-					<a href="<?=base_url('cPage')?>" class="btn waves-effect waves-light">
+					<a href="<?=base_url('cCompagnie')?>" class="btn waves-effect waves-light">
 						Ok
 						<i class="material-icons left">done</i>
 					</a>

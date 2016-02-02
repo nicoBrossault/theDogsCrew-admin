@@ -12,18 +12,17 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 <?php
 
-foreach($comp as $data){
 	echo form_open_multipart('formComp');
-	echo form_hidden('idcompagnie',$data->getIdcompagnie());	
-	echo form_hidden('idUser',$data->getIduser());
-	$date = $data->getDate()->format('Y-m-d');
+	echo form_hidden('idcompagnie',$comp->getIdcompagnie());	
+	echo form_hidden('idUser',$comp->getIduser());
+	$date = $comp->getDate()->format('Y-m-d');
 ?>
 
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
 	<?php foreach($langues as $datalangue):?>
 	<option value="<?=utf8_encode($datalangue->getLangue())?>"
-		<?php if(utf8_encode($this->doctrine->em->find('langue',$data->getIdlangue())->getLangue())==utf8_encode($datalangue->getLangue()))
+		<?php if(utf8_encode($this->doctrine->em->find('langue',$comp->getIdlangue())->getLangue())==utf8_encode($datalangue->getLangue()))
 		{echo "selected='selected'";}?>
 	>
 		<?=utf8_encode($datalangue->getLangue())?>
@@ -56,8 +55,8 @@ foreach($comp as $data){
 	$fileImages = scandir($dir);
 	$exist=false;
 	
-	if($data->getImage()){
-		$nomImg=explode('/',$data->getImage());
+	if($comp->getImage()){
+		$nomImg=explode('/',$comp->getImage());
 		$nomImg=$nomImg[1];
 	}else{
 		$nomImg=NULL;
@@ -81,7 +80,7 @@ foreach($comp as $data){
 
 <?php
 	
-	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$data->getTitre(),'value'=>$data->getTitre(),);
+	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$comp->getTitre(),'value'=>$comp->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_error('titre','<span class="error">','</span>');
 	echo form_input($titre);
@@ -124,8 +123,8 @@ foreach($comp as $data){
 			'name'=>'texte',
 			'id'=>'texte',
 			'class'=>"materialize-textarea",
-			'placeholder'=>utf8_encode($data->getTexte()),
-			'value'=>utf8_encode($data->getTexte()),
+			'placeholder'=>utf8_encode($comp->getTexte()),
+			'value'=>utf8_encode($comp->getTexte()),
 			'cols' => '40','rows' => '40');
 	echo '<label for="texte"><h5>Texte</h5></label>';
 	echo form_error('texte','<span class="error">','</span>');
@@ -134,7 +133,6 @@ foreach($comp as $data){
 	
 	echo form_submit('envoi', 'Valider');     
 	echo form_close();
-}
 ?>
 <br>
 <br>

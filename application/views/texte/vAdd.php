@@ -34,7 +34,7 @@ foreach($texte as $data){
 		'name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>utf8_encode($data->getLibelle()),
-		'value'=>'',
+		'value'=>utf8_encode($data->getLibelle(),
 	);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_input($titre);

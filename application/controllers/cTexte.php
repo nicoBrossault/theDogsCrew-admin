@@ -13,8 +13,7 @@ class CTexte extends CI_Controller {
 		$this->layout->th_default();
 		$this->ajaxGet();
 		
-		$queryNb = $this->doctrine->em->createQuery("SELECT t FROM textsite t");
-		$types = $queryNb->getResult();
+		$types = $this->doctrine->em->getRepository('textsite')->findAll();
 		
 		$this->layout->view('texte/vIndex',array('types'=>$types));
 	}
@@ -23,8 +22,7 @@ class CTexte extends CI_Controller {
 		$this->load->helper('text');
 		$this->ajaxGet();
 		
-		$queryNb = $this->doctrine->em->createQuery("SELECT t FROM textsite t WHERE t.type='".$type."'");
-		$textes = $queryNb->getResult();
+		$textes = $this->doctrine->em->createQuery("SELECT t FROM textsite t WHERE t.type='".$type."'")->getResult();
 		
 		$this->layout->view('texte/vList', array(
 						'textes'	=>	$textes,
@@ -35,8 +33,7 @@ class CTexte extends CI_Controller {
 		$_SESSION['object']="Textsite";
 		$titre="Modifier un texte :";
 		
- 		$queryNb = $this->doctrine->em->createQuery("SELECT t FROM textsite t WHERE t.idtext=".$id);
-		$texte = $queryNb->getResult();
+ 		$texte = $this->doctrine->em->find('textsite',$id);
 		
 		$queryLng = $this->doctrine->em->createQuery("SELECT l FROM langue l");
 		$langues = $queryLng->getResult();

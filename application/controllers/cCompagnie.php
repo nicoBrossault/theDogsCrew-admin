@@ -13,8 +13,7 @@ class CCompagnie extends CI_Controller {
 		$this->layout->th_default();
 	
 		$this->ajaxGet();
-	
-		$comps=$this->get_Page($id, '10');
+		$comps=$this->doctrine->em->getRepository('compagnie')->findAll();
 		$this->layout->view("compagnie/vIndex",array('comps'=>$comps));
 	}
 	
@@ -28,7 +27,7 @@ class CCompagnie extends CI_Controller {
 					'langues'	=>	$langues,
 			));
 		}else{
-			$comp = $this->doctrine->em->createQuery("SELECT c FROM compagnie c WHERE c.idcompagnie=".$id)->getResult();
+			$comp = $this->doctrine->em->find('compagnie',$id);
 			$this->layout->view('compagnie/vEdit', array(
 					'titre'		=>	$titre,
 					'langues'	=>	$langues,
@@ -37,19 +36,8 @@ class CCompagnie extends CI_Controller {
 		}
 	}
 	
-	function get_Page($page,$per_page){
-		$min = (($page)*$per_page)-($per_page);
-		$num = $min + $per_page;
-		 
-		return $this->doctrine->em->createQuery(
-				"SELECT c
-    			FROM compagnie c
-    			WHERE c.idcompagnie >".$min." AND c.idcompagnie <=".$num
-				)->getResult();
-	}
-	
 	public function supprimer($id){
-		$comp = $this->doctrine->em->createQuery("SELECT c FROM compagnie c WHERE c.idcompagnie =".$id)->getResult();
+		$comp=$this->doctrine->em->find('compagnie',$id);
 		$this->jsutils->getAndBindTo('.delete','click',base_url().'cCompagnie/validDelete','#content');
 		$this->jsutils->compile();
 		$this->layout->view('compagnie/vDelete', array(
