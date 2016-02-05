@@ -31,7 +31,7 @@ class Compagnie
     /**
      * @var integer $idlangue
      *
-     * @Column(name="idlangue", type="integer", nullable=false)
+     * @Column(name="idlangue", type="integer", nullable=true)
      */
     private $idlangue;
 
@@ -52,7 +52,7 @@ class Compagnie
     /**
      * @var text $image
      *
-     * @Column(name="image", type="text", nullable=false)
+     * @Column(name="image", type="text", nullable=true)
      */
     private $image;
 

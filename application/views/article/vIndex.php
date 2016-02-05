@@ -33,6 +33,13 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?=$article->getIdArticle()?>
 						<br>
 						<br>
+						<?php if($user->getIdType()->getIdType()!=2): ?>
+						<label style="font-size:20px;">Auteur : </label>
+						<br>
+						<?=$article->getIduser()->getPrenom().' '.$article->getIduser()->getNom()?>
+						<br>
+						<br>
+						<?php endif; ?>
 						<label style="font-size:20px;">Langue : </label>
 						<br>
 						<?=utf8_encode($article->getIdlangue()->getLangue())?>
@@ -82,24 +89,28 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 								<?=$article->getIdarticle()?>
 							</a>
 						</li>
+						<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
 						<li>
 							<a class="btn-floating yellow darken-1 supprimer" id="<?=$article->getIdarticle()?>">
 								<i class="material-icons">delete</i>
 								<?=$article->getIdarticle()?>
 							</a>
 						</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</li>
 		<?php endforeach; ?>	
 	</ul>
 </div>
+<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
 	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
 	  	<i class="material-icons">add</i>
 	</a>
 </div>
 <br>
+<?php endif; ?>
 <?php
 	echo "<br>".$this->pagination->create_links();
 ?>

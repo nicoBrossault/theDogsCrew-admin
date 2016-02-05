@@ -33,6 +33,13 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?=$page->getIdpage()?>
 						<br>
 						<br>
+						<?php if($user->getIdType()->getIdType()!=2): ?>
+						<label style="font-size:20px;">Auteur : </label>
+						<br>
+						<?=$page->getIduser()->getPrenom().' '.$page->getIduser()->getNom()?>
+						<br>
+						<br>
+						<?php endif; ?>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
 						<?=utf8_encode($page->getTexte())?>
@@ -65,12 +72,14 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 								<?=$page->getIdpage()?>
 							</a>
 						</li>
-						<li>
-							<a class="btn-floating yellow darken-1 supprimer" id="<?=$page->getIdpage()?>">
-								<i class="material-icons">delete</i>
-								<?=$page->getIdpage()?>
-							</a>
-						</li>
+						<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
+							<li>
+								<a class="btn-floating yellow darken-1 supprimer" id="<?=$page->getIdpage()?>">
+									<i class="material-icons">delete</i>
+									<?=$page->getIdpage()?>
+								</a>
+							</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -78,12 +87,14 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<?php endforeach; ?>	
 	</ul>
 </div>
-<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
-	  	<i class="material-icons">add</i>
-	</a>
-</div>
-<br>
+<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
+	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+		<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
+		  	<i class="material-icons">add</i>
+		</a>
+	</div>
+	<br>
+<?php endif; ?>
 <?php
 	echo "<br>".$this->pagination->create_links();
 ?>

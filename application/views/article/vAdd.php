@@ -34,7 +34,7 @@ echo form_hidden('idUser',$_SESSION['user']);
 	<option value="NULL">Aucune Page</option>	
 	<?php foreach($page as $dataPage): ?>
 	<option value="<?=$dataPage->getIdpage()?>">
-		<?=utf8_encode($dataPage->getTitre())?>
+		<?=utf8_encode($dataPage->getTitre()).' : '.utf8_encode($dataPage->getIdlangue()->getLangue())?>
 	</option>
 	<?php endforeach; ?>
 </select>

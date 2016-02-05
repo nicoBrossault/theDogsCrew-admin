@@ -7,16 +7,29 @@ class CPage extends CI_Controller {
 		parent::__construct();
 	}
 	
+	public function thereIsLayout(){
+		if(!isset($layout)){
+			$titre="Pages";
+			$this->layout->set_titre($titre);
+			$this->layout->th_default();
+		}
+	}
+	
 	public function index($id=1){
-		$titre="Pages";
-		$this->layout->set_titre($titre);
-		$this->layout->th_default();
-		
-		$this->ajaxGet();
-		$this->page_pagination($id);
-		
-		$pages=$this->get_Page($id, '10');
-		$this->layout->view("page/vIndex",array('pages'=>$pages));
+		if(!isset($_SESSION['user'])){
+			$this->layout->view('index/vConnexion');
+		}else{
+			$titre="Pages";
+			$this->layout->set_titre($titre);
+			$this->layout->th_default();
+			
+			$this->ajaxGet();
+			$this->page_pagination($id);
+			
+			$user=$this->doctrine->em->find('user',$_SESSION['user']);
+			$pages=$this->get_Page($id, '10');
+			$this->layout->view("page/vIndex",array('pages'=>$pages, 'user'=>$user));
+		}
 	}
 
 	public function page_pagination($id){
@@ -40,10 +53,18 @@ function get_Page($page,$per_page){
     	$min = (($page)*$per_page)-($per_page);
     	$num = $min+$per_page;
     	
-    	return $this->doctrine->em->createQuery("SELECT p FROM page p")
-    	->setFirstResult($min)
-    	->setMaxResults($num)
-    	->getResult();
+    	$user=$this->doctrine->em->find('user',$_SESSION['user']);
+    	if($user->getIdtype()->getIdtype()==2){
+    		return $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.iduser=".$_SESSION['user'])
+    		->setFirstResult($min)
+    		->setMaxResults($num)
+    		->getResult();
+    	}else{
+    		return $this->doctrine->em->createQuery("SELECT p FROM page p")
+    		->setFirstResult($min)
+    		->setMaxResults($num)
+    		->getResult();
+    	}
     }
 	
 	public function count(){
@@ -56,6 +77,7 @@ function get_Page($page,$per_page){
 	}
 	
 	public function add($id=NULL){
+		$this->thereIsLayout();
 		$_SESSION['object']="page";
 		$titre="Modifier/ Ajouter une page :";
 		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
@@ -65,16 +87,26 @@ function get_Page($page,$per_page){
 					'langues'	=>	$langues,
 			));
 		}else{
-			$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
-			$this->layout->view('page/vEdit', array(
-					'titre'		=>	$titre,
-					'page'		=>	$page,
-					'langues'	=>	$langues,
-			));
+			//auteur page
+			$authorPage=$this->doctrine->em->find('page', $id)->getIduser()->getIdUser();
+			$author=$this->doctrine->em->find('user', $_SESSION['user'])->getIdUser();
+			$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
+			if($authorPage==$author || $type==1){
+				$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
+				$this->layout->view('page/vEdit', array(
+						'titre'		=>	$titre,
+						'page'		=>	$page,
+						'langues'	=>	$langues,
+				));
+			}else{
+				redirect('cPage','refresh');
+			}
 		}		
 	}
 	
 	public function supprimer($id){
+		$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
+		if($type!=3){
 		$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
 		$this->jsutils->getAndBindTo('.delete','click',base_url().'cPage/validDelete','#content');
 		$this->jsutils->compile();
@@ -82,26 +114,31 @@ function get_Page($page,$per_page){
 				'id'	=>	$id,
 				'page'	=>	$page,
 		));
+		}else{
+			redirect('cPage','refresh');
+		}
 	}
 	
 	public function validDelete($id){
+		$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
+		if($type!=3){
 		$page=$this->doctrine->em->find('page',$id);
 		$this->doctrine->em->remove($page);
 		$this->doctrine->em->flush();
-		
-		$this->jsutils->getAndBindTo('.delete','click',base_url().'cPage/validDelete','#content');
-		$this->jsutils->compile();
 		
 		$msg='La page : "'.$page->getTitre().'" a bien été supprimé.';
 		$this->layout->view('page/vDelete', array(
 				'msg'	=>	$msg,
 				'page'	=>	$page,
 		));
+		}else{
+			redirect('cPage','refresh');
+		}
 	}
 	
 	public function ajaxGet(){
-		$this->jsutils->getAndBindTo('.modifier','click',base_url().'cPage/add','#content');
-		$this->jsutils->getAndBindTo('.addPage','click',base_url().'cPage/add','#content');
+		$this->jsutils->getAndBindTo('.modifier','click',base_url().'cPage/add','body');
+		$this->jsutils->getAndBindTo('.addPage','click',base_url().'cPage/add','body');
 		$this->jsutils->getAndBindTo('.supprimer','click',base_url().'cPage/supprimer','#content');
 		$this->jsutils->compile();		
 	}

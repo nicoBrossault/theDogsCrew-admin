@@ -19,7 +19,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<li>
 			<div class="collapsible-header">
 				<label>Compagnie <?=$comp->getIdcompagnie()?> : </label>
-				<?=$comp->getTitre()?>
+				<?=utf8_encode($comp->getTitre())?>
 				<i style='font-size:10px; color: gray;'>
 					<?=utf8_encode($this->doctrine->em->find('langue',$comp->getIdlangue())->getLangue())?>
 				</i>
@@ -33,6 +33,16 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?=$comp->getIdcompagnie()?>
 						<br>
 						<br>
+						<?php if($user->getIdType()->getIdType()!=2): ?>
+						<label style="font-size:20px;">Auteur : </label>
+						<br>
+						<?php
+							$thisAuthor=$this->doctrine->em->find('user',$comp->getIduser());
+							echo $thisAuthor->getPrenom().' '.$thisAuthor->getNom()
+						?>
+						<br>
+						<br>
+						<?php endif; ?>
 						<label style="font-size:20px;">Contenu : </label>
 						<br>
 						<?=utf8_encode($comp->getTexte())?>
@@ -69,12 +79,14 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 								<?=$idCompagnie=$comp->getIdcompagnie()?>
 							</a>
 						</li>
-						<li>
-							<a class="btn-floating yellow darken-1 supprimer" id="<?=$comp->getIdcompagnie()?>">
-								<i class="material-icons">delete</i>
-								<?=$comp->getIdcompagnie()?>
-							</a>
-						</li>
+						<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
+							<li>
+								<a class="btn-floating yellow darken-1 supprimer" id="<?=$comp->getIdcompagnie()?>">
+									<i class="material-icons">delete</i>
+									<?=$comp->getIdcompagnie()?>
+								</a>
+							</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -82,8 +94,10 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<?php endforeach; ?>	
 	</ul>
 </div>
+<?php if($user->getIdtype()->getIdTYpe()!=3): ?>
 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
 	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addPage">
 	  	<i class="material-icons">add</i>
 	</a>
 </div>
+<?php endif; ?>

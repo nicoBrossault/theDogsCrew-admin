@@ -10,23 +10,32 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 ?>
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
-<?php
-foreach($langue as $data){
-	echo form_open('form');
-	
-	echo form_hidden('idLangue',$data->getId());
-	
-	$nomLangue=$data->getLangue();
-	$langue= array(
-			'name'=>'langue',
-			'id'=>'langue',
-			'placeholder'=>'langue',
-			'value'=>utf8_encode($nomLangue),
-	);
-	echo '<label for="langue"><h5>Langue</h5></label>';
-	echo form_input($langue);
-	
-	echo form_submit('envoi', 'Valider');     
-	echo form_close();
-}  
-?>
+
+<div class="card">
+<div class="card-title teal darkness-1 white-text" style="padding:2%;">Modifier la langue</div>
+	<div class="card-content">
+	<?php
+		echo form_open('formLangue');
+		
+		echo form_hidden('idLangue',NULL);
+		
+		$langueNom= array(
+				'name'=>'langue',
+				'id'=>'langue',
+				'placeholder'=>'Nom de la langue',
+				'value'=>'',
+		);
+		echo '<label for="langue"><h5>Langue</h5></label>';
+		echo form_input($langueNom);
+	?>
+	<div class="card-action" style="margin-bottom: 2%">
+		<button class="btn waves-effect waves-light right" type="submit" name="action">
+			Ajouter
+			<i class="material-icons right">add</i>
+		</button>
+	</div>
+	<?php    
+		echo form_close(); 
+	?>
+	</div>
+</div>

@@ -66,4 +66,8 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		<?php endforeach; ?>	
 	</ul>
 </div>
-<br>
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addTextNav">
+	  	<i class="material-icons">add</i>
+	</a>
+</div>

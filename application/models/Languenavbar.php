@@ -24,7 +24,7 @@ class Languenavbar
     /**
      * @var integer $idlangue
      *
-     * @Column(name="idLangue", type="integer", nullable=false)
+     * @Column(name="idLangue", type="integer", nullable=true)
      */
     private $idlangue;
 

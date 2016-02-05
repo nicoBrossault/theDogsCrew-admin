@@ -14,7 +14,7 @@ class Doctrine
         // load the Doctrine classes
         $doctrineClassLoader = new \Doctrine\Common\ClassLoader('Doctrine', APPPATH.'libraries');
         $doctrineClassLoader->register();
- 
+         
         // load Symfony2 helpers
         // Don't be alarmed, this is necessary for YAML mapping files
         $symfonyClassLoader = new \Doctrine\Common\ClassLoader('Symfony', APPPATH.'libraries/Doctrine');
@@ -28,9 +28,9 @@ class Doctrine
         $proxyClassLoader = new \Doctrine\Common\ClassLoader('Proxies', APPPATH.'models');
         $proxyClassLoader->register();
  
-        // set up the configuration
+        // set up the configuration 
         $config = new \Doctrine\ORM\Configuration;
- 
+     
         if(ENVIRONMENT == 'development')
             // set up simple array caching for development mode
             $cache = new \Doctrine\Common\Cache\ArrayCache;
@@ -43,13 +43,13 @@ class Doctrine
         // set up proxy configuration
         $config->setProxyDir(APPPATH.'models/Proxies');
         $config->setProxyNamespace('Proxies');
- 
+         
         // auto-generate proxy classes if we are in development mode
         $config->setAutoGenerateProxyClasses(ENVIRONMENT == 'development');
  
         // set up annotation driver
-//  	$yamlDriver = new \Doctrine\ORM\Mapping\Driver\YamlDriver(APPPATH.'models/Mappings');
-// 		$config->setMetadataDriverImpl($yamlDriver);
+//         $yamlDriver = new \Doctrine\ORM\Mapping\Driver\YamlDriver(APPPATH.'models/Mappings');
+//         $config->setMetadataDriverImpl($yamlDriver);
         $driverImpl = $config->newDefaultAnnotationDriver(APPPATH.'models');
         $config->setMetadataDriverImpl($driverImpl);
  
@@ -61,10 +61,10 @@ class Doctrine
             'host' => $db['default']['hostname'],
             'dbname' => $db['default']['database']
         );
- 
+         
         // create the EntityManager
         $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
- 
+         
         // store it as a member, for use in our CodeIgniter controllers.
         $this->em = $em;
     }

@@ -22,7 +22,7 @@ Textsite:
       nullable: false
     text:
       type: text
-      nullable: false
+      nullable: true
   oneToOne:
     iduser:
       targetEntity: User

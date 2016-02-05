@@ -39,7 +39,7 @@
 
 <!-- GALERIE -->	
 	<div class="col s10 m6 l4  hoverable">
-		<a href="#" class="teal-text text-darken-1">
+		<a href="<?=base_url('cGalerie')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
 				<div class="card-content white-text center-align">
 					<i class="large material-icons">photo_library</i>
@@ -53,7 +53,7 @@
 
 <!-- IMAGE PAGE -->	
 	<div class="col s10 m6 l4  hoverable">
-		<a href="#" class="teal-text text-darken-1">
+		<a href="<?=base_url('cImagePage')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
 				<div class="card-content white-text center-align">
 					<i class="large material-icons">art_track</i>
@@ -78,7 +78,11 @@
 			</div>
 		</a>
 	</div>
-
+<?php
+	$user=$this->doctrine->em->find('user', $_SESSION['user']);
+	$idTypeUser=$user->getIdtype()->getIdTYpe();
+	if($idTypeUser==1):
+?>
 <!-- LANGUE -->
 	<div class="col s10 m6 l4  hoverable">
 		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
@@ -95,7 +99,7 @@
 
 <!-- TEXT SITE -->
 	<div class="col s10 m6 l4 offset-m3 offset-l4 hoverable">
-		<a href="<?=base_url('cLangue')?>" class="teal-text text-darken-1">
+		<a href="<?=base_url('cTexte')?>" class="teal-text text-darken-1">
 			<div class="card teal darken-1">
 				<div class="card-content white-text center-align">
 					<i class="large material-icons">view_compact</i>
@@ -107,3 +111,4 @@
 		</a>
 	</div>
 </div>
+<?php endif;?>

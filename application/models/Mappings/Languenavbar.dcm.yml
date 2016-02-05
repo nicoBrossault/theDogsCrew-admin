@@ -13,7 +13,7 @@ Languenavbar:
     idlangue:
       type: integer
       unsigned: false
-      nullable: false
+      nullable: true
       column: idLangue
     texte:
       type: string

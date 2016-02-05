@@ -23,11 +23,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 							<?=utf8_encode($langue->getLangue())?>
 				</div>
 				<div class="collapsible-body white">
-					<div class="row">
-						<div class="col m10 s10 offset-m1 offset-s1" style="padding-top:3%; padding-bottom:3%">
-						</div>
-					</div>
-					<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+					<div class="fixed-action-btn horizontal" style="bottom: 45px; right:96px;">
 						<a class="btn-floating btn-large red">
 							<i class="large material-icons">mode_edit</i>
 						</a>
@@ -50,4 +46,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			</li>
 		<?php endforeach; ?>
 	</ul>
+</div>
+<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	<a id="<?=NULL?>"class="btn-floating btn-large waves-effect waves-light red addLangue">
+	  	<i class="material-icons">add</i>
+	</a>
 </div>

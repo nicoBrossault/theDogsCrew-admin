@@ -143,5 +143,7 @@ $autoload['model'] = array(
 		"Page",
 		"Compagnie",
 		"textsite",
-		"Languenavbar"
+		"Languenavbar",
+		"image",
+		"mdpsalt",
 );

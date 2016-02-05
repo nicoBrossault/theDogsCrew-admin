@@ -80,7 +80,11 @@ class FormArticle extends CI_Controller {
 			$page=$this->doctrine->em->find('page',$idPage);
 			
 			$object->setIdpage($page->getIdpage());
-		}	
+		}
+		if(isset($_POST['page']) && !empty($_POST['page']) && $_POST['page']=="NULL"){
+			$this->form_validation->set_rules('page', 'Id de la page', 'trim');
+			$object->setIdpage(NULL);
+		}
 		
 		if ($this->form_validation->run() == FALSE){
 			//echo 'test false';

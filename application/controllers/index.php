@@ -8,7 +8,7 @@ class Index extends CI_Controller {
 		 //the library "jsUtils" was load in : autoload.php
 	}
  
-	public function index(){		
+	public function index(){
 		if(!isset($_SESSION['user'])){
 			$this->layout->view('index/vConnexion');
 		}else{
@@ -26,7 +26,7 @@ class Index extends CI_Controller {
 		$this->load->library('form_validation');
 		
 		$isUser=false;
-		$users = $this->doctrine->em->createQuery("SELECT u FROM user u")->getResult();
+		$users = $this->doctrine->em->getRepository("user")->findAll();
 		$msg="";
 		
 		if(isset($_POST['mailUser'])){
@@ -42,13 +42,19 @@ class Index extends CI_Controller {
 				}
 			}
 		}
-		if(isset($_POST['mdp']) && $isUser){
+		if(isset($_POST['mdp']) && isset($isUser) && isset($idUser)){
 			$this->form_validation
 			->set_rules('mdp', 'Mot de passe', 'required', 'trim|required|xss_clean');
 			
+			$mdps=$this->doctrine->em->getRepository('mdpSalt')->findAll();
+			foreach($mdps as $mdp){
+				$sel1=$mdp->getSel1();
+				$sel2=$mdp->getSel2();
+			}
 			$testUser=$this->doctrine->em->find('user',$idUser);
-			
-			if($testUser->getMdp()==sha1($_POST['mdp'])){
+			$mdpComplet=$sel1.sha1($_POST['mdp']).$sel2;
+			//$mdpComplet=sha1($_POST['mdp']);
+			if($testUser->getMdp()==$mdpComplet){
 				$isUser=true;
 			}else{
 				$msg.="Mot de passe invalide";
@@ -62,6 +68,11 @@ class Index extends CI_Controller {
 			$_SESSION['user']=$idUser;
 			$this->index();
 		}
+	}
+	
+	function disconnect(){
+		session_destroy();
+		redirect('index','refresh');
 	}
 	
 	function ajaxGet(){

@@ -17,7 +17,6 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	echo form_hidden('idUser',$comp->getIduser());
 	$date = $comp->getDate()->format('Y-m-d');
 ?>
-
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
 	<?php foreach($langues as $datalangue):?>
@@ -78,8 +77,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <br>
 <br>
 
-<?php
-	
+<?php	
 	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$comp->getTitre(),'value'=>$comp->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_error('titre','<span class="error">','</span>');

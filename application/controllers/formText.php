@@ -24,7 +24,7 @@ class FormText extends CI_Controller {
 			$object = $this->doctrine->em->find('textsite', $id);
 		}else{
 			$object = new Textsite();
-		}		
+		}
 		if(isset($_POST['idUser']) && !empty($_POST['idUser'])){
 			//echo "idUser : ".$_POST['idUser']."<br>";
 			$idUser=$_POST['idUser'];
@@ -39,7 +39,7 @@ class FormText extends CI_Controller {
 			$idUser=$_POST['type'];
 			$this->form_validation->set_rules('type', 'Type du texte', 'trim');
 				
-			$object->setIduser($queryUser);
+			$object->setType($_POST['type']);
 		}
 		if(isset($_POST['langue']) && !empty($_POST['langue'])){
 			//echo "Recup : ".$_POST['langue']."<br>";
@@ -60,12 +60,12 @@ class FormText extends CI_Controller {
 		}
 		if(isset($_POST['libelle']) && !empty($_POST['libelle'])){
 			//echo "titre : ".$_POST['libelle']."<br>";
-			$this->form_validation->set_rules('libelle', 'Libelle du texte', 'trim|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('libelle', 'Libelle du texte', 'trim|xss_clean');
 			$object->setLibelle(utf8_decode($_POST['libelle']));
 		}
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo "texte : ".$_POST['texte']."<br>";
-			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('texte', 'texte', 'trim|xss_clean');
 			$object->setText(utf8_decode($_POST['texte']));
 		}
 		

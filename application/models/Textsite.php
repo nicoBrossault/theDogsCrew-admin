@@ -38,7 +38,7 @@ class Textsite
     /**
      * @var text $text
      *
-     * @Column(name="text", type="text", nullable=false)
+     * @Column(name="text", type="text", nullable=true)
      */
     private $text;
 

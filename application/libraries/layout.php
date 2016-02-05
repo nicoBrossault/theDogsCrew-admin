@@ -5,6 +5,7 @@ class Layout {
 	private $content="";
 	private $theme='';
 	private $titre='';
+	private $isLayout='';
 
 /*
 |===============================================================================
@@ -28,6 +29,15 @@ class Layout {
 	public function getTitre(){
 		return $this->titre;
 	}
+	
+	public function setThereIsLayout($isLayout){
+		$this->isLayout = $isLayout;
+		return true;
+	}
+	
+	public function getThereIsLayout(){
+		return $this->isLayout;
+	}
 
 /*
 |===============================================================================
@@ -39,7 +49,8 @@ class Layout {
 */
 	public function th_default(){
 		$this->CI->load->view('theme/content/vMenu', array(
-								'titre'=>$this->titre,
+								'titre'		=>	$this->titre,
+								'layout'	=>	$this->isLayout,
 							));
 	}
 	

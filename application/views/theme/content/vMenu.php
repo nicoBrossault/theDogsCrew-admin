@@ -1,5 +1,5 @@
 <?php
-use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
+	use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 ?>
 <!DOCTYPE html>
 	<head>
@@ -27,14 +27,51 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 						<span class="card-title grey-text text-darken-4">The Dogs' Crew
 							<i class="material-icons right" style="margin-top:8px;">close</i>
 						</span>
-						<?php if(isset($_SESSION['user'])):
-							$user=$this->doctrine->em->find('user',$_SESSION['user']);
-						?>
-							<a href="#">
-								<i class="material-icons left">account_circle</i>
-								<?=$user->getPrenom()?>
-							</a>
-						<?php endif; ?>
+						<ul class="collapsibleUser">
+							<li>
+								<div class="collapsibleUser-header" style="margin-left:-6%">
+									<?php if(isset($_SESSION['user'])):
+										$user=$this->doctrine->em->find('user',$_SESSION['user']);
+										$idTypeUser=$user->getIdtype()->getIdTYpe();
+									?>
+										<a href="#" class="user">
+											<i class="material-icons left">account_circle</i>
+											<?=$user->getPrenom()?>
+											<i class="material-icons right divCircle openUser teal darken-1 center-align">
+												keyboard_arrow_down
+											</i>
+											<i class="material-icons right divCircle closeUser teal darken-1 center-align">
+												keyboard_arrow_up
+											</i>
+										</a>
+									<?php endif; ?>
+								</div>
+								<div class="collapsibleUser-body">
+									<div class="card">
+										<div class="card-title blue-grey darken-1 white-text" style="padding:2%">
+											Utilisateur :
+										</div>
+										<div class="card-content" style="padding:2%">
+											<?=$user->getPrenom().' '.$user->getNom()?><br>
+											Type : <?=utf8_encode($user->getIdtype()->getLibelle())?>
+										</div>
+										<div class="card-action" style="padding-bottom:50px">
+												<a href="<?=base_url("cUser")?>" style="color:#888888; width:35%; float:left; margin-top:-10px;"
+												class="tooltipped" data-position="top" data-delay="50" 
+												<?php if($idTypeUser==1): ?>data-tooltip="Modifier les utilisateurs"
+												<?php else: ?> data-tooltip="Modifier mes informations"
+												<?php endif; ?>>
+												<i class="material-icons left">account_circle</i>
+											</a>
+											<a href="<?=base_url('index')?>/disconnect" style="color:red; width:35%; float:left; margin-top:-10px;"
+											class="tooltipped" data-position="top" data-delay="50" data-tooltip="Déconnexion">
+												<i class="material-icons">power_settings_new</i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
 						<a href="<?=base_url()?>">
 							<i class="material-icons left">home</i>
 							Home
@@ -80,17 +117,19 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 					</ul>
 				</li>
 				<li>
-					<i class="material-icons left">view_compact</i>
-					<a href="<?=base_url("cTexte")?>">Textes du Site</a>
-				</li>
-				<li>
-					<i class="material-icons left">language</i>
-					<a href="<?=base_url("cLangue")?>">Langue du Site</a>
-				</li>
-				<li>
 					<i class="material-icons left">photo_library</i>
-					<a href="#">Galerie</a>
+					<a href="<?=base_url("cGalerie")?>">Galerie</a>
 				</li>
+				<?php if($idTypeUser==1): ?>
+					<li>
+						<i class="material-icons left">view_compact</i>
+						<a href="<?=base_url("cTexte")?>">Textes du Site</a>
+					</li>
+					<li>
+						<i class="material-icons left">language</i>
+						<a href="<?=base_url("cLangue")?>">Langue du Site</a>
+					</li>
+				<?php endif; ?>
 			</ul>
 			<a href="#" data-activates="slide-out" class="button-collapse">	
 				<i class="mdi-navigation-menu btnAccordeon"></i>

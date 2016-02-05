@@ -20,7 +20,8 @@ $date = $article->getDate()->format('Y-m-d');
   
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">
-	<?php foreach($langues as $datalangue): ?>
+	<?php 
+	foreach($langues as $datalangue): ?>
 	<option value="<?=utf8_encode($datalangue->getLangue())?>"
 		<?php if(utf8_encode($article->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
 		{echo "selected='selected'";}?>
@@ -33,7 +34,6 @@ $date = $article->getDate()->format('Y-m-d');
 <br>
 <br>
 <br>
-
 <label for="page"><h5>Page</h5></label>
 <select id="page" name="page" style="display:block">
 	<option value="NULL"<?php if($article->getIdpage()==NULL):?> selected <?php endif;?>>
@@ -45,10 +45,11 @@ $date = $article->getDate()->format('Y-m-d');
 		<?php if($dataPage->getIdpage()==$article->getIdpage())
 		{echo "selected='selected'";}?>
 	>
-		<?=utf8_encode($dataPage->getTitre())?>
+		<?=utf8_encode($dataPage->getIdlangue()->getLangue()).' : '.utf8_encode($dataPage->getTitre())?>
 	</option>
 	<?php endforeach; ?>
 </select>
+<div class="test"></div>
 <br>
 <br>
 <br>

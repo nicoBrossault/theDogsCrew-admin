@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$('.button-collapse').sideNav({
 	      menuWidth: 280, // Default is 240
 	      edge: 'left', // Choose the horizontal origin
@@ -9,6 +10,20 @@ $(document).ready(function() {
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
 		selectYears: 15 // Creates a dropdown of 15 years to control year
+	});
+	
+	//collapsible user
+	$('.collapsibleUser-body').css('display','none');
+	$('.closeUser').hide();
+	$('.openUser').click(function(){
+		$('.collapsibleUser-body').slideDown("speed");
+		$('.openUser').hide();
+		$('.closeUser').show();
+	});
+	$('.closeUser').click(function(){
+		$('.collapsibleUser-body').slideUp("speed");
+		$('.closeUser').hide();
+		$('.openUser').show();
 	});
 	
 	//collapsible items of page in menu

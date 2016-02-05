@@ -1,0 +1,23 @@
+Compte:
+  type: entity
+  table: mdpsalt
+  fields:
+    idMdp:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idMdp
+      generator:
+        strategy: IDENTITY
+    sel1:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    sel2:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+  lifecycleCallbacks: {  }

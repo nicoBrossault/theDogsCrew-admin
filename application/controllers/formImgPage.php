@@ -8,26 +8,35 @@ class FormImgPage extends CI_Controller {
 	}
 
 	function index(){
+		
+		$msg="Aucune images séléctionné...";
+		
 		if(isset($_POST['imgP']) && !empty($_POST['imgP'])){
 			$this->form_validation->set_rules('imgP', 'Images check', 'trim');
-			$dellImages=$_POST['imgP'];
+			$delImages=$_POST['imgP'];
 		}
 		
 		if(isset($_FILES['fileImg']['name']) && !empty($_FILES['fileImg']['name'])){
+			//echo $_FILES['fileImg']['name']."<br>";
+			$msg="";
 			$addImage=$_FILES['fileImg']['name'];
 		}
 		
 		if ($this->form_validation->run() == FALSE){
-			echo 'test false';
-			$titre="Images des Pages";
+			//echo 'test false';
+			$titre="Ajouter une image";
 			$this->layout->set_titre($titre);
 			$this->layout->th_default();
+			if(isset($addImage)){
+				$msg = $this->addImg($addImage);
+			}
+			$this->layout->view('imagesPage/vAdd', array('msg'=>$msg));
 		}else{
 			//echo 'test true';
-			if(isset($images)){
-				$this->delImg($dellImages);
+			if(isset($delImages)){
+				$this->delImg($delImages);
 			}
-			if(isset($image)){
+			if(isset($addImage)){
 				$this->addImg($addImage);
 			}
 			redirect('cImagePage', 'refresh');
@@ -35,15 +44,17 @@ class FormImgPage extends CI_Controller {
 	}
 	
 	function addImg($addImage){
-		$dir    = '../theDogsCrew-site/imagesPage/';
+		$dir= '../theDogsCrew-site/imagesPage/';
 		$fileImages = scandir($dir);
 		$exist=false;
 		foreach($fileImages as $fileImage){
 			if($fileImage==$addImage){
 				$exist=true;
+				return $msg="L'image existe déjà !<br>";
 			}
 		}
 		if(!$exist){
+			$this->form_validation->set_rules('userfile', 'File', 'trim');
 			$config['upload_path'] = '../theDogsCrew-site/imagesPage/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
@@ -52,16 +63,16 @@ class FormImgPage extends CI_Controller {
 			$data['upload_data'] = '';
 	
 			if(!$this->upload->do_upload('fileImg')) {
-				$data = array('msg' => $this->upload->display_errors());
+				return $msg=$this->upload->display_errors();
 			}else{
-				$data = array('msg' => "Upload success!");
 				$data['upload_data'] = $this->upload->data();
+				return $msg = "Upload success!";
 			}
 		}
 	}
 	
 	function delImg($dellImages){
-		foreach ($images as $image){
+		foreach ($dellImages as $image){
 			$imgPathFolder="../theDogsCrew-site/imagesPage/";
 			$imgPathDB="imagesPage/";
 			$pages=$this->doctrine->em->getRepository('page')->findAll();
