@@ -16,10 +16,10 @@ if($user->getIdtype()->getIdtype()==3):
 else:
 	echo form_open('formArticle');
 endif;
-echo form_hidden('idArticle',$article->getIdarticle());
-echo form_hidden('idUser',$article->getIduser()->getIduser());
+echo form_hidden('idArticle',$article->getIdarticle()->getIdarticle());
+echo form_hidden('idUser',$article->getIdusertemp()->getIduser());
 
-$date = $article->getDate()->format('Y-m-d');
+$date = $article->getDatetemp()->format('Y-m-d');
 ?>	
   
 <label for="langue"><h5>Langue</h5></label>
@@ -27,7 +27,7 @@ $date = $article->getDate()->format('Y-m-d');
 	<?php 
 	foreach($langues as $datalangue): ?>
 	<option value="<?=utf8_encode($datalangue->getLangue())?>"
-		<?php if(utf8_encode($article->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
+		<?php if(utf8_encode($article->getIdlanguetemp()->getlangue())==utf8_encode($datalangue->getLangue()))
 		{echo "selected='selected'";}?>
 	>
 		<?=utf8_encode($datalangue->getLangue())?>
@@ -40,13 +40,13 @@ $date = $article->getDate()->format('Y-m-d');
 <br>
 <label for="page"><h5>Page</h5></label>
 <select id="page" name="page" style="display:block">
-	<option value="NULL"<?php if($article->getIdpage()==NULL):?> selected <?php endif;?>>
+	<option value="NULL"<?php if($article->getIdpagetemp()==NULL):?> selected <?php endif;?>>
 		Aucune Page
 	</option>
 	
 	<?php foreach($page as $dataPage): ?>
 	<option value="<?=$dataPage->getIdpage()?>"
-		<?php if($dataPage->getIdpage()==$article->getIdpage())
+		<?php if($dataPage->getIdpage()==$article->getIdpagetemp())
 		{echo "selected='selected'";}?>
 	>
 		<?=utf8_encode($dataPage->getIdlangue()->getLangue()).' : '.utf8_encode($dataPage->getTitre())?>
@@ -70,7 +70,7 @@ $date = $article->getDate()->format('Y-m-d');
 $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
-		'value'=>utf8_encode($article->getTitre()),
+		'value'=>utf8_encode($article->getTitretemp()),
 );
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
@@ -110,7 +110,7 @@ $texte= array(
 		'id'=>'texte',
 		'class'=>"materialize-textarea article",
 		'placeholder'=>'Texte de l\'article',
-		'value'=>utf8_encode($article->getTexte()),
+		'value'=>utf8_encode($article->getTextetemp()),
 		'cols' => '40',
 		'rows' => '40'
 );

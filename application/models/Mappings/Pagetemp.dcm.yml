@@ -1,34 +1,41 @@
-Compagnie:
+Pagetemp:
   type: entity
-  table: compagnie
+  table: pagetemp
   fields:
-    idcompagnie:
+    idpagetemp:
       id: true
       type: integer
       unsigned: false
       nullable: false
-      column: idCompagnie
+      column: idPageTemp
       generator:
         strategy: IDENTITY
-    iduser:
+    idpage:
       type: integer
       unsigned: false
       nullable: false
-      column: idUser
-    idlangue:
+      column: idPage
+    idlanguetemp:
       type: integer
       unsigned: false
+      nullable: false
+      column: idLangueTemp
+    idusertemp:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idUserTemp
+    imagetemp:
+      type: text
+      nullable: true
+      column: imageTemp
+    date:
+      type: date
       nullable: false
     titre:
       type: text
       nullable: false
     texte:
       type: text
-      nullable: false
-    image:
-      type: text
-      nullable: true
-    date:
-      type: date
       nullable: false
   lifecycleCallbacks: {  }

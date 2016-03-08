@@ -1,0 +1,58 @@
+Articletemp:
+  type: entity
+  table: articletemp
+  fields:
+    idarticletemp:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idArticleTemp
+      generator:
+        strategy: IDENTITY
+    idpagetemp:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: idPageTemp
+    datetemp:
+      type: date
+      nullable: false
+      column: dateTemp
+    titretemp:
+      type: text
+      nullable: false
+      column: titreTemp
+    textetemp:
+      type: text
+      nullable: false
+      column: texteTemp
+  oneToOne:
+    idlanguetemp:
+      targetEntity: Langue
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idLangueTemp:
+          referencedColumnName: id
+      orphanRemoval: false
+    idarticle:
+      targetEntity: Article
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idArticle:
+          referencedColumnName: idArticle
+      orphanRemoval: false
+    idusertemp:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUserTemp:
+          referencedColumnName: idUser
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

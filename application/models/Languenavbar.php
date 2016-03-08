@@ -22,18 +22,21 @@ class Languenavbar
     private $idlanguenavbar;
 
     /**
-     * @var integer $idlangue
-     *
-     * @Column(name="idLangue", type="integer", nullable=true)
-     */
-    private $idlangue;
-
-    /**
      * @var string $texte
      *
      * @Column(name="texte", type="string", length=255, nullable=false)
      */
     private $texte;
+
+    /**
+     * @var Langue
+     *
+     * @OneToOne(targetEntity="Langue")
+     * @JoinColumns({
+     *   @JoinColumn(name="idLangue", referencedColumnName="id", unique=true)
+     * })
+     */
+    private $idlangue;
 
 
     /**
@@ -44,28 +47,6 @@ class Languenavbar
     public function getIdlanguenavbar()
     {
         return $this->idlanguenavbar;
-    }
-
-    /**
-     * Set idlangue
-     *
-     * @param integer $idlangue
-     * @return Languenavbar
-     */
-    public function setIdlangue($idlangue)
-    {
-        $this->idlangue = $idlangue;
-        return $this;
-    }
-
-    /**
-     * Get idlangue
-     *
-     * @return integer 
-     */
-    public function getIdlangue()
-    {
-        return $this->idlangue;
     }
 
     /**
@@ -88,5 +69,27 @@ class Languenavbar
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * Set idlangue
+     *
+     * @param Langue $idlangue
+     * @return Languenavbar
+     */
+    public function setIdlangue(\Langue $idlangue = null)
+    {
+        $this->idlangue = $idlangue;
+        return $this;
+    }
+
+    /**
+     * Get idlangue
+     *
+     * @return Langue 
+     */
+    public function getIdlangue()
+    {
+        return $this->idlangue;
     }
 }

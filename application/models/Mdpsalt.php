@@ -13,80 +13,80 @@ use Doctrine\Mapping as ORM;
 class Mdpsalt
 {
     /**
-     * @var integer $idmdp
+     * @var integer $idmdpsalt
      *
-     * @Column(name="idMdp", type="integer", nullable=false)
+     * @Column(name="idMdpSalt", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
-    private $idmdp;
+    private $idmdpsalt;
 
     /**
-     * @var string $sel1
+     * @var text $saltr
      *
-     * @Column(name="sel1", type="string", length=255, nullable=false)
+     * @Column(name="saltR", type="text", nullable=false)
      */
-    private $sel1;
-    
+    private $saltr;
+
     /**
-     * @var string $sel2
+     * @var text $saltl
      *
-     * @Column(name="sel2", type="string", length=255, nullable=false)
+     * @Column(name="saltL", type="text", nullable=false)
      */
-    private $sel2;
+    private $saltl;
 
 
     /**
-     * Get idMdp
+     * Get idmdpsalt
      *
      * @return integer 
      */
-    public function getIdMdp()
+    public function getIdmdpsalt()
     {
-        return $this->idMdp;
+        return $this->idmdpsalt;
     }
 
     /**
-     * Set sel1
+     * Set saltr
      *
-     * @param string $sel1
+     * @param text $saltr
      * @return Mdpsalt
      */
-    public function setSel1($sel1)
+    public function setSaltr($saltr)
     {
-        $this->sel1 = $sel1;
+        $this->saltr = $saltr;
         return $this;
     }
 
     /**
-     * Get sel1
+     * Get saltr
      *
-     * @return string 
+     * @return text 
      */
-    public function getSel1()
+    public function getSaltr()
     {
-        return $this->sel1;
+        return $this->saltr;
     }
-    
+
     /**
-     * Set sel2
+     * Set saltl
      *
-     * @param string $sel2
+     * @param text $saltl
      * @return Mdpsalt
      */
-    public function setSel2($sel2)
+    public function setSaltl($saltl)
     {
-    	$this->sel2 = $sel2;
-    	return $this;
+        $this->saltl = $saltl;
+        return $this;
     }
-    
+
     /**
-     * Get sel2
+     * Get saltl
      *
-     * @return string
+     * @return text 
      */
-    public function getSel2()
+    public function getSaltl()
     {
-    	return $this->sel2;
+        return $this->saltl;
     }
 }

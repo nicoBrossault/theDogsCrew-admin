@@ -36,19 +36,18 @@ class CTexte extends CI_Controller {
 	}
 	
 	public function listText($type){
+		$_SESSION['typeText']=$type;
+		$this->thereIsLayout();
 		$this->load->helper('text');
 		$this->ajaxGet();
-		$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
-		
+		$typeUser=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
 		if($type=="textNav"){
 			$textNav = $this->doctrine->em->getRepository('languenavbar')->findAll();
 			$this->layout->view('texte/vListTextNav', array(
 					'textNav'	=>	$textNav,
-			));
-			
+			));			
 		}else{
 			$textes = $this->doctrine->em->createQuery("SELECT t FROM textsite t WHERE t.type='".$type."'")->getResult();
-			
 			$this->layout->view('texte/vList', array(
 							'textes'	=>	$textes,
 							));
@@ -59,12 +58,11 @@ class CTexte extends CI_Controller {
 		$this->thereIsLayout();
 		$titre="Modifier/ Ajouter un texte :";
 		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
-		$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
+		
 		if($id==NULL){
 			$this->layout->view('texte/vAdd', array(
 					'titre'		=>	$titre,
 					'langues'	=>	$langues,
-					'type'		=>	$type,
 			));
 		}else{
 			$texte=$this->doctrine->em->find('textsite',$id);
@@ -135,7 +133,7 @@ class CTexte extends CI_Controller {
 		$this->jsutils->getAndBindTo('.delete','click','cTexte/validDeleteTextNav','#content');
 		$this->jsutils->compile();
 	
-		$msg='Le Texte de la NavBar en "'.utf8_encode($this->doctrine->em->find('langue',$textNav->getIdlangue())->getLangue()).'" a bien été supprimé.';
+		$msg='Le Texte de la NavBar en "'.utf8_encode($textNav->getIdlangue()->getLangue()).'" a bien été supprimé.';
 		$this->layout->view('texte/vDeleteTextNav', array(
 				'msg'		=>	$msg,
 				'textNav'		=>	$textNav,

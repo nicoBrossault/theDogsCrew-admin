@@ -10,7 +10,12 @@
 		<div class="card hoverable">
 			<div class="card-title teal darken-1 white-text" style="text-align:center; padding:2%">
 				<?php if(!isset($msg)):?>
-					<b>Supprimer l'article "<?=$user->getPrenom().' '.$user->getNom()?>" ?</b>
+					<b>Supprimer l'utilisateur "<?=$user->getPrenom().' '.$user->getNom()?>" ?</b>
+					<br>
+					<i>
+						<b><u>ATTENTION</u></b> : toutes les instances seront associées au 
+						dernier utilisateur administrateur trouvé dans la base de données.
+					</i>
 				<?php else : echo $msg?>
 				<?php endif; ?>
 			</div>

@@ -10,7 +10,7 @@
 		<div class="card hoverable">
 			<div class="card-title teal darken-1 white-text" style="text-align:center; padding:2%">
 				<?php if(!isset($msg)):?>
-					<b>Supprimer le texte de la NavBar"<?=utf8_encode($this->doctrine->em->find('langue',$textNav->getIdlangue())->getLangue())?>" ?</b>
+					<b>Supprimer le texte de la NavBar"<?=utf8_encode($textNav->getIdlangue()->getLangue())?>" ?</b>
 				<?php else : echo $msg?>
 				<?php endif; ?>
 			</div>

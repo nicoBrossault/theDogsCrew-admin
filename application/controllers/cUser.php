@@ -23,10 +23,6 @@ class CUser extends CI_Controller {
 			$user=$this->doctrine->em->find('user',$_SESSION['user']);
 			$this->ajaxGet();
 			if($user->getIdtype()->getIdtype()!=1){
-				$this->layout->setThereIsLayout(true);
-				$titre="Utilisateur";
-				$this->layout->set_titre($titre);
-				$this->layout->th_default();
 				$this->add($id=$user->getIduser());
 			}else{
 				$isAdmin=true;
@@ -85,10 +81,58 @@ class CUser extends CI_Controller {
 	
 	public function validDelete($id){
 		$user=$this->doctrine->em->find('user',$id);
-		$this->doctrine->em->remove($user);
-		$this->doctrine->em->flush();
-	
-		$msg='L\'utilisateur : "'.$user->getPrenom().' '.$user->getNom().'" a bien été supprimé.';
+		$count=0;
+		foreach($this->doctrine->em->getRepository('user')->findAll() as $users){
+			$count+=1;
+		}
+		if($count>1){
+			//Recuperation du premier utilisateur admin dans la bdd
+			$allUser=$this->doctrine->em->getRepository('user')->findAll();
+			foreach($allUser as $oneUser){
+				if($oneUser->getIdtype()->getIdtype()==1){
+					$adminUser=$oneUser;
+				}
+			}
+			//echo "article<br>";
+			$articles=$this->doctrine->em->getRepository('article')->findAll();
+			foreach($articles as $article){
+				if($article->getIduser()->getIduser()==$user->getIduser()){
+					$thisArticle=$this->doctrine->em->find('article',$article->getIdarticle())->setIduser($adminUser);
+					$this->doctrine->em->flush();
+				}
+			}
+			//echo "page<br>";
+			$pages=$this->doctrine->em->getRepository('page')->findAll();
+			foreach($pages as $page){
+				if($page->getIduser()->getIduser()==$user->getIduser()){
+					$thisPage=$this->doctrine->em->find('page',$page->getIdpage())->setIduser($adminUser);
+					$this->doctrine->em->flush();
+				}
+			}
+			//echo "compagnie<br>";
+			$compagnies=$this->doctrine->em->getRepository('compagnie')->findAll();
+			foreach($compagnies as $compagnie){
+				if($this->doctrine->em->find('user',$compagnie->getIduser())->getIduser()==$user->getIduser()){
+					$thisCompagnie=$this->doctrine->em->find('compagnie',$compagnie->getIdcompagnie())->setIduser($adminUser->getIduser());
+					$this->doctrine->em->flush();
+				}
+			}
+			//echo "image<br>";
+			$images=$this->doctrine->em->getRepository('image')->findAll();
+			foreach($images as $image){
+				if($image->getIduser()->getIduser()==$user->getIduser()){
+					$thisImage=$this->doctrine->em->find('image',$image->getIdimage())->setIduser($adminUser);
+					$this->doctrine->em->flush();
+				}
+			}
+			
+			$this->doctrine->em->remove($user);
+			$this->doctrine->em->flush();
+			$msg='L\'utilisateur : "'.$user->getPrenom().' '.$user->getNom().'" a bien été supprimé.';
+		}else{
+			$msg='Vous ne pouvais pas supprimer l\'utilisateur : "'.$user->getPrenom().' '.$user->getNom().
+			'" car il s\'agit du dernier utilisateur existant.';
+		}
 		$this->layout->view('user/vDelete', array(
 				'msg'		=>	$msg,
 				'user'		=>	$user,

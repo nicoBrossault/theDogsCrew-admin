@@ -146,4 +146,7 @@ $autoload['model'] = array(
 		"Languenavbar",
 		"image",
 		"mdpsalt",
+		"Articletemp",
+		"Pagetemp",
+		"Compagnietemp"
 );

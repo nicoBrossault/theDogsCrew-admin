@@ -27,8 +27,9 @@ class CArticle extends CI_Controller {
 			$this->page_pagination($id);
 			
 			$user=$this->doctrine->em->find('user',$_SESSION['user']);
+			$articlestemp=$this->doctrine->em->getRepository('articletemp')->findAll();
 			$articles=$this->get_Page($id, '10');
-			$this->layout->view("article/vIndex",array('articles'=>$articles, 'user'=>$user));
+			$this->layout->view("article/vIndex",array('articles'=>$articles, 'user'=>$user,'articlestemp'=>$articlestemp));
 		}
 	}
 
@@ -92,19 +93,88 @@ class CArticle extends CI_Controller {
 			$authorArticle=$this->doctrine->em->find('article', $id)->getIduser()->getIdUser();
 			$author=$this->doctrine->em->find('user', $_SESSION['user'])->getIdUser();
 			$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
+			$user=$this->doctrine->em->find('user',$_SESSION['user']);
+			$articlesTemp=$this->doctrine->em->getRepository('articletemp')->findAll();
+			
+			$exist=false;
 			if($authorArticle==$author || $type==1 || $type==3){
-				$article=$this->doctrine->em->find('article',$id);
-				$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
-				$this->layout->view('article/vEdit', array(
-						'titre'		=>	$titre,
-						'article'	=>	$article,
-						'page'		=>	$page,
-						'langues'	=>	$langues,
-				));
+				foreach($articlesTemp as $articleTemp){
+					if($id==$articleTemp->getIdarticle()->getIdarticle()){
+						$exist=true;
+					}
+				}
+				if($exist==true && $type==3){
+					$titre="Modifier l'article";
+					$thisArticleTemp=$this->doctrine->em->createQuery("SELECT a FROM articletemp a WHERE a.idarticle=".$id)
+					->getResult();
+					foreach($thisArticleTemp as $dataArticleTemp){
+						$id=$dataArticleTemp->getIdarticletemp();
+					}
+					$article=$this->doctrine->em->find('articletemp',$id);
+					$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
+					$this->layout->view('article/vEditTemp', array(
+							'titre'		=>	$titre,
+							'article'	=>	$article,
+							'page'		=>	$page,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}else{
+					$article=$this->doctrine->em->find('article',$id);
+					$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
+					$this->layout->view('article/vEdit', array(
+							'titre'		=>	$titre,
+							'article'	=>	$article,
+							'page'		=>	$page,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}
 			}else{
 				redirect('cArticle','refresh');
 			}
 		}		
+	}
+	
+	public function addTemp(){
+		$id=$_GET['id'];
+		$this->thereIsLayout();
+		$titre="Article modifié :";
+		
+		$user=$this->doctrine->em->find('user',$_SESSION['user']);
+		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
+		$articletemp=$this->doctrine->em->find('articletemp',$id);
+		$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
+		$this->layout->view('article/vListTemp', array(
+				'titre'			=>	$titre,
+				'articletemp'	=>	$articletemp,
+				'page'			=>	$page,
+				'langues'		=>	$langues,
+				'user'			=>	$user,
+		));
+	}
+	
+	public function validEdit(){
+		$id=$_GET['id'];
+		$articleTemp=$this->doctrine->em->find('articletemp',$id);
+		$article=$this->doctrine->em->find('article',$articleTemp->getIdarticle()->getIdArticle());
+		$article->setDate($articleTemp->getDatetemp());
+		$article->setidLangue($articleTemp->getIdlanguetemp());
+		$article->setIdpage($articleTemp->getIdpagetemp());
+		$article->setTitre($articleTemp->getTitretemp());
+		$article->setTexte($articleTemp->getTextetemp());
+		$this->doctrine->em->persist($article);
+		$this->doctrine->em->remove($articleTemp);
+		$this->doctrine->em->flush();
+		redirect('cArticle', 'refresh');
+	}
+	
+	public function cancelEdit(){
+		$id=$_GET['id'];
+		$articleTemp=$this->doctrine->em->find('articletemp',$id);
+		$this->doctrine->em->remove($articleTemp);
+		$this->doctrine->em->flush();
+		redirect('cArticle', 'refresh');
 	}
 	
 	public function supprimer($id){

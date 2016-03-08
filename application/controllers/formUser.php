@@ -67,10 +67,10 @@ class FormUser extends CI_Controller {
 				$this->form_validation->set_rules('mdp2', 'Email de l\'utlisateur', 'trim|xss_clean');
 				$mdps=$this->doctrine->em->getRepository('mdpSalt')->findAll();
 				foreach($mdps as $mdp){
-					$sel1=$mdp->getSel1();
-					$sel2=$mdp->getSel2();
+					$selR=$mdp->getSaltr();
+					$selL=$mdp->getSaltl();
 				}
-				$mdpComplet=$sel1.sha1($_POST['mdp2']).$sel2;
+				$mdpComplet=$selR.sha1($_POST['mdp2']).$selL;
 				$object->setMdp($mdpComplet);
 				$isValid=True;
 			}else{

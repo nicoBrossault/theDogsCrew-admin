@@ -9,6 +9,7 @@
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/materialize.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/style.css">
+		<link rel="icon" type="image/png" href="<?=base_url()?>assets/images/favicon.png" />
 	</head>
 	<body>
 		<nav class="teal darken-1" style="margin-bottom: 5%; color:gray">

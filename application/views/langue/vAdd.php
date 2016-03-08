@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 
 <div class="card">
-<div class="card-title teal darkness-1 white-text" style="padding:2%;">Modifier la langue</div>
+<div class="card-title teal darkness-1 white-text" style="padding:2%;">Ajouter une langue</div>
 	<div class="card-content">
 	<?php
 		echo form_open('formLangue');

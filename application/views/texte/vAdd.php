@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	echo form_open('formText');
 	echo form_hidden('idText',NULL);
 	echo form_hidden('idUser',$_SESSION['user']);
-	echo form_hidden('type',$type);
+	echo form_hidden('type',$_SESSION['typeText']);
 ?>
 <label for="langue"><h5>Langue</h5></label>
 <select id="langue" name="langue" style="display:block">

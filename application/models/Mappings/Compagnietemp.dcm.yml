@@ -1,0 +1,56 @@
+Compagnietemp:
+  type: entity
+  table: compagnietemp
+  fields:
+    idcompagnietemp:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idCompagnieTemp
+      generator:
+        strategy: IDENTITY
+    imagetemp:
+      type: text
+      nullable: true
+      column: imageTemp
+    date:
+      type: date
+      nullable: false
+    titretemp:
+      type: text
+      nullable: false
+      column: titreTemp
+    textetemp:
+      type: text
+      nullable: false
+      column: texteTemp
+  oneToOne:
+    idcompagnie:
+      targetEntity: Compagnie
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idCompagnie:
+          referencedColumnName: idCompagnie
+      orphanRemoval: false
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUser:
+          referencedColumnName: idUser
+      orphanRemoval: false
+    idlangue:
+      targetEntity: Langue
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idLangue:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

@@ -11,15 +11,10 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 <?php
-	if($user->getIdtype()->getIdtype()==3){
-		echo form_open_multipart('formPageTemp');
-	}else{
-		echo form_open_multipart('formPage');
-	}
-	
+	echo form_open_multipart('formPageTemp');	
 	echo form_hidden('idPage',$page->getIdpage());
 	
-	echo form_hidden('idUser',$page->getIduser()->getIduser());
+	echo form_hidden('idUser',$page->getIdusertemp());
 	$date = $page->getDate()->format('Y-m-d');
 ?>
  
@@ -27,7 +22,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <select id="langue" name="langue" style="display:block">
 	<?php foreach($langues as $datalangue): ?>
 	<option value="<?=utf8_encode($datalangue->getLangue())?>"
-		<?php if(utf8_encode($page->getIdlangue()->getlangue())==utf8_encode($datalangue->getLangue()))
+		<?php if(utf8_encode($this->doctrine->em->find('langue',$page->getIdlanguetemp())->getlangue())==utf8_encode($datalangue->getLangue()))
 		{echo "selected='selected'";}?>
 	>
 		<?=utf8_encode($datalangue->getLangue())?>
@@ -63,8 +58,8 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 	$fileImages = scandir($dir);
 	$exist=false;
 	
-	if($page->getImage()){
-		$nomImg=explode('/',$page->getImage());
+	if($page->getImagetemp()){
+		$nomImg=explode('/',$page->getImagetemp());
 		$nomImg=$nomImg[1];
 	}else{
 		$nomImg=NULL;
@@ -89,7 +84,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 <?php
 	
-	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>utf8_encode($page->getTitre()),'value'=>utf8_encode($page->getTitre()),);
+	$titre= array('name'=>'titre','id'=>'titre','placeholder'=>$page->getTitre(),'value'=>$page->getTitre(),);
 	echo '<label for="titre"><h5>Titre</h5></label>';
 	echo form_error('titre','<span class="error">','</span>');
 	echo form_input($titre);

@@ -38,7 +38,7 @@ class FormTextNav extends CI_Controller {
 				//echo "Test : ".$test." = ".$postLangue."<br>";
 				if($test==$postLangue){
 					//echo "-> this : ".$test." = OK <br>";
-					$object->setIdlangue($dataLg->getId());
+					$object->setIdlangue($dataLg);
 				}
 			}
 		}

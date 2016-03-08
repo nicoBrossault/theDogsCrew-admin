@@ -7,7 +7,77 @@
 ?>
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+<?php
+if(isset($msgArticle) && !empty($msgArticle)):
+foreach($msgArticle as $msgA):
 
+if($user->getIduser()==1 || $msgA->getIdarticle()->getIduser()->getIduser()==$user->getIduser()):?>
+	<div class="row" style="margin-top: 2%; text-align:center; color:white">
+		<div class="col s10 m6 offset-s1 offset-m3">
+			<div class="card teal darken-1">
+				L'article : 
+				<span style="background-color:white">
+					<a href='<?=base_url('cArticle')?>/addTemp?id=<?=$msgA->getIdArticletemp()?>'>
+						<?=utf8_encode($msgA->getIdArticle()->getTitre())?>
+					</a>
+				</span>
+				 a été modifié. Valider ?
+			</div>
+		</div>
+	</div>
+<?php
+endif;
+endforeach;
+endif;
+?>
+
+<?php
+if(isset($msgPage) && !empty($msgPage)):
+foreach($msgPage as $msgP):
+
+if($user->getIduser()==1 || $this->doctrine->em->find('page',$msgP->getIdpage())->getIduser()->getIduser()==$user->getIduser()):?>
+	<div class="row" style="margin-top: 2%; text-align:center; color:white">
+		<div class="col s10 m6 offset-s1 offset-m3">
+			<div class="card teal darken-1">
+				La page : 
+				<span style="background-color:white">
+					<a href='<?=base_url('cPage')?>/addTemp?id=<?=$msgP->getIdpagetemp()?>'>
+						<?=utf8_encode($this->doctrine->em->find('page',$msgP->getIdpage())->getTitre())?>
+					</a>
+				</span>
+				 a été modifiée. Valider ?
+			</div>
+		</div>
+	</div>
+<?php
+endif;
+endforeach;
+endif;
+?>
+
+<?php
+if(isset($msgComp) && !empty($msgComp)):
+foreach($msgComp as $msgC):
+
+if($user->getIduser()==1 || $msgC->getIdcompagnie()->getIduser()->getIduser()==$user->getIduser()):?>
+	<div class="row" style="margin-top: 2%; text-align:center; color:white">
+		<div class="col s10 m6 offset-s1 offset-m3">
+			<div class="card teal darken-1">
+				La page Compagnie : 
+				<span style="background-color:white">
+					<a href='<?=base_url('cCompagnie')?>/addTemp?id=<?=$msgC->getIdcompagnietemp()?>'>
+						<?=utf8_encode($msgC->getIdcompagnie()->getTitre())?>
+					</a>
+				</span>
+				 a été modifiée. Valider ?
+			</div>
+		</div>
+	</div>
+<?php
+endif;
+endforeach;
+endif;
+?>
 <div class="container">
 <!-- ARTICLE -->
 	<div class="col s10 m6 l4  hoverable">

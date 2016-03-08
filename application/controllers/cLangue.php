@@ -35,8 +35,8 @@ class CLangue extends CI_Controller {
 	}
 	
 	public function add($id=NULL){
-		$_SESSION['object']="textsite";
-		$titre="Modifier/ Ajouter un texte :";
+		$this->thereIsLayout();
+		$titre="Modifier/Ajouter une langue:";
 		if($id==NULL){
 			$this->layout->view('langue/vAdd', array(
 					'titre'		=>	$titre,
@@ -51,18 +51,17 @@ class CLangue extends CI_Controller {
 	}
 	
 	public function supprimer($id){
+		$this->thereIsLayout();
 		$langue=$this->doctrine->em->find('langue',$id);
-		$this->jsutils->getAndBindTo('.delete','click',base_url().'cLangue/validDelete','#content');
+		$this->jsutils->getAndBindTo('.delete','click','cLangue/validDelete','#content');
 		$this->jsutils->compile();
 		$this->layout->view('langue/vDelete', array(
 				'id'		=>	$id,
-				'langue'		=>	$langue,
+				'langue'	=>	$langue,
 		));
 	}
 	
-	public function validDelete($id){
-		$this->thereIsLayout();
-		
+	public function validDelete($id){		
 		$langue=$this->doctrine->em->find('langue',$id);	
 		$idLangue=$langue->getId();
 		$nomLangue=utf8_encode($langue->getLangue());
@@ -97,7 +96,7 @@ class CLangue extends CI_Controller {
 		//echo "languenavbar<br>";
 		$languenavbars=$this->doctrine->em->getRepository('languenavbar')->findAll();
 		foreach($languenavbars as $languenavbar){
-			if($languenavbar->getIdlangue()==$idLangue){
+			if($languenavbar->getIdlangue()->getId()==$idLangue){
 				$thisLanguenavbar=$this->doctrine->em->find('languenavbar',$languenavbar->getIdlanguenavbar());
 				$this->doctrine->em->remove($thisLanguenavbar);
 				$this->doctrine->em->flush();

@@ -31,7 +31,7 @@ class Compagnie
     /**
      * @var integer $idlangue
      *
-     * @Column(name="idlangue", type="integer", nullable=true)
+     * @Column(name="idlangue", type="integer", nullable=false)
      */
     private $idlangue;
 

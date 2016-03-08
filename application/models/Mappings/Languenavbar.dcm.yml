@@ -10,14 +10,19 @@ Languenavbar:
       column: idLangueNavBar
       generator:
         strategy: IDENTITY
-    idlangue:
-      type: integer
-      unsigned: false
-      nullable: true
-      column: idLangue
     texte:
       type: string
       length: 255
       fixed: false
       nullable: false
+  oneToOne:
+    idlangue:
+      targetEntity: Langue
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idLangue:
+          referencedColumnName: id
+      orphanRemoval: false
   lifecycleCallbacks: {  }

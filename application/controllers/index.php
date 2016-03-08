@@ -15,7 +15,38 @@ class Index extends CI_Controller {
 			$titre = "Index";
 			$this->layout->set_titre($titre);
 			$this->layout->th_default();
-			$this->layout->view('index/vIndex');
+			
+			$user=$this->doctrine->em->find("user",$_SESSION['user']);
+			
+			$articlesTemp=$this->doctrine->em->getRepository('articletemp')->findAll();
+			$countA=0;
+			$msgArticle=array();
+			foreach($articlesTemp as $articleTemp){
+				$countA+=1;
+				$msgArticle[]=$this->doctrine->em->find('articletemp', $articleTemp->getIdarticletemp());
+			}
+			
+			$pagesTemp=$this->doctrine->em->getRepository('pagetemp')->findAll();
+			$countP=0;
+			$msgPage=array();
+			foreach($pagesTemp as $pageTemp){
+				$countP+=1;
+				$msgPage[]=$this->doctrine->em->find('pagetemp', $pageTemp->getIdpagetemp());
+			}
+			
+			$compsTemp=$this->doctrine->em->getRepository('compagnietemp')->findAll();
+			$countC=0;
+			$msgComp=array();
+			foreach($compsTemp as $compTemp){
+				$countC+=1;
+				$msgComp[]=$this->doctrine->em->find('compagnietemp', $compTemp->getIdcompagnietemp());
+			}
+			
+			$this->layout->view('index/vIndex', array(
+					'msgArticle'=>	$msgArticle,
+					'msgPage'	=>	$msgPage,
+					'msgComp'	=>	$msgComp,
+					'user'		=>	$user));
 		}
 		
 	}
@@ -48,11 +79,11 @@ class Index extends CI_Controller {
 			
 			$mdps=$this->doctrine->em->getRepository('mdpSalt')->findAll();
 			foreach($mdps as $mdp){
-				$sel1=$mdp->getSel1();
-				$sel2=$mdp->getSel2();
+				$selR=$mdp->getSaltr();
+				$selL=$mdp->getSaltl();
 			}
 			$testUser=$this->doctrine->em->find('user',$idUser);
-			$mdpComplet=$sel1.sha1($_POST['mdp']).$sel2;
+			$mdpComplet=$selR.sha1($_POST['mdp']).$selL;
 			//$mdpComplet=sha1($_POST['mdp']);
 			if($testUser->getMdp()==$mdpComplet){
 				$isUser=true;

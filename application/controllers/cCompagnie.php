@@ -25,12 +25,17 @@ class CCompagnie extends CI_Controller {
 		
 			$this->ajaxGet();
 			$user=$this->doctrine->em->find('user',$_SESSION['user']);
-			if($user->getIdtype()->getIdtype()==1){
+			if($user->getIdtype()->getIdtype()==2){
 				$comps=$this->doctrine->em->createQuery("SELECT c FROM compagnie c WHERE c.iduser=".$_SESSION['user']);
 			}else{
 				$comps=$this->doctrine->em->getRepository('compagnie')->findAll();
+				if($user->getIdtype()->getIdtype()==3){
+					$compsTemp=$this->doctrine->em->getRepository('compagnietemp')->findAll();
+					$this->layout->view("compagnie/vIndex",array('comps'=>$comps, 'user'=>$user, 'compsTemp'=>$compsTemp));
+				}else{
+					$this->layout->view("compagnie/vIndex",array('comps'=>$comps, 'user'=>$user));
+				}
 			}
-			$this->layout->view("compagnie/vIndex",array('comps'=>$comps, 'user'=>$user));
 		}
 	}
 	
@@ -45,16 +50,41 @@ class CCompagnie extends CI_Controller {
 			));
 		}else{
 			//auteur page
-			$authorComp=$this->doctrine->em->find('compagnie', $id)->getIduser()->getIdUser();
+			$user=$this->doctrine->em->find('user',$_SESSION['user']);
+			$authorComp=$this->doctrine->em->find('compagnie', $id)->getIduser();
 			$author=$this->doctrine->em->find('user', $_SESSION['user'])->getIdUser();
 			$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
-			if($authorPage==$author || $type==1 || $type==3){
-				$comp = $this->doctrine->em->find('compagnie',$id);
-				$this->layout->view('compagnie/vEdit', array(
-						'titre'		=>	$titre,
-						'langues'	=>	$langues,
-						'comp'		=>	$comp,
-				));
+			$compsTemp=$this->doctrine->em->getRepository('compagnietemp')->findAll();
+				
+			$exist=false;
+			if($authorComp==$author || $type==1 || $type==3){
+				foreach($compsTemp as $compTemp){
+					if($id==$compTemp->getIdcompagnie()->getIdcompagnie()){
+						$exist=true;
+					}
+				}
+				if($exist==true && $type==3){
+					$thisCompTemp=$this->doctrine->em->createQuery("SELECT c FROM compagnietemp c WHERE c.idcompagnie=".$id)
+					->getResult();
+					foreach($thisCompTemp as $dataCompTemp){
+						$id=$dataCompTemp->getIdcompagnietemp();
+					}
+					$comp = $this->doctrine->em->find('compagnietemp',$id);
+					$this->layout->view('compagnie/vEditTemp', array(
+							'titre'		=>	$titre,
+							'comp'		=>	$comp,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}else{
+					$comp = $this->doctrine->em->find('compagnie',$id);
+					$this->layout->view('compagnie/vEdit', array(
+							'titre'		=>	$titre,
+							'comp'		=>	$comp,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}
 			}else{
 				redirect('cCompagnie','refresh');
 			}
@@ -91,6 +121,47 @@ class CCompagnie extends CI_Controller {
 		}else{
 			redirect('cCompagnie','refresh');
 		}
+	}
+	
+	public function addTemp(){
+		$id=$_GET['id'];
+		$this->thereIsLayout();
+		$titre="Compagnie modifié :";
+	
+		$user=$this->doctrine->em->find('user',$_SESSION['user']);
+		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
+		$compTemp=$this->doctrine->em->find('compagnietemp',$id);
+		$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
+		$this->layout->view('compagnie/vListTemp', array(
+				'titre'		=>	$titre,
+				'compTemp'	=>	$compTemp,
+				'page'		=>	$page,
+				'langues'	=>	$langues,
+				'user'		=>	$user,
+		));
+	}
+	
+	public function validEdit(){
+		$id=$_GET['id'];
+		$compTemp=$this->doctrine->em->find('compagnietemp',$id);
+		$compagnie=$this->doctrine->em->find('compagnie',$compTemp->getIdcompagnie()->getIdcompagnie());
+		$compagnie->setDate($compTemp->getDate());
+		$compagnie->setidLangue($compTemp->getIdlanguetemp()->getIdlangue());
+		$compagnie->setTitre($compTemp->getTitretemp());
+		$compagnie->setTexte($compTemp->getTextetemp());
+		$compagnie->setImage($compTemp->getImagetemp());
+		$this->doctrine->em->persist($compagnie);
+		$this->doctrine->em->remove($comptemp);
+		$this->doctrine->em->flush();
+		redirect('cPage', 'refresh');
+	}
+	
+	public function cancelEdit(){
+		$id=$_GET['id'];
+		$comptemp=$this->doctrine->em->find('compagnietemp',$id);
+		$this->doctrine->em->remove($comptemp);
+		$this->doctrine->em->flush();
+		redirect('cCompagnie', 'refresh');
 	}
 	
 	public function ajaxGet(){

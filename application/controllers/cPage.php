@@ -27,8 +27,9 @@ class CPage extends CI_Controller {
 			$this->page_pagination($id);
 			
 			$user=$this->doctrine->em->find('user',$_SESSION['user']);
+			$pagestemp=$this->doctrine->em->getRepository('pagetemp')->findAll();
 			$pages=$this->get_Page($id, '10');
-			$this->layout->view("page/vIndex",array('pages'=>$pages, 'user'=>$user));
+			$this->layout->view("page/vIndex",array('pages'=>$pages, 'user'=>$user, 'pagestemp'=>$pagestemp));
 		}
 	}
 
@@ -49,7 +50,7 @@ class CPage extends CI_Controller {
 		$this->pagination->initialize($config);
 	}	
 	
-function get_Page($page,$per_page){
+	function get_Page($page,$per_page){
     	$min = (($page)*$per_page)-($per_page);
     	$num = $min+$per_page;
     	
@@ -88,16 +89,41 @@ function get_Page($page,$per_page){
 			));
 		}else{
 			//auteur page
+			$user=$this->doctrine->em->find('user',$_SESSION['user']);
 			$authorPage=$this->doctrine->em->find('page', $id)->getIduser()->getIdUser();
 			$author=$this->doctrine->em->find('user', $_SESSION['user'])->getIdUser();
 			$type=$this->doctrine->em->find('user', $_SESSION['user'])->getIdtype()->getIdtype();
-			if($authorPage==$author || $type==1){
-				$page = $this->doctrine->em->createQuery("SELECT p FROM page p WHERE p.idpage =".$id)->getResult();
-				$this->layout->view('page/vEdit', array(
-						'titre'		=>	$titre,
-						'page'		=>	$page,
-						'langues'	=>	$langues,
-				));
+			$pagesTemp=$this->doctrine->em->getRepository('pagetemp')->findAll();
+			
+			$exist=false;
+			if($authorPage==$author || $type==1 || $type==3){
+				foreach($pagesTemp as $pageTemp){
+					if($id==$pageTemp->getIdpage()){
+						$exist=true;
+					}
+				}
+				if($exist==true && $type==3){
+					$thisPageTemp=$this->doctrine->em->createQuery("SELECT p FROM pagetemp p WHERE p.idpage=".$id)
+						->getResult();
+					foreach($thisPageTemp as $dataPageTemp){
+						$id=$dataPageTemp->getIdpagetemp();
+					}
+					$page = $this->doctrine->em->find('pagetemp',$id);
+					$this->layout->view('page/vEditTemp', array(
+							'titre'		=>	$titre,
+							'page'		=>	$page,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}else{
+					$page = $this->doctrine->em->find('page',$id);
+					$this->layout->view('page/vEdit', array(
+							'titre'		=>	$titre,
+							'page'		=>	$page,
+							'langues'	=>	$langues,
+							'user'		=>	$user,
+					));
+				}
 			}else{
 				redirect('cPage','refresh');
 			}
@@ -134,6 +160,47 @@ function get_Page($page,$per_page){
 		}else{
 			redirect('cPage','refresh');
 		}
+	}
+	
+	public function addTemp(){
+		$id=$_GET['id'];
+		$this->thereIsLayout();
+		$titre="Page modifié :";
+	
+		$user=$this->doctrine->em->find('user',$_SESSION['user']);
+		$langues = $this->doctrine->em->createQuery("SELECT l FROM langue l")->getResult();
+		$pagetemp=$this->doctrine->em->find('pagetemp',$id);
+		$page = $this->doctrine->em->createQuery("SELECT p FROM page p")->getResult();
+		$this->layout->view('page/vListTemp', array(
+				'titre'		=>	$titre,
+				'pagetemp'	=>	$pagetemp,
+				'page'		=>	$page,
+				'langues'	=>	$langues,
+				'user'		=>	$user,
+		));
+	}
+	
+	public function validEdit(){
+		$id=$_GET['id'];
+		$pageTemp=$this->doctrine->em->find('pagetemp',$id);
+		$page=$this->doctrine->em->find('page',$pageTemp->getIdpage());
+		$page->setDate($pageTemp->getDate());
+		$page->setidLangue($this->doctrine->em->find('langue',$pageTemp->getIdlanguetemp()));
+		$page->setTitre($pageTemp->getTitre());
+		$page->setTexte($pageTemp->getTexte());
+		$page->setImage($pageTemp->getImagetemp());
+		$this->doctrine->em->persist($page);
+		$this->doctrine->em->remove($pageTemp);
+		$this->doctrine->em->flush();
+		redirect('cPage', 'refresh');
+	}
+	
+	public function cancelEdit(){
+		$id=$_GET['id'];
+		$pageTemp=$this->doctrine->em->find('pagetemp',$id);
+		$this->doctrine->em->remove($pageTemp);
+		$this->doctrine->em->flush();
+		redirect('cPage', 'refresh');
 	}
 	
 	public function ajaxGet(){

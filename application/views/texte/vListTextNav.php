@@ -19,8 +19,8 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		?>
 		<li>
 			<div class="collapsible-header">
-				Texte pour la NavBar en 
-				<?=utf8_encode($this->doctrine->em->find('langue',$texte->getIdlangue())->getLangue())?>
+				Texte pour la NavBar en :"
+				<?=utf8_encode($texte->getIdlangue()->getLangue())?>"
 			</div>
 			<div class="collapsible-body white">
 				<div class="row">

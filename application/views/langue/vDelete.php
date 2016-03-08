@@ -1,3 +1,6 @@
+<?php
+use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
+?>
 <script src="<?=base_url()?>assets/js/jquery.js"></script>
 <?php
 	if(isset($library_src) && isset($script_foot)){
@@ -5,6 +8,9 @@
 		echo $script_foot;
 	}
 ?>
+<script src="<?=base_url()?>assets/js/general.js"></script>
+<script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+
 <div class="row" style="margin-top: 2%;">
 	<div class="col s8 m5 offset-s2 offset-m4">
 		<div class="card hoverable">
